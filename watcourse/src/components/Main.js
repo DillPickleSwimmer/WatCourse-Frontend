@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import '../styles/Main.css';
 import { ReactComponent as ClosedLock } from '../images/icon_lock_closed.svg';
 import { ReactComponent as OpenLock } from '../images/icon_lock_open.svg';
+import TermSlider from './TermSlider';
 
 class Main extends Component {
     constructor(props) {
@@ -18,9 +19,7 @@ class Main extends Component {
     render() {
         return (
         <div className="Main">
-            <div className="slider">
-                {/*insert term slider here */}
-            </div>
+            <TermSlider className="slider" />
             <div className="footer">
                 <div className="content">
                     <a href="https://github.com/DillPickleSwimmer/WatCourse-Frontend">Frontend Github</a>

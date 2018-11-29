@@ -19,3 +19,14 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+::-webkit-scrollbar{
+    height: 5px;
+    width: 5px;
+    background: none;
+}
+
+::-webkit-scrollbar-thumb:horizontal{
+    background: var(--theme-icon-grey);
+    border-radius: 10px;
+}

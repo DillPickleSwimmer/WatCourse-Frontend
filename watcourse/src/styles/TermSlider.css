@@ -1,0 +1,5 @@
+.TermSlider {
+    overflow: auto;
+    white-space: nowrap;
+    flex-grow: 1;
+}
