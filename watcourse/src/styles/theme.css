@@ -1,0 +1,12 @@
+/* user variables like this: var(--var-name) */
+
+:root {
+    /* theme colors */
+    --theme-pink: #E91E63;
+    --theme-dark-pink: #963A58;
+    --theme-blue: #7FDEDD;
+    --theme-text-grey: #0D0D0D;
+    --theme-icon-grey: #919190;
+    --theme-white: #FFFFFF;
+    --theme-black: #000000;
+}

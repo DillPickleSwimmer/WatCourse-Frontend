@@ -7,7 +7,6 @@ class App extends Component {
     return (
       <div className="App">
         {/* header */}
-        <p>Test</p>
         {this.props.children}
       </div>
     );

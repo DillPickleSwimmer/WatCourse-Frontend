@@ -1,6 +1,7 @@
 import React from 'react'; 
 import { Route, IndexRoute } from 'react-router';
-import App from './containers/App';
+import App from './components/App';
+import Main from './components/Main';
 import sampleContainer from './containers/sampleContainer';
 
 // Map components to different routes.
@@ -9,7 +10,7 @@ import sampleContainer from './containers/sampleContainer';
 // IndexRoute maps component to the default route
 export default (
   <Route path="/" component={App}> 
-    {/*<IndexRoute component={HomePage} />*/}
+    <IndexRoute component={Main} />
     <Route path="sample" component={sampleContainer} />
   </Route>
 );
