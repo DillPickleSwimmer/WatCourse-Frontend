@@ -1,0 +1,50 @@
+@import url("theme.css");
+
+.Header {
+    width: 100%;
+    height: 60px;
+    background-image: linear-gradient(to right, var(--theme-pink) , var(--theme-dark-pink));
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+}
+
+.Header .logo {
+    height: 40px;
+    padding: 10px;
+}
+
+.Header svg *, .Header svg {
+    fill: white;
+}
+
+.Header .links {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.Header .links .links-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.Header .link {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.Header .link:hover .link-text {
+    text-decoration: underline;
+}
+
+.Header .link svg {
+    width: 25px;
+    height: 25px;
+}
