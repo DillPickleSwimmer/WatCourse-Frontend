@@ -1,0 +1,12 @@
+@import url("theme.css");
+
+.CourseCard {
+    min-height: 60px;
+    width: 100%;
+    background-color: var(--theme-light-grey);
+    color: var(--theme-text-grey);
+    padding: 10px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}

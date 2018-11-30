@@ -1,0 +1,39 @@
+@import url("theme.css");
+
+.TermCard {
+    max-width: 100%;
+    border: 1px solid var(--theme-pink);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+    box-sizing:border-box;
+    flex: 0 0 320px; /* grow, shrink, basis */
+    background-color: var(--theme-med-grey);
+}
+
+.TermCard .header {
+    color: var(--theme-pink);
+    font-size: 22px;
+    font-weight: bold;
+    min-height: 35px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.TermCard .header .title {
+    flex-grow: 1;
+}
+
+.TermCard .header svg {
+    width: 25px;
+    height: 25px;
+    fill: var(--theme-icon-grey);
+}
+
+.TermCard .courses {
+    overflow-x: hidden;
+    overflow-y: auto;
+}

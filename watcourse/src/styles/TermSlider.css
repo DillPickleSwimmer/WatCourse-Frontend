@@ -1,5 +1,10 @@
 .TermSlider {
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
     white-space: nowrap;
     flex-grow: 1;
+    padding: 10px 0px;
+    max-height: 1500px;
+    display: flex; 
+    flex-wrap: nowrap; 
 }
