@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux';
-import sampleQuote from './sampleReducer';
+import sampleQuoteReducer from './sampleReducer';
+import termReducer from './termReducer';
+import courseReducer from './courseReducer';
 
 const rootReducer = combineReducers({
-    sampleQuote,
+    sampleQuote: sampleQuoteReducer,
+    terms: termReducer, 
+    courses: courseReducer,
 });
 
 export default rootReducer;

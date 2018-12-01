@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../styles/TermCard.css';
 import CourseCard from './CourseCard';
 import { ReactComponent as Pencil } from '../images/icon_pencil.svg';
-import { CourseType, TermType } from '../types/types';
+import { TermType } from '../types/types';
 
 class TermCard extends Component {
     render() {
