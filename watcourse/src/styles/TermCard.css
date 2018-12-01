@@ -10,7 +10,6 @@
     padding: 10px;
     box-sizing:border-box;
     flex: 0 0 320px; /* grow, shrink, basis */
-    background-color: var(--theme-med-grey);
 }
 
 .TermCard .header {

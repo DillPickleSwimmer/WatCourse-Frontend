@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
 import '../styles/TermCard.css';
 import CourseCard from './CourseCard';
 import { ReactComponent as Pencil } from '../images/icon_pencil.svg';
+import { CourseType, TermType } from '../types/types';
 
 class TermCard extends Component {
     render() {
+        const { season, year, term, courses } = this.props.term;
+
         return (
             <div className="TermCard">
                 <div className="header">
-                    <div className="title">{`${this.props.season} ${this.props.year} - ${this.props.term}`}</div>
+                    <div className="title">{`${season} ${year} - ${term}`}</div>
                     <Pencil />
                 </div>
                 <div className="courses">
-                    {this.props.courses}
+                    {courses.map((course, index) => <CourseCard key={index} course={course} />)}
                 </div>
             </div>
         );
@@ -21,10 +23,7 @@ class TermCard extends Component {
 }
 
 TermCard.propTypes = {
-    season: PropTypes.oneOf(['Fall', 'Spring', 'Winter']).isRequired,
-    year: PropTypes.number.isRequired, 
-    term: PropTypes.string.isRequired, 
-    courses: PropTypes.arrayOf(PropTypes.instanceOf(CourseCard))
+    term: TermType,
 };
 
 export default TermCard;

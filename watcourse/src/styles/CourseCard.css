@@ -3,10 +3,18 @@
 .CourseCard {
     min-height: 60px;
     width: 100%;
-    background-color: var(--theme-light-grey);
     color: var(--theme-text-grey);
     padding: 10px;
     margin-bottom: 5px;
     box-sizing: border-box;
     font-size: 14px;
+}
+
+.default {
+    background-color: var(--theme-med-grey);
+}
+
+.elective {
+    border: 1px solid var(--theme-blue);
+    border-radius: 4px;
 }

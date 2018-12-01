@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import '../styles/Main.css';
 import { ReactComponent as ClosedLock } from '../images/icon_lock_closed.svg';
 import { ReactComponent as OpenLock } from '../images/icon_lock_open.svg';
-import TermSlider from './TermSlider';
+import TermSliderContainer from '../containers/TermSliderContainer';
 
 class Main extends Component {
     constructor(props) {
@@ -19,7 +19,7 @@ class Main extends Component {
     render() {
         return (
         <div className="Main">
-            <TermSlider className="slider" />
+            <TermSliderContainer className="slider" />
             <div className="footer">
                 <div className="content">
                     <a href="https://github.com/DillPickleSwimmer/WatCourse-Frontend">Frontend Github</a>
