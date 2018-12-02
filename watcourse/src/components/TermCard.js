@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/TermCard.css';
 import CourseCard from './CourseCard';
-import { ReactComponent as Pencil } from '../images/icon_pencil.svg';
+import { ReactComponent as AddIcon } from '../images/icon_add.svg';
 import { TermType } from '../types/types';
 
 class TermCard extends Component {
@@ -12,7 +12,7 @@ class TermCard extends Component {
             <div className="TermCard">
                 <div className="header">
                     <div className="title">{`${season} ${year} - ${term}`}</div>
-                    <Pencil />
+                    <AddIcon />
                 </div>
                 <div className="courses">
                     {courses.map((course, index) => <CourseCard key={index} course={course} />)}
