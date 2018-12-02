@@ -1,10 +1,14 @@
-import { fork } from 'redux-saga/effects';
+import { fork, all } from 'redux-saga/effects';
 import sampleQuoteSaga from './sampleQuoteSaga';
 import termSaga from './termSaga';
 import courseSaga from './courseSaga';
+import authSaga from './authSaga';
 
 export default function* startForman() {
-    yield fork(sampleQuoteSaga);    // fork = nonblocking call
-    yield fork(termSaga);
-    yield fork(courseSaga);
+    yield all([
+        fork(sampleQuoteSaga),    // fork = nonblocking call
+        fork(termSaga),
+        fork(courseSaga),
+        fork(authSaga),
+    ]);
 }

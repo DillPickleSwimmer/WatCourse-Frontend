@@ -1,7 +1,7 @@
 import { put, call, takeLatest } from 'redux-saga/effects';
 import { sampleEndpoint } from '../api/sampleAPI';
 import {
-    GET_QUOTE_SUCCESS, GET_QUOTE_REQUEST,
+    GET_QUOTE_SUCCESS, GET_QUOTE_ERROR, GET_QUOTE_REQUEST,
 } from '../actions/types';
 
 export function* sampleQuote(action) {
@@ -9,7 +9,7 @@ export function* sampleQuote(action) {
         const quote = yield call(sampleEndpoint, action.payload);
         yield put({ type: GET_QUOTE_SUCCESS, quote });
     } catch (error) {
-        yield put({ type: 'GET_QUOTE_ERROR', error });
+        yield put({ type: GET_QUOTE_ERROR, error });
     }
 }
 

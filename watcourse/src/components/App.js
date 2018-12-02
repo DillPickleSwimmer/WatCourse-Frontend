@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { PropTypes } from 'prop-types';
 import '../styles/App.css';
 import Header from './Header';
+import { authenticate } from '../actions/authActions';
 
 class App extends Component {
+    componentWillMount() {
+        this.props.dispatch(authenticate());
+        if(!this.props.auth) browserHistory.push('/login');
+    }
+
+    componentWillUpdate(nextProps) {
+        if(this.props.auth && !nextProps.auth) browserHistory.push('/login');
+    }
+
     render() {
         return (
         <div className="App">
@@ -15,7 +27,8 @@ class App extends Component {
 }
 
 App.propTypes = {
+    auth: PropTypes.bool.isRequired,
     children: PropTypes.object.isRequired
 };
 
-export default App;
+export default connect((state)=>({auth: state.auth.authenticated}))(App);

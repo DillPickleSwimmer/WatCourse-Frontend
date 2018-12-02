@@ -2,7 +2,7 @@
 
 ## How to run:
 
-cd into the 'watcourse' folder and do 'npm start'
+cd into the 'watcourse' folder and do 'npm start'  (dont forget to npm install)
 
 ## Tips:
 
