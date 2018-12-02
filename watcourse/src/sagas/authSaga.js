@@ -3,6 +3,7 @@ import {
     AUTH_REQUEST, AUTH_SUCCESS, AUTH_ERROR, 
     SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_ERROR,
     LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR,
+    LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR,
 } from '../actions/types';
 import { authRef } from '../base';  
 
@@ -36,10 +37,20 @@ function* loginSaga(action) {
     }
 }
 
+function* logoutSaga(action) {
+    try {
+        const user = yield authRef.signOut();
+        yield put({ type: LOGOUT_SUCCESS, user });
+    } catch (error) {
+        yield put({ type: LOGOUT_ERROR, error });
+    }
+}
+
 export default function* authSaga() {    
     yield all([
         takeLatest(AUTH_REQUEST, authenticateSaga),
         takeLatest(SIGNUP_REQUEST, signupSaga),
         takeLatest(LOGIN_REQUEST, loginSaga),
+        takeLatest(LOGOUT_REQUEST, logoutSaga),
     ]);
 }

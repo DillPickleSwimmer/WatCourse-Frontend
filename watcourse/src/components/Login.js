@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { browserHistory } from 'react-router';
 import { PropTypes } from 'prop-types';
 import { login } from '../actions/authActions';
-import { Redirect } from 'react-router';
 
 class Login extends Component {
     componentWillMount() {

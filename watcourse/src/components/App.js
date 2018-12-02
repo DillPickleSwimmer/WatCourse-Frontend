@@ -6,7 +6,7 @@ import '../styles/App.css';
 import Header from './Header';
 import { authenticate } from '../actions/authActions';
 
-export const noAuthPages = ['/login', '/signup'];
+export const noAuthPages = ['/login', '/signup', '/sample'];
 
 class App extends Component {
     componentWillMount() {

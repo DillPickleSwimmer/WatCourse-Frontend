@@ -1,6 +1,7 @@
 import { 
     AUTH_SUCCESS, AUTH_ERROR,
     LOGIN_SUCCESS, LOGIN_ERROR,
+    LOGOUT_SUCCESS, LOGOUT_ERROR,
     SIGNUP_SUCCESS, SIGNUP_ERROR,
 } from '../actions/types';
 
@@ -30,6 +31,13 @@ export default function (state = initialState, action) {
                 authenticated: false,
                 user: null,
                 error: action.error,
+            }
+        case LOGOUT_ERROR:
+            return {
+                ...state,
+                authenticated: false,
+                user: null,
+                error: null,
             }
         default:
             return state;

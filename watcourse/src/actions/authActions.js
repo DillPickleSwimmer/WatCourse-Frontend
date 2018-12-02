@@ -2,6 +2,7 @@ import {
     AUTH_REQUEST, 
     SIGNUP_REQUEST,
     LOGIN_REQUEST,
+    LOGOUT_REQUEST,
 } from '../actions/types';
 
 export const authenticate = () => ({
@@ -14,4 +15,8 @@ export const signup = (email, password) => ({
 
 export const login = (email, password) => ({
     type: LOGIN_REQUEST, email, password
+})
+
+export const logout = (email, password) => ({
+    type: LOGOUT_REQUEST,
 })
