@@ -6,14 +6,16 @@ import '../styles/App.css';
 import Header from './Header';
 import { authenticate } from '../actions/authActions';
 
+export const noAuthPages = ['/login', '/signup'];
+
 class App extends Component {
     componentWillMount() {
         this.props.dispatch(authenticate());
-        if(!this.props.auth) browserHistory.push('/login');
+        if(!this.props.auth && !noAuthPages.find((page)=>page == window.location.pathname)) browserHistory.push('/login');
     }
 
     componentWillUpdate(nextProps) {
-        if(this.props.auth && !nextProps.auth) browserHistory.push('/login');
+        if(this.props.auth && !nextProps.auth && !noAuthPages.find((page)=>page == window.location.pathname)) browserHistory.push('/login');
     }
 
     render() {
