@@ -4,6 +4,7 @@ import {
     SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_ERROR,
     LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR,
     LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR,
+    GET_TERMS_REQUEST,
 } from '../actions/types';
 import { authRef } from '../base';  
 import { getTerms } from '../actions/termActions';
@@ -47,7 +48,7 @@ function* logoutSaga(action) {
 }
 
 function* onLoginSaga(action) {
-    yield getTerms();
+    put({type: GET_TERMS_REQUEST});
 }
 
 export default function* authSaga() {    
