@@ -9,8 +9,8 @@ class SearchResultCard extends Component {
             <div className="SearchResultCard" onClick={this.props.onClick}>
                 <div className="summary">
                     <div className="title">
-                        <div>{this.props.course.code}</div>
-                        <div>{this.props.course.name}</div>
+                        <div>{this.props.course.subject + this.props.course.num}</div>
+                        <div>{this.props.course.title}</div>
                     </div>
                     <div className="links">
                         <div onClick={this.props.addToShortlist}>Add to Shortlist</div>

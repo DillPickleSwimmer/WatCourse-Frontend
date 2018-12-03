@@ -17,20 +17,20 @@ export default function (state = initialState, action) {
         case ADD_TO_TERM:
             var addTerm = state.find(term=>term.id === action.term);
             addTerm.courses = [
-                ...addTerm.courses.filter(course=>course.id !== action.course.id),
-                action.course
+                ...addTerm.courses.filter(id => id !== action.course.id),
+                action.course.id 
             ];
             return [
-                ...state.filter(term=>term.id !== addTerm.id), 
+                ...state.filter(term =>term.id !== addTerm.id), 
                 addTerm
             ];
         case REMOVE_FROM_TERM: 
-            var removeTerm = state.find(term=>term.id === action.term);
+            var removeTerm = state.find(term =>term.id === action.term);
             removeTerm.courses = [
-                ...removeTerm.courses.filter(course=>course.id !== action.course.id),
+                ...removeTerm.courses.filter(id => id !== action.course.id),
             ];
             return [
-                ...state.filter(term=>term.id !== removeTerm.id), 
+                ...state.filter(term => term.id !== removeTerm.id), 
                 removeTerm
             ];
         default:

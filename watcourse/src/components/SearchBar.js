@@ -32,8 +32,9 @@ class SearchBar extends Component {
                 this.state.results : this.props.courses
             ) : [];
         results = results.filter((course) => 
-            this.filterString(course.code).substring(0,searchStr.length) === searchStr ||
-            this.filterString(course.name).substring(0,searchStr.length) === searchStr
+            
+            this.filterString(course.subject + course.num).substring(0,searchStr.length) === searchStr ||
+            this.filterString(course.title).substring(0,searchStr.length) === searchStr
         );
 
         this.setState({ searchStr, results });

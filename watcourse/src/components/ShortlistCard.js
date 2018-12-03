@@ -10,8 +10,8 @@ class ShortlistCard extends Component {
             <div className="ShortlistCard" onClick={this.props.onClick}>
                 <div className="summary">
                     <div className="summary-title">
-                        <div>{this.props.course.code}</div>
-                        <div>{this.props.course.name}</div>
+                        <div>{this.props.course.subject + this.props.course.num}</div>
+                        <div>{this.props.course.title}</div>
                     </div>
                     <div className="links">
                         <RemoveIcon className="icon" onClick={this.props.removeFromShortlist} />
