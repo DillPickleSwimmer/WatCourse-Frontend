@@ -1,0 +1,16 @@
+@import url("theme.css");
+
+.ShortlistCard {
+    background-color: var(--theme-med-grey);
+    padding: 7px;
+    margin: 5px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.ShortlistCard .content {
+    width: 100%;
+    border-top: 2px solid var(--theme-med-grey);
+    margin-top: 5px;
+    font-weight: 200;
+}

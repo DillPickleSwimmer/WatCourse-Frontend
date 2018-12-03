@@ -48,7 +48,7 @@ const initialState = [
 export default function (state = initialState, action) {
     switch (action.type) {
         case GET_TERMS_SUCCESS:
-            return action.terms || state;    // make use of the spread operator
+            return action.terms || state;    
         default:
             return state;
     }

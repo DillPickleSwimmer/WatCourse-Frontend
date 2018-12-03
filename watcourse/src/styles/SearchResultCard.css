@@ -1,0 +1,21 @@
+@import url("theme.css");
+
+.SearchResultCard {
+    width: 100%;
+    color: var(--theme-text-grey);
+    background-color: var(--theme-light-grey);
+    margin-bottom: 5px;
+    padding: 10px;
+    border: 1px solid var(--theme-med-grey);
+    box-sizing: border-box;
+}
+
+.SearchResultCard .summary div, .SearchResultCard .content div {
+    padding: 2px;
+}
+
+.SearchResultCard .content {
+    border-top: 2px solid var(--theme-med-grey);
+    margin-top: 5px;
+    font-weight: 200;
+}

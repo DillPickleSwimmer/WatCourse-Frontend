@@ -16,3 +16,11 @@ export const TermType = PropTypes.shape({
     term: PropTypes.string.isRequired, 
     courses: PropTypes.arrayOf(CourseType)
 });
+
+// Course Search Type
+export const CourseSearchType = PropTypes.shape({
+    code: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    prereqs: PropTypes.string,  
+});

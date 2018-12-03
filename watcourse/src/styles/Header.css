@@ -27,6 +27,10 @@
     align-items: flex-end;
 }
 
+.Header .links:hover {
+    cursor: pointer;
+}
+
 .Header .links .links-inner {
     display: flex;
     flex-direction: row;

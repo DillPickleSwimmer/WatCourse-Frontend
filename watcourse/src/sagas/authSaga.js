@@ -19,7 +19,6 @@ function* authenticateSaga(action) {
 }
 
 function* signupSaga(action) {
-    console.log(action);
     try {
         const user = yield authRef.createUserWithEmailAndPassword(action.email, action.password);
         yield put({ type: SIGNUP_SUCCESS, user });

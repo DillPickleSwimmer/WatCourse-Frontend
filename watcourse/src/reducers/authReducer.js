@@ -32,7 +32,7 @@ export default function (state = initialState, action) {
                 user: null,
                 error: action.error,
             }
-        case LOGOUT_ERROR:
+        case LOGOUT_SUCCESS:
             return {
                 ...state,
                 authenticated: false,
