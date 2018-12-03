@@ -54,6 +54,10 @@ class SignUp extends Component {
                     <div >
                         <button type="submit">Sign up</button>
                     </div>
+                    <br/>
+                    <div>
+                        <a href="/login">Already have an account?</a>
+                    </div>
                 </div>
                 </form>
                 <div>{this.props.error}</div>
