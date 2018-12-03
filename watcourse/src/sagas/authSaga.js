@@ -6,6 +6,7 @@ import {
     LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR,
 } from '../actions/types';
 import { authRef } from '../base';  
+import { getTerms } from '../actions/termActions';
 
 function* authenticateSaga(action) {
     yield authRef.onAuthStateChanged(user => {
@@ -45,11 +46,17 @@ function* logoutSaga(action) {
     }
 }
 
+function* onLoginSaga(action) {
+    yield getTerms();
+}
+
 export default function* authSaga() {    
     yield all([
         takeLatest(AUTH_REQUEST, authenticateSaga),
         takeLatest(SIGNUP_REQUEST, signupSaga),
         takeLatest(LOGIN_REQUEST, loginSaga),
         takeLatest(LOGOUT_REQUEST, logoutSaga),
+        takeLatest(LOGIN_SUCCESS, onLoginSaga),
+        takeLatest(SIGNUP_SUCCESS, onLoginSaga),
     ]);
 }
