@@ -14,6 +14,20 @@
     padding: 2px;
 }
 
+.SearchResultCard .summary {
+    display: flex;
+    flex-direction: row;
+}
+
+.SearchResultCard .summary .title {
+    flex-grow: 1;
+}
+
+.SearchResultCard .summary .links div:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .SearchResultCard .content {
     border-top: 2px solid var(--theme-med-grey);
     margin-top: 5px;

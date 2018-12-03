@@ -6,6 +6,7 @@ import { ReactComponent as Logo } from '../images/logo.svg';
 import { ReactComponent as Profile } from '../images/icon_profile.svg';
 import { logout } from '../actions/authActions';
 import { openSearchModal } from '../actions/modalActions';
+import { deselectTerm } from '../actions/selectTermActions';
 
 class Header extends Component {
     render() {
@@ -14,7 +15,10 @@ class Header extends Component {
                 <a href="/"><Logo className="logo" /></a>
                 <div className="links">
                     {this.props.auth && <div className="links-inner">
-                        <div className="link" onClick={() => this.props.dispatch(openSearchModal(true))}>
+                        <div className="link" onClick={() => {
+                            this.props.dispatch(deselectTerm());
+                            this.props.dispatch(openSearchModal(true));
+                        }}>
                             <div className="link-text">search</div>
                         </div>
                         <div className="link" href="" onClick={()=>this.props.dispatch(logout())}>

@@ -3,13 +3,13 @@ import {
 } from '../actions/types';
 
 export const openSearchModal = () => ({
-    type: SEARCH_MODAL_TOGGLE, open: null,
+    type: SEARCH_MODAL_TOGGLE, open: null
 })
 
-export const closeSearchModal = (email, password) => ({
-    type: SEARCH_MODAL_TOGGLE, open: true,
+export const closeSearchModal = () => ({
+    type: SEARCH_MODAL_TOGGLE, open: true
 })
 
-export const toggleSearchModal = (email, password) => ({
-    type: SEARCH_MODAL_TOGGLE, open: false, 
+export const toggleSearchModal = () => ({
+    type: SEARCH_MODAL_TOGGLE, open: false
 })

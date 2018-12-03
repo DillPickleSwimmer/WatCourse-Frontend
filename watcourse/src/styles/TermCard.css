@@ -26,10 +26,14 @@
     flex-grow: 1;
 }
 
-.TermCard .header svg {
+.TermCard .header .add-button {
     width: 25px;
     height: 25px;
     fill: var(--theme-icon-grey);
+}
+
+.TermCard .header .add-button:hover {
+    cursor: pointer;
 }
 
 .TermCard .courses {
