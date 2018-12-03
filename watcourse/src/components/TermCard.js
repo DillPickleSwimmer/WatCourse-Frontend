@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import '../styles/TermCard.css';
 import CourseCard from './CourseCard';
 import { ReactComponent as AddIcon } from '../images/icon_add.svg';
-import { TermType } from '../types/types';
+import { TermType, CourseType } from '../types/types';
 
 class TermCard extends Component {
     render() {
-        const { season, year, term, courses } = this.props.term;
+        const { courses, term } = this.props; 
 
         return (
             <div className="TermCard">
                 <div className="header">
-                    <div className="title">{`${season} ${year} - ${term}`}</div>
+                    <div className="title">{`${term.name}`}</div>
                     <AddIcon />
                 </div>
                 <div className="courses">
@@ -24,6 +25,7 @@ class TermCard extends Component {
 
 TermCard.propTypes = {
     term: TermType,
+    courses: PropTypes.arrayOf(CourseType).isRequired 
 };
 
 export default TermCard;

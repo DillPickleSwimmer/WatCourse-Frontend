@@ -6,13 +6,18 @@ import '../styles/App.css';
 import Header from './Header';
 import SearchContainer from '../containers/SearchContainer';
 import { authenticate } from '../actions/authActions';
+import { getCourses } from '../actions/courseActions';
+import { getTerms } from '../actions/termActions';
 
 export const noAuthPages = ['/login', '/signup', '/sample'];
 
 class App extends Component {
     componentWillMount() {
         this.props.dispatch(authenticate());
+        this.props.dispatch(getCourses());
         if(!this.props.auth && !noAuthPages.find((page)=>page === window.location.pathname)) browserHistory.push('/login');
+        this.props.dispatch(getTerms());
+
     }
 
     componentWillUpdate(nextProps) {

@@ -3,8 +3,9 @@ import { PropTypes } from 'prop-types';
 // Course Type
 
 export const CourseType = PropTypes.shape({
-    courseCode: PropTypes.string.isRequired,
-    courseName: PropTypes.string.isRequired,
+    subject: PropTypes.string.isRequired,
+    num: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     defaultCourse: PropTypes.bool,
 });
 
