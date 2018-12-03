@@ -2,6 +2,17 @@ import React, { Component } from "react";
 import { browserHistory } from 'react-router';
 import { PropTypes } from 'prop-types';
 import { signup } from '../actions/authActions';
+import '../styles/Signup.css';
+import Background from '../images/login_background.png';
+
+var backgroundStyle = {
+    backgroundPosition:"0px 0px",
+    backgroundSize: 'cover',
+    height:"100vh",
+    
+    backgroundRepeat: 'no-repeat',
+    backgroundImage: `url(${Background})`
+  };
 
 class SignUp extends Component {
     componentWillMount() {
@@ -20,26 +31,30 @@ class SignUp extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Sign up</h1>
+            <div className="Signup" style={backgroundStyle}>
                 <form onSubmit={this.handleSignUp}>
-                    <label>
-                    Email
-                    <input
-                        name="email"
-                        type="email"
-                        placeholder="Email"
-                    />
-                    </label>
-                    <label>
-                    Password
-                    <input
-                        name="password"
-                        type="password"
-                        placeholder="Password"
-                    />
-                    </label>
-                    <button type="submit">Sign Up</button>
+                <div className="centered">
+                    <h1>Sign up</h1>
+                    <div>
+                            <p className="spaced-out">Email: </p>
+                            <input className="spaced-out" 
+                                name="email"
+                                type="email"
+                                placeholder="Email"/>
+                        
+                    </div>
+                    <div>
+                        <p className="spaced-out">Password: </p>
+                        <input className="spaced-out" 
+                            name="password"
+                            type="password"
+                            placeholder="Password"/>
+                   
+                    </div>
+                    <div >
+                        <button type="submit">Sign up</button>
+                    </div>
+                </div>
                 </form>
                 <div>{this.props.error}</div>
             </div>
