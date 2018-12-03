@@ -23,7 +23,7 @@ class ShortlistCard extends Component {
 ShortlistCard.propTypes = {
     course: CourseSearchType.isRequired,
     expanded: PropTypes.bool,
-    onClick: PropTypes.function,
+    onClick: PropTypes.func.isRequired,
 };
 
 export default ShortlistCard;

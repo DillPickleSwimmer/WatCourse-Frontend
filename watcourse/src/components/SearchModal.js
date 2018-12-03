@@ -6,6 +6,7 @@ import { ReactComponent as CloseIcon } from '../images/icon_close.svg';
 import { toggleSearchModal } from '../actions/modalActions';
 import SearchResultCard from './SearchResultCard';
 import ShortlistCard from './ShortlistCard';
+import SearchBar from './SearchBar';
 
 class SearchModal extends Component {
     constructor(props) {
@@ -14,10 +15,12 @@ class SearchModal extends Component {
         this.state = {
             openResult: null,
             openShortlist: null,
+            results: [],
         }
 
         this.handleResultClick = this.handleResultClick.bind(this);
         this.handleShortlistClick = this.handleShortlistClick.bind(this);
+        this.handleResultsUpdate = this.handleResultsUpdate.bind(this);
     }
 
     handleResultClick = (index) => {
@@ -48,9 +51,11 @@ class SearchModal extends Component {
         }
     }
 
-    render() {
-        var results = this.props.courses;
+    handleResultsUpdate = (results) => {
+        this.setState({ results });
+    }
 
+    render() {
         return (
             <div className="SearchModal">
                 <div className="background" />
@@ -64,10 +69,10 @@ class SearchModal extends Component {
                         </div>
                     </div>
                     <div className="search-bar">
-
+                        <SearchBar courses={this.props.courses} updateResults={this.handleResultsUpdate}/>
                     </div>
                     <div className="search-results">
-                        {results.map((result, index) =>
+                        {this.state.results.map((result, index) =>
                             <SearchResultCard 
                                 key={index} 
                                 course={result}

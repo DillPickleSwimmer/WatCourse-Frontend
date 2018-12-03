@@ -23,7 +23,7 @@ class SearchResultCard extends Component {
 SearchResultCard.propTypes = {
     course: CourseSearchType,
     expanded: PropTypes.bool,
-    onClick: PropTypes.function,
+    onClick: PropTypes.func.isRequired,
 };
 
 export default SearchResultCard;

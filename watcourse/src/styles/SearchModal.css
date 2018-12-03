@@ -34,8 +34,8 @@
 .SearchModal .inner-modal .modal-header {
     display: flex; 
     flex-direction: row;
-    margin-bottom: 15px;
-    height: 40px;
+    margin-bottom: 10px;
+    min-height: 40px;
 }
 
 .SearchModal .inner-modal .modal-header .title {
@@ -58,8 +58,12 @@
 }
 
 .SearchModal .inner-modal .search-bar {
-    height: 70px;
-    border: 1px solid grey; /*TEMP*/
+    height: 50px;
+    min-height: 50px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
 } 
 
 .SearchModal .inner-modal .search-results {

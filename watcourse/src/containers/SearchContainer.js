@@ -30,9 +30,9 @@ const mapStateToProps = (state) => ({
             prereqs: "A tormented soul is not required but recommended.",  
         },
         {
-            code: "CS343",
-            name: "Concurrent Programming",
-            description: "A really painful course about uC++ concurrency with long hard assignments. Enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy!",
+            code: "CS346",
+            name: "ConcurrenCY",
+            description: "special boii",
             prereqs: "A tormented soul is not required but recommended.",  
         },
         {

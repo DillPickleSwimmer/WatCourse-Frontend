@@ -1,0 +1,23 @@
+@import url("theme.css");
+
+.SearchBar {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.SearchBar input {
+    width: 100%;
+    flex-grow: 1;
+    font-size: 26px;
+    padding: 7px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 2px solid var(--theme-med-grey);
+}
+
+.SearchBar input:focus {
+    outline: none;
+}
