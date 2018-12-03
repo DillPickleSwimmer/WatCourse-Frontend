@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 //import { PropTypes } from 'prop-types';
 import '../styles/Main.css';
 import { ReactComponent as ClosedLock } from '../images/icon_lock_closed.svg';
 import { ReactComponent as OpenLock } from '../images/icon_lock_open.svg';
 import TermSliderContainer from '../containers/TermSliderContainer';
+import { getCourses } from '../actions/courseActions';
+
+
 
 class Main extends Component {
     constructor(props) {
         super(props);
         this.state = { locked: true }
         this.handleLockClick = this.handleLockClick.bind(this);
+    }
+
+    componentWillMount() {
+        this.props.dispatch(getCourses());
+
     }
 
     handleLockClick = () => {
@@ -37,4 +46,5 @@ class Main extends Component {
 Main.propTypes = {
 };
 
-export default Main;
+export default connect((state)=>({
+}))(Main);

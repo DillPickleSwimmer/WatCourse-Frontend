@@ -9,7 +9,7 @@ import { removeFromTerm } from '../actions/termActions';
 class TermCard extends Component {
     render() {
         const { courses, term } = this.props; 
-
+        console.log('rendered')
         return (
             <div className="TermCard">
                 <div className="header">

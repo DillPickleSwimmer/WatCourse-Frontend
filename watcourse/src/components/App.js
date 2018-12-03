@@ -14,14 +14,13 @@ export const noAuthPages = ['/login', '/signup', '/sample'];
 class App extends Component {
     componentWillMount() {
         this.props.dispatch(authenticate());
-        this.props.dispatch(getCourses());
         if(!this.props.auth && !noAuthPages.find((page)=>page === window.location.pathname)) browserHistory.push('/login');
-        this.props.dispatch(getTerms());
-
     }
+
 
     componentWillUpdate(nextProps) {
         if(this.props.auth && !nextProps.auth && !noAuthPages.find((page)=>page === window.location.pathname)) browserHistory.push('/login');
+        this.props.dispatch(getTerms());
     }
 
     render() {

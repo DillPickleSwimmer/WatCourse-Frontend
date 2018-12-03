@@ -1,4 +1,4 @@
-import { put, all, takeLatest } from 'redux-saga/effects';
+import { put, all, takeLatest, select } from 'redux-saga/effects';
 import {
     AUTH_REQUEST, AUTH_SUCCESS, AUTH_ERROR, 
     SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_ERROR,
@@ -8,6 +8,7 @@ import {
 } from '../actions/types';
 import { authRef } from '../base';  
 import { getTerms } from '../actions/termActions';
+import { takeEvery } from 'redux-saga';
 
 function* authenticateSaga(action) {
     yield authRef.onAuthStateChanged(user => {
@@ -48,8 +49,10 @@ function* logoutSaga(action) {
 }
 
 function* onLoginSaga(action) {
-    put({type: GET_TERMS_REQUEST});
+    yield put(getTerms());
 }
+
+
 
 export default function* authSaga() {    
     yield all([
@@ -57,7 +60,6 @@ export default function* authSaga() {
         takeLatest(SIGNUP_REQUEST, signupSaga),
         takeLatest(LOGIN_REQUEST, loginSaga),
         takeLatest(LOGOUT_REQUEST, logoutSaga),
-        takeLatest(LOGIN_SUCCESS, onLoginSaga),
-        takeLatest(SIGNUP_SUCCESS, onLoginSaga),
+        takeEvery(LOGIN_SUCCESS, onLoginSaga),
     ]);
 }

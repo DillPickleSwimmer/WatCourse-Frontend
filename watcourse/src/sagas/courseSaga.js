@@ -6,8 +6,10 @@ import {
 
 export function* getCoursesSaga(action) {
     try {
+        console.log(' fetching courses');
         const courses = yield call(getCoursesEndpoint);
         yield put({ type: GET_COURSES_SUCCESS, courses });
+        console.log('done fetching courses');
     } catch (error) {
         yield put({ type: GET_COURSES_ERROR, error });
     }
