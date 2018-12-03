@@ -52,6 +52,10 @@ class Login extends Component {
                     <div >
                         <button type="submit">Login</button>
                     </div>
+                    <br/>
+                    <div>
+                        <a href="/signup">Need an account?</a>
+                    </div>
                 </div>
                 </form>
                 <div>{this.props.error}</div>
