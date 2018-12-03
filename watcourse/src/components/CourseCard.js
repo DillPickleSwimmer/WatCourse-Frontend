@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import '../styles/CourseCard.css';
 import { CourseType } from '../types/types';
+import { ReactComponent as RemoveIcon } from '../images/icon_minus.svg';
 
 class CourseCard extends Component {
     render() {
@@ -9,8 +11,9 @@ class CourseCard extends Component {
         return (
             <div 
                 className={`CourseCard ${defaultCourse ? "default" : "elective"}`}
-            >
-                {`${subject}${num}`}<br />{title}
+            >  
+                <div className="summary">{`${subject}${num}`}<br />{title}</div>
+                <div className="icon"><RemoveIcon onClick={this.props.removeFromTerm}/></div>
             </div>
         );
     }
@@ -18,6 +21,7 @@ class CourseCard extends Component {
 
 CourseCard.propTypes = {
     course: CourseType,
+    removeFromTerm: PropTypes.func.isRequired,
 };
 
 export default CourseCard;

@@ -31,3 +31,11 @@ export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 
 export const SEARCH_MODAL_TOGGLE = 'SEARCH_MODAL_TOGGLE';
+
+export const SELECT_TERM = 'SELECT_TERM';
+
+export const ADD_SHORTLIST = 'ADD_SHORTLIST';
+export const REMOVE_SHORTLIST = 'REMOVE_SHORTLIST';
+
+export const ADD_TO_TERM = 'ADD_TO_TERM';
+export const REMOVE_FROM_TERM = 'REMOVE_FROM_TERM';

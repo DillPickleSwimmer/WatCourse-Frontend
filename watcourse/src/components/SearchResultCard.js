@@ -8,8 +8,14 @@ class SearchResultCard extends Component {
         return (
             <div className="SearchResultCard" onClick={this.props.onClick}>
                 <div className="summary">
-                    <div>{this.props.course.code}</div>
-                    <div>{this.props.course.name}</div>
+                    <div className="title">
+                        <div>{this.props.course.code}</div>
+                        <div>{this.props.course.name}</div>
+                    </div>
+                    <div className="links">
+                        <div onClick={this.props.addToShortlist}>Add to Shortlist</div>
+                        {this.props.selectedTerm !== null && <div onClick={this.props.addToTerm}>Add to Term </div>}
+                    </div>
                 </div>
                 {this.props.expanded && <div className="content">
                     <div><i>Description:</i> {this.props.course.description}</div>
@@ -23,7 +29,10 @@ class SearchResultCard extends Component {
 SearchResultCard.propTypes = {
     course: CourseSearchType,
     expanded: PropTypes.bool,
-    onClick: PropTypes.function,
+    onClick: PropTypes.func.isRequired,
+    selectedTerm: PropTypes.number, 
+    addToShortlist: PropTypes.func.isRequired,
+    addToTerm: PropTypes.func,
 };
 
 export default SearchResultCard;

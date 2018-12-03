@@ -8,6 +8,8 @@
     margin-bottom: 5px;
     box-sizing: border-box;
     font-size: 14px;
+    display: flex;
+    flex-direction: row;
 }
 
 .default {
@@ -17,4 +19,17 @@
 .elective {
     border: 1px solid var(--theme-blue);
     border-radius: 4px;
+}
+
+.CourseCard .summary {
+    flex-grow: 1;
+}
+
+.CourseCard .icon {
+    width: 15px;
+    height: 15px;
+}
+
+.CourseCard .icon:hover {
+    cursor: pointer; 
 }

@@ -18,7 +18,6 @@ export const getTermsEndpoint = (accessToken, userId) => {
             return response.json();
         })
         .then(json => {
-            console.log(json)
             return json;
         });
 };

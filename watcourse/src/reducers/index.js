@@ -4,6 +4,8 @@ import termReducer from './termReducer';
 import courseReducer from './courseReducer';
 import authReducer from './authReducer';
 import searchModalReducer from './searchModalReducer';
+import selectTermReducer from './selectTermReducer';
+import shortlistReducer from './shortlistReducer';
 import { LOGOUT_SUCCESS } from '../actions/types';
 
 const baseRootReducer = combineReducers({
@@ -12,6 +14,8 @@ const baseRootReducer = combineReducers({
     courses: courseReducer,
     auth: authReducer, 
     searchModal: searchModalReducer,
+    selectedTerm: selectTermReducer,
+    shortlist: shortlistReducer,
 });
 
 const rootReducer = (state, action) => {
