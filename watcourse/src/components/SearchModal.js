@@ -5,7 +5,7 @@ import { CourseSearchType } from '../types/types';
 import { ReactComponent as CloseIcon } from '../images/icon_close.svg';
 import { toggleSearchModal } from '../actions/modalActions';
 import { deselectTerm } from '../actions/selectTermActions';
-import { addToShortlist, removeFromShortlist } from '../actions/shortlistActions';
+import { postShortList, deleteShortList, getShortList } from '../actions/shortlistActions';
 import { addToTerm } from '../actions/termActions';
 import SearchResultCard from './SearchResultCard';
 import ShortlistCard from './ShortlistCard';
@@ -24,6 +24,10 @@ class SearchModal extends Component {
         this.handleResultClick = this.handleResultClick.bind(this);
         this.handleShortlistClick = this.handleShortlistClick.bind(this);
         this.handleResultsUpdate = this.handleResultsUpdate.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.dispatch(getShortList())
     }
 
     handleResultClick = (index) => {
@@ -84,7 +88,7 @@ class SearchModal extends Component {
                                 course={result}
                                 onClick={() => this.handleResultClick(index)}
                                 expanded={this.state.openResult === index}
-                                addToShortlist={() => {this.props.dispatch(addToShortlist(result))}}
+                                addToShortlist={() => {this.props.dispatch(postShortList(result))}}
                                 addToTerm={() => {this.props.dispatch(addToTerm(this.props.selectedTerm, result))}}
                                 selectedTerm={this.props.selectedTerm}
                             />
@@ -99,7 +103,7 @@ class SearchModal extends Component {
                                     course={course} 
                                     onClick={() => this.handleShortlistClick(index)}
                                     expanded={this.state.openShortlist === index}
-                                    removeFromShortlist={()=>this.props.dispatch(removeFromShortlist(course))}
+                                    removeFromShortlist={() => {this.props.dispatch(deleteShortList(course))}}
                                     addToTerm={() => {this.props.dispatch(addToTerm(this.props.selectedTerm, course))}}
                                     selectedTerm={this.props.selectedTerm}
                                 />    
