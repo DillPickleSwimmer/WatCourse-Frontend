@@ -1,5 +1,5 @@
 import { put, all, call, takeLatest, select} from 'redux-saga/effects';
-import { getShortlist, postShortlist, deleteShortlist } from '../api/shortlistEndpoint';
+import { getShortlistEndpoint, postShortlistEndpoint, deleteShortlistEndpoint } from '../api/shortlistEndpoint';
 import {
     GET_SHORTLIST_SUCCESS, GET_SHORTLIST_ERROR, GET_SHORTLIST_REQUEST,
     POST_SHORTLIST_SUCCESS, POST_SHORTLIST_ERROR, POST_SHORTLIST_REQUEST,
@@ -12,14 +12,11 @@ const getCourses = (state) => state.courses
 
 export function* getShortlistSaga(action) {
     try {
-        console.log('fetching shortlist');
         const user = yield select(getUser); 
         const courses = yield select(getCourses);
         const token = user['qa'] || user.stsTokenManager.accessToken;        
-        const shortlistCourses = yield call(getShortlist, token, user.uid);
-        console.log('getShortlistSaga, shortlistCourses' + JSON.stringify(shortlistCourses))
+        const shortlistCourses = yield call(getShortlistEndpoint, token, user.uid);
         yield put({ type: GET_SHORTLIST_SUCCESS, courses, shortlistCourses });
-        console.log('done fetching courses');
     } catch (error) {
         yield put({ type: GET_SHORTLIST_ERROR, error });
     }
@@ -30,7 +27,7 @@ export function* postShortlistSaga(action) {
         const user = yield select(getUser); 
         const token = user['qa'] || user.stsTokenManager.accessToken;        
         const course  = action.course
-        yield call(postShortlist, token, user.uid, course.id);
+        yield call(postShortlistEndpoint, token, user.uid, course.id);
         yield put({ type: POST_SHORTLIST_SUCCESS, course });
     } catch (error) {
         yield put({ type: POST_SHORTLIST_ERROR, error });
@@ -42,10 +39,10 @@ export function* deleteShortlistSaga(action) {
         const user = yield select(getUser); 
         const token = user['qa'] || user.stsTokenManager.accessToken;        
         const course  = action.course
-        yield call(deleteShortlist, token, user.uid, course.id);
+        yield call(deleteShortlistEndpoint, token, user.uid, course.id);
         yield put({ type: DELETE_SHORTLIST_SUCCESS, course });
     } catch (error) {
-        yield put({ type: POST_SHORTLIST_ERROR, error });
+        yield put({ type: DELETE_SHORTLIST_ERROR, error });
     }
 }
 

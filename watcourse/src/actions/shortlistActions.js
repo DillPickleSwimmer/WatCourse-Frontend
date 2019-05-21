@@ -4,14 +4,14 @@ import {
     DELETE_SHORTLIST_REQUEST,
 } from '../actions/types';
 
-export const getShortList = () => ({
+export const getShortlist = () => ({
     type: GET_SHORTLIST_REQUEST
 })
 
-export const postShortList = (course) => ({
+export const addToShortlist = (course) => ({
     type: POST_SHORTLIST_REQUEST, course
 })
 
-export const deleteShortList = (course) => ({
+export const removeFromShortlist = (course) => ({
     type: DELETE_SHORTLIST_REQUEST, course
 })

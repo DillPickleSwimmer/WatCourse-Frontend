@@ -5,7 +5,7 @@ import { CourseSearchType } from '../types/types';
 import { ReactComponent as CloseIcon } from '../images/icon_close.svg';
 import { toggleSearchModal } from '../actions/modalActions';
 import { deselectTerm } from '../actions/selectTermActions';
-import { postShortList, deleteShortList, getShortList } from '../actions/shortlistActions';
+import { addToShortlist, removeFromShortlist, getShortlist } from '../actions/shortlistActions';
 import { addToTerm } from '../actions/termActions';
 import SearchResultCard from './SearchResultCard';
 import ShortlistCard from './ShortlistCard';
@@ -27,7 +27,7 @@ class SearchModal extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(getShortList())
+        this.props.dispatch(getShortlist())
     }
 
     handleResultClick = (index) => {
@@ -88,7 +88,7 @@ class SearchModal extends Component {
                                 course={result}
                                 onClick={() => this.handleResultClick(index)}
                                 expanded={this.state.openResult === index}
-                                addToShortlist={() => {this.props.dispatch(postShortList(result))}}
+                                addToShortlist={() => {this.props.dispatch(addToShortlist(result))}}
                                 addToTerm={() => {this.props.dispatch(addToTerm(this.props.selectedTerm, result))}}
                                 selectedTerm={this.props.selectedTerm}
                             />
@@ -103,7 +103,7 @@ class SearchModal extends Component {
                                     course={course} 
                                     onClick={() => this.handleShortlistClick(index)}
                                     expanded={this.state.openShortlist === index}
-                                    removeFromShortlist={() => {this.props.dispatch(deleteShortList(course))}}
+                                    removeFromShortlist={()=>{this.props.dispatch(removeFromShortlist(course))}}
                                     addToTerm={() => {this.props.dispatch(addToTerm(this.props.selectedTerm, course))}}
                                     selectedTerm={this.props.selectedTerm}
                                 />    

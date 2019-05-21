@@ -1,7 +1,7 @@
 
 const ENDPOINT = `/shortlist/courses`
 
-export const getShortlist = (accessToken, userId) => {
+export const getShortlistEndpoint = (accessToken, userId) => {
     return fetch(ENDPOINT, { headers: { 'Authorization': accessToken, 'UserID': userId } })
         .then(response => {
             return response.json()
@@ -11,7 +11,7 @@ export const getShortlist = (accessToken, userId) => {
         })
 }
 
-export const postShortlist = (accessToken, userId, courseId) => {
+export const postShortlistEndpoint = (accessToken, userId, courseId) => {
     console.log('courseid is:' + JSON.stringify(courseId))
     return fetch(ENDPOINT, {
         method: 'POST',
@@ -25,7 +25,7 @@ export const postShortlist = (accessToken, userId, courseId) => {
     })
 }
 
-export const deleteShortlist = (accessToken, userId, courseId) => {
+export const deleteShortlistEndpoint = (accessToken, userId, courseId) => {
     console.log('deleteShortlist - courseid is:' + JSON.stringify(courseId))
     return fetch(ENDPOINT, {
         method: 'DELETE',
