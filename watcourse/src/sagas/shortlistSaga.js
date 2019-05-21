@@ -7,15 +7,18 @@ import {
 } from '../actions/types';
 
 export const getUser = (state) => state.auth.user.user 
+const getCourses = (state) => state.courses
 
 
 export function* getShortlistSaga(action) {
     try {
         console.log('fetching shortlist');
         const user = yield select(getUser); 
+        const courses = yield select(getCourses);
         const token = user['qa'] || user.stsTokenManager.accessToken;        
-        const courses = yield call(getShortlist(token, user.uid));
-        yield put({ type: GET_SHORTLIST_SUCCESS, courses });
+        const shortlistCourses = yield call(getShortlist, token, user.uid);
+        console.log('getShortlistSaga, shortlistCourses' + JSON.stringify(shortlistCourses))
+        yield put({ type: GET_SHORTLIST_SUCCESS, courses, shortlistCourses });
         console.log('done fetching courses');
     } catch (error) {
         yield put({ type: GET_SHORTLIST_ERROR, error });
