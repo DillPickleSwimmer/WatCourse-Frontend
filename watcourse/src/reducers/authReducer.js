@@ -31,7 +31,7 @@ export default function (state = initialState, action) {
             authenticated: false,
             user: null,
             error: action.error,
-        }
+        };
     case LOGOUT_SUCCESS:
         return {
             ...state,
@@ -39,7 +39,7 @@ export default function (state = initialState, action) {
             user: null,
             error: null,
             shortlist: [],
-        }
+        };
     default:
         return state;
     }

@@ -20,10 +20,10 @@ const baseRootReducer = combineReducers({
 
 const rootReducer = (state, action) => {
     if (action.type === LOGOUT_SUCCESS) {
-      state = undefined
+        state = undefined;
     }
   
-    return baseRootReducer(state, action)
-}
+    return baseRootReducer(state, action);
+};
 
 export default rootReducer;
