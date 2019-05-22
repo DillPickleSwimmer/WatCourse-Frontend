@@ -6,11 +6,11 @@ import {
     DELETE_SHORTLIST_SUCCESS, DELETE_SHORTLIST_ERROR, DELETE_SHORTLIST_REQUEST,
 } from '../actions/types';
 
-export const getUser = (state) => state.auth.user.user 
-const getCourses = (state) => state.courses
+export const getUser = (state) => state.auth.user.user;
+const getCourses = (state) => state.courses;
 
 
-export function* getShortlistSaga(action) {
+export function* getShortlistSaga() {
     try {
         const user = yield select(getUser); 
         const courses = yield select(getCourses);
@@ -26,7 +26,7 @@ export function* postShortlistSaga(action) {
     try {
         const user = yield select(getUser); 
         const token = user['qa'] || user.stsTokenManager.accessToken;        
-        const course  = action.course
+        const course  = action.course;
         yield call(postShortlistEndpoint, token, user.uid, course.id);
         yield put({ type: POST_SHORTLIST_SUCCESS, course });
     } catch (error) {
@@ -38,7 +38,7 @@ export function* deleteShortlistSaga(action) {
     try {
         const user = yield select(getUser); 
         const token = user['qa'] || user.stsTokenManager.accessToken;        
-        const course  = action.course
+        const course  = action.course;
         yield call(deleteShortlistEndpoint, token, user.uid, course.id);
         yield put({ type: DELETE_SHORTLIST_SUCCESS, course });
     } catch (error) {

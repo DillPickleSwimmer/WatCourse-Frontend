@@ -4,12 +4,10 @@ import {
     GET_COURSES_SUCCESS, GET_COURSES_ERROR, GET_COURSES_REQUEST,
 } from '../actions/types';
 
-export function* getCoursesSaga(action) {
+export function* getCoursesSaga() {
     try {
-        console.log(' fetching courses');
         const courses = yield call(getCoursesEndpoint);
         yield put({ type: GET_COURSES_SUCCESS, courses });
-        console.log('done fetching courses');
     } catch (error) {
         yield put({ type: GET_COURSES_ERROR, error });
     }

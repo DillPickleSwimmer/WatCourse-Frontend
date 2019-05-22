@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { getQuoteAction } from '../actions/sampleActions';
 import { PropTypes } from 'prop-types';
 
-class SampleEndpoint extends Component {
+class SampleEndpoint extends React.Component {
 
     // right after our component renders.
     componentDidMount() {

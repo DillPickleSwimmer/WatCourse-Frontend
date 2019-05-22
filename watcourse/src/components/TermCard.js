@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import  React from 'react';
 import { PropTypes } from 'prop-types';
 import '../styles/TermCard.css';
 import CourseCard from './CourseCard';
@@ -6,10 +6,9 @@ import { ReactComponent as AddIcon } from '../images/icon_add.svg';
 import { TermType, CourseType } from '../types/types';
 import { removeFromTerm } from '../actions/termActions';
 
-class TermCard extends Component {
+class TermCard extends React.Component {
     render() {
         const { courses, term } = this.props; 
-        console.log('rendered')
         return (
             <div className="TermCard">
                 <div className="header">

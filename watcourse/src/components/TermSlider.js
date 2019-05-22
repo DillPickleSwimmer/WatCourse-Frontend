@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import  React from 'react';
 import { PropTypes } from 'prop-types';
 import '../styles/TermSlider.css';
 import TermCard from './TermCard.js';
@@ -6,7 +6,7 @@ import { TermType, CourseType } from '../types/types';
 import { openSearchModal } from '../actions/modalActions';
 import { selectTerm } from '../actions/selectTermActions';
 
-class TermSlider extends Component {
+class TermSlider extends React.Component {
     render() {
         const { courses } = this.props; 
         return (

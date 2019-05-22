@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import  React from 'react';
 import { PropTypes } from 'prop-types';
 import '../styles/SearchBar.css';
 import { CourseSearchType } from '../types/types';
 
-class SearchBar extends Component {
+class SearchBar extends React.Component {
     constructor(props) {
         super(props)
 

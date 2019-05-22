@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-//import { PropTypes } from 'prop-types';
 import '../styles/Main.css';
 import { ReactComponent as ClosedLock } from '../images/icon_lock_closed.svg';
 import { ReactComponent as OpenLock } from '../images/icon_lock_open.svg';
@@ -9,7 +8,7 @@ import { getCourses } from '../actions/courseActions';
 
 
 
-class Main extends Component {
+class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = { locked: true }

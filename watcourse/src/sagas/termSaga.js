@@ -10,7 +10,7 @@ import {
     PUT_TERMS_SUCCESS, PUT_TERMS_ERROR, PUT_TERMS_REQUEST,
 } from '../actions/types';
 
-export const getUser = (state) => state.auth.user.user 
+export const getUser = (state) => state.auth.user.user;
 
 
 function* getTerm(term) {
@@ -23,15 +23,14 @@ function* getTerm(term) {
             id: term.id,
             name: term.name, 
             courses: courses, 
-        }
+        };
         yield put({ type: GET_TERMS_SUCCESS, term: custom_term });
     } catch (error) {
-        console.log(error)
         yield put({ type: GET_TERMS_ERROR, error });
     }
 }
 
-export function* getTermsSaga(action) {
+export function* getTermsSaga() {
     try {
         const user = yield select(getUser); 
         const token = user['qa'] || user.stsTokenManager.accessToken;
@@ -48,7 +47,9 @@ export function* getTermsSaga(action) {
 
 export function* putTermsSaga(action) {
     try {
-        const terms = yield call(putTermsEndpoint, action.payload);
+        const user = yield select(getUser); 
+        const token = user['qa'] || user.stsTokenManager.accessToken;
+        const terms = yield call(putTermsEndpoint, token, user.uid,  action.term, action.course);
         yield put({ type: PUT_TERMS_SUCCESS, terms });
     } catch (error) {
         yield put({ type: PUT_TERMS_ERROR, error });

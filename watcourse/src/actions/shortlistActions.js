@@ -6,12 +6,12 @@ import {
 
 export const getShortlist = () => ({
     type: GET_SHORTLIST_REQUEST
-})
+});
 
 export const addToShortlist = (course) => ({
     type: POST_SHORTLIST_REQUEST, course
-})
+});
 
 export const removeFromShortlist = (course) => ({
     type: DELETE_SHORTLIST_REQUEST, course
-})
+});

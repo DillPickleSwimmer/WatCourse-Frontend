@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { browserHistory } from 'react-router';
 import { PropTypes } from 'prop-types';
 import { login } from '../actions/authActions';
@@ -14,7 +14,7 @@ var backgroundStyle = {
     backgroundImage: `url(${Background})`
   };
   
-class Login extends Component {
+class Login extends React.Component {
     componentWillMount() {
         if(this.props.auth) browserHistory.push('/');
     }

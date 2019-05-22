@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import  React from 'react';
 import { connect } from 'react-redux';
 //import { PropTypes } from 'prop-types';
 import '../styles/Header.css';
@@ -8,7 +8,7 @@ import { logout } from '../actions/authActions';
 import { openSearchModal } from '../actions/modalActions';
 import { deselectTerm } from '../actions/selectTermActions';
 
-class Header extends Component {
+class Header extends React.Component {
     render() {
         return (
             <div className="Header">

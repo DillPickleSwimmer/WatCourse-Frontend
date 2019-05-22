@@ -7,16 +7,16 @@ import {
 
 export const authenticate = () => ({
     type: AUTH_REQUEST,
-})
+});
 
 export const signup = (email, password) => ({
     type: SIGNUP_REQUEST, email, password
-})
+});
 
 export const login = (email, password) => ({
     type: LOGIN_REQUEST, email, password
-})
+});
 
-export const logout = (email, password) => ({
+export const logout = () => ({
     type: LOGOUT_REQUEST,
-})
+});

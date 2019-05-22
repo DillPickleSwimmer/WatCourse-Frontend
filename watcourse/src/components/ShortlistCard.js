@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import  React from 'react';
 import { PropTypes } from 'prop-types';
 import '../styles/ShortlistCard.css';
 import { CourseSearchType } from '../types/types';
 import { ReactComponent as RemoveIcon } from '../images/icon_minus.svg';
 
-class ShortlistCard extends Component {
+class ShortlistCard extends React.Component {
     render() {
         return (
             <div className="ShortlistCard" onClick={this.props.onClick}>

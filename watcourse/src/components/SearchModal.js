@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import  React from 'react';
 import { PropTypes } from 'prop-types';
 import '../styles/SearchModal.css';
 import { CourseSearchType } from '../types/types';
@@ -11,7 +11,7 @@ import SearchResultCard from './SearchResultCard';
 import ShortlistCard from './ShortlistCard';
 import SearchBar from './SearchBar';
 
-class SearchModal extends Component {
+class SearchModal extends React.Component {
     constructor(props) {
         super(props)
 

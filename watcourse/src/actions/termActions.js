@@ -1,7 +1,7 @@
 import {
     GET_TERMS_REQUEST,
-    ADD_TO_TERM, 
-    REMOVE_FROM_TERM
+    PUT_TERMS_REQUEST, 
+    REMOVE_FROM_TERM // TODO: delete term request
 } from '../actions/types';
 
 export const getTerms = () => ({
@@ -9,7 +9,7 @@ export const getTerms = () => ({
 });
 
 export const addToTerm = (term, course) => ({
-    type: ADD_TO_TERM, term, course
+    type: PUT_TERMS_REQUEST, term, course
 });
 
 export const removeFromTerm = (term, course) => ({

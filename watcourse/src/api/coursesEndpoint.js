@@ -1,5 +1,5 @@
-export const getCoursesEndpoint = (param) => {
-    const ENDPOINT = `/courses`;    // update this
+export const getCoursesEndpoint = () => {
+    const ENDPOINT = '/courses';    // update this
   
     return fetch(ENDPOINT)
         .then(response => {
@@ -8,5 +8,5 @@ export const getCoursesEndpoint = (param) => {
         .then(json => {
             return json;
         });
-  };
+};
   

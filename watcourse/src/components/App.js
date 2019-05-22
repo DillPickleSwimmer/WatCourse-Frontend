@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { PropTypes } from 'prop-types';
@@ -6,12 +6,11 @@ import '../styles/App.css';
 import Header from './Header';
 import SearchContainer from '../containers/SearchContainer';
 import { authenticate } from '../actions/authActions';
-import { getCourses } from '../actions/courseActions';
 import { getTerms } from '../actions/termActions';
 
 export const noAuthPages = ['/login', '/signup', '/sample'];
 
-class App extends Component {
+class App extends React.Component {
     componentWillMount() {
         this.props.dispatch(authenticate());
         if(!this.props.auth && !noAuthPages.find((page)=>page === window.location.pathname)) browserHistory.push('/login');
@@ -25,11 +24,11 @@ class App extends Component {
 
     render() {
         return (
-        <div className="App">
-            {this.props.searchModalOpen && <SearchContainer />}
-            <Header />
-            {this.props.children}
-        </div>
+            <div className="App">
+                {this.props.searchModalOpen && <SearchContainer />}
+                <Header />
+                {this.props.children}
+            </div>
         );
     }
 }

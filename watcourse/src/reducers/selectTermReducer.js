@@ -1,9 +1,7 @@
 import { 
     SELECT_TERM,
 } from '../actions/types';
-import { select } from 'redux-saga/effects';
 
-// todo set this to []
 const initialState = null;
 
 export default function (state = initialState, action) {

@@ -7,14 +7,14 @@ const authParameters = {
   }
 };*/
 
-export const sampleEndpoint = (param) => {
-  const ENDPOINT = `https://api.chucknorris.io/jokes/random`;
+export const sampleEndpoint = () => {
+    const ENDPOINT = 'https://api.chucknorris.io/jokes/random';
 
-  return fetch(ENDPOINT/*, authParameters*/)
-  .then(response => {
-    return response.json();
-  })
-  .then(json => {
-      return json;
-  });
+    return fetch(ENDPOINT/*, authParameters*/)
+        .then(response => {
+            return response.json();
+        })
+        .then(json => {
+            return json;
+        });
 };

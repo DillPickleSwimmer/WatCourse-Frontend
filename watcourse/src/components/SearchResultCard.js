@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import  React from 'react';
 import { PropTypes } from 'prop-types';
 import '../styles/SearchResultCard.css';
 import { CourseSearchType } from '../types/types';
 
-class SearchResultCard extends Component {
+class SearchResultCard extends React.Component {
     render() {
         return (
             <div className="SearchResultCard" onClick={this.props.onClick}>

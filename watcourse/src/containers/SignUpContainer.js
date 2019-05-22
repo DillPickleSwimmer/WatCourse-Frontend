@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import SignUp from "../components/SignUp";
+import SignUp from '../components/SignUp';
 
 // subscribe to redux store & merge into component props
 const mapStateToProps = (state) => ({
