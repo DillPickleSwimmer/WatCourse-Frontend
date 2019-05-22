@@ -1,4 +1,4 @@
-import { put, all, takeLatest, select } from 'redux-saga/effects';
+import { put, all, takeLatest } from 'redux-saga/effects';
 import {
     AUTH_REQUEST, AUTH_SUCCESS, AUTH_ERROR, 
     SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_ERROR,

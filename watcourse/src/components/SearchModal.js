@@ -5,7 +5,7 @@ import { CourseSearchType } from '../types/types';
 import { ReactComponent as CloseIcon } from '../images/icon_close.svg';
 import { toggleSearchModal } from '../actions/modalActions';
 import { deselectTerm } from '../actions/selectTermActions';
-import { addToShortlist, removeFromShortlist } from '../actions/shortlistActions';
+import { addToShortlist, removeFromShortlist, getShortlist } from '../actions/shortlistActions';
 import { addToTerm } from '../actions/termActions';
 import SearchResultCard from './SearchResultCard';
 import ShortlistCard from './ShortlistCard';
@@ -24,6 +24,10 @@ class SearchModal extends Component {
         this.handleResultClick = this.handleResultClick.bind(this);
         this.handleShortlistClick = this.handleShortlistClick.bind(this);
         this.handleResultsUpdate = this.handleResultsUpdate.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.dispatch(getShortlist())
     }
 
     handleResultClick = (index) => {
@@ -99,7 +103,7 @@ class SearchModal extends Component {
                                     course={course} 
                                     onClick={() => this.handleShortlistClick(index)}
                                     expanded={this.state.openShortlist === index}
-                                    removeFromShortlist={()=>this.props.dispatch(removeFromShortlist(course))}
+                                    removeFromShortlist={()=>{this.props.dispatch(removeFromShortlist(course))}}
                                     addToTerm={() => {this.props.dispatch(addToTerm(this.props.selectedTerm, course))}}
                                     selectedTerm={this.props.selectedTerm}
                                 />    

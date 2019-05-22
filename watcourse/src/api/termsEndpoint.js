@@ -12,7 +12,6 @@ export const getTermEndpoint = ( termId, accesToken, userId ) => {
 
 export const getTermsEndpoint = (accessToken, userId) => {
     const ENDPOINT = `/term`;    // update this
-  
     return fetch(ENDPOINT, { headers: { 'Authorization': accessToken, 'UserID' : userId } })
         .then(response => {
             return response.json();
