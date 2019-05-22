@@ -10,7 +10,7 @@ import { LOGOUT_SUCCESS } from '../actions/types';
 
 const baseRootReducer = combineReducers({
     sampleQuote: sampleQuoteReducer,
-    terms: termReducer,
+    terms: termReducer, 	
     courses: courseReducer,
     auth: authReducer, 
     searchModal: searchModalReducer,

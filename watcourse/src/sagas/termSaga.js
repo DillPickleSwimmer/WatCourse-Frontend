@@ -2,7 +2,7 @@ import { put, call, takeLatest, all, select } from 'redux-saga/effects';
 import { 
     getTermsEndpoint, 
 } from '../api/termsEndpoint';
-// TODO: implement add term + delete w/ cascade. 
+// TODO: implement add + delete term
 import { getTermCoursesSaga } from './termCourseSaga';
 
 import {
