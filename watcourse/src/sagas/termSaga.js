@@ -19,7 +19,7 @@ export function* getTermsSaga() {
         const terms_ids = yield call(getTermsEndpoint, token, user.uid);
         
         yield all( terms_ids.map( term => call( getTermCoursesSaga, term))); 
-        put({ type: GET_TERMS_SUCCESS });
+        yield put({ type: GET_TERMS_SUCCESS });
     } catch (error) {
         yield put({ type: GET_TERMS_ERROR, error });
     }
