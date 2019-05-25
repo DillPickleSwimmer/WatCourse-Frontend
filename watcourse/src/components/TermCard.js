@@ -4,7 +4,7 @@ import '../styles/TermCard.css';
 import CourseCard from './CourseCard';
 import { ReactComponent as AddIcon } from '../images/icon_add.svg';
 import { TermType, CourseType } from '../types/types';
-import { removeFromTerm } from '../actions/termActions';
+import { removeFromTerm } from '../actions/termCourseActions';
 
 class TermCard extends React.Component {
     render() {
@@ -20,7 +20,7 @@ class TermCard extends React.Component {
                         <CourseCard 
                             key={index} 
                             course={course} 
-                            removeFromTerm={()=>{   // UPDATE TO USE TERM ID NOT INDEX
+                            removeFromTerm={()=>{
                                 this.props.dispatch(removeFromTerm(this.props.term.id, course));
                             }}
                         />

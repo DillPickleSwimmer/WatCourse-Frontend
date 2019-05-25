@@ -1,6 +1,7 @@
 import { 
-    GET_TERMS_SUCCESS,
-    ADD_TO_TERM, REMOVE_FROM_TERM, 
+    GET_TERM_COURSES_SUCCESS,
+    ADD_TERM_COURSE_SUCCESS,
+    REMOVE_TERM_COURSE_SUCCESS, 
 } from '../actions/types';
 
 // todo set this to []
@@ -9,12 +10,12 @@ const initialState = [];
 //need to sort these terms in order to maintain order
 export default function (state = initialState, action) {
     switch (action.type) {
-    case GET_TERMS_SUCCESS:
+    case GET_TERM_COURSES_SUCCESS:
         return [
             ...state.filter(term => action.term.id !== term.id), 
             action.term
         ]; 
-    case ADD_TO_TERM:
+    case ADD_TERM_COURSE_SUCCESS:
         var addTerm = state.find(term=>term.id === action.term);
         addTerm.courses = [
             ...addTerm.courses.filter(id => id !== action.course.id),
@@ -24,8 +25,8 @@ export default function (state = initialState, action) {
             ...state.filter(term =>term.id !== addTerm.id), 
             addTerm
         ];
-    case REMOVE_FROM_TERM: 
-        var removeTerm = state.find(term =>term.id === action.term);
+    case REMOVE_TERM_COURSE_SUCCESS: 
+        var removeTerm = state.find(term => term.id === action.term);
         removeTerm.courses = [
             ...removeTerm.courses.filter(id => id !== action.course.id),
         ];

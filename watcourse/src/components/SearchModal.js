@@ -6,7 +6,7 @@ import { ReactComponent as CloseIcon } from '../images/icon_close.svg';
 import { toggleSearchModal } from '../actions/modalActions';
 import { deselectTerm } from '../actions/selectTermActions';
 import { addToShortlist, removeFromShortlist, getShortlist } from '../actions/shortlistActions';
-import { addToTerm } from '../actions/termActions';
+import { addToTerm } from '../actions/termCourseActions';
 import SearchResultCard from './SearchResultCard';
 import ShortlistCard from './ShortlistCard';
 import SearchBar from './SearchBar';
