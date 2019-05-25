@@ -6,7 +6,7 @@ import {
 import { getTermCoursesSaga } from './termCourseSaga';
 
 import {
-    GET_TERMS_ERROR, GET_TERMS_REQUEST,
+    GET_TERMS_REQUEST, GET_TERMS_SUCCESS, GET_TERMS_ERROR,
 } from '../actions/types';
 
 export const getUser = (state) => state.auth.user.user;
@@ -18,10 +18,9 @@ export function* getTermsSaga() {
 
         const terms_ids = yield call(getTermsEndpoint, token, user.uid);
         
-        yield all( terms_ids.map( term => call( getTermCoursesSaga, term) ) ); 
-
+        yield all( terms_ids.map( term => call( getTermCoursesSaga, term))); 
+        put({ type: GET_TERMS_SUCCESS });
     } catch (error) {
-
         yield put({ type: GET_TERMS_ERROR, error });
     }
 }
