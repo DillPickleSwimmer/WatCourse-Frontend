@@ -4,11 +4,11 @@ import {
     SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_ERROR,
     LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR,
     LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR,
-    GET_TERMS_REQUEST,
 } from '../actions/types';
 import { authRef } from '../base';  
 import { getTerms } from '../actions/termActions';
 import { takeEvery } from 'redux-saga';
+import { putUser } from '../api/userEndpoint';
 
 function* authenticateSaga(action) {
     yield authRef.onAuthStateChanged(user => {
@@ -23,7 +23,10 @@ function* authenticateSaga(action) {
 
 function* signupSaga(action) {
     try {
+        // Get user from Firebase
         const user = yield authRef.createUserWithEmailAndPassword(action.email, action.password);
+        // Add user to our backend
+        yield putUser(user.user.qa, user.user.uid);
         yield put({ type: SIGNUP_SUCCESS, user });
     } catch (error) {
         yield put({ type: SIGNUP_ERROR, error });
