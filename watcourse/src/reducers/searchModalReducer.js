@@ -2,7 +2,7 @@ import {
     SEARCH_MODAL_TOGGLE,
 } from '../actions/types';
 
-const initialState = [];
+const initialState = false;
 
 export default function (state = initialState, action) {
     switch (action.type) {
