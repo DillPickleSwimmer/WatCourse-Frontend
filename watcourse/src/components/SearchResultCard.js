@@ -6,9 +6,9 @@ import { CourseSearchType } from '../types/types';
 class SearchResultCard extends React.Component {
     render() {
         return (
-            <div className="SearchResultCard" onClick={this.props.onClick}>
+            <div className="SearchResultCard">
                 <div className="summary">
-                    <div className="title">
+                    <div className="title" onClick={this.props.onClick}>
                         <div>{this.props.course.subject + this.props.course.num}</div>
                         <div>{this.props.course.title}</div>
                     </div>

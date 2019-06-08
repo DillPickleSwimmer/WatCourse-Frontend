@@ -7,9 +7,9 @@ import { ReactComponent as RemoveIcon } from '../images/icon_minus.svg';
 class ShortlistCard extends React.Component {
     render() {
         return (
-            <div className="ShortlistCard" onClick={this.props.onClick}>
+            <div className="ShortlistCard">
                 <div className="summary">
-                    <div className="summary-title">
+                    <div className="summary-title" onClick={this.props.onClick}>
                         <div>{this.props.course.subject + this.props.course.num}</div>
                         <div>{this.props.course.title}</div>
                     </div>
