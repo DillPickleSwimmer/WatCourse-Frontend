@@ -91,6 +91,7 @@ class SearchModal extends React.Component {
                                 addToShortlist={() => {this.props.dispatch(addToShortlist(result))}}
                                 addToTerm={() => {this.props.dispatch(addToTerm(this.props.selectedTerm, result))}}
                                 selectedTerm={this.props.selectedTerm}
+                                addToShortlistText={this.props.shortlist.findIndex(i => i.id === result.id) >= 0 ? null : "Add to Shortlist"}
                             />
                         )}
                     </div>
