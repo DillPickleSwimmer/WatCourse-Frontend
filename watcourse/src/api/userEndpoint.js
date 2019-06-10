@@ -6,7 +6,8 @@ export const putUser = (accessToken, userId) => {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': accessToken,
+            'USERID': userId,
         },
-        body: JSON.stringify({ 'UserID': userId })
+        body: {},
     });
 };
