@@ -4,6 +4,7 @@ import { PropTypes } from 'prop-types';
 import { login } from '../actions/authActions';
 import '../styles/Login.css';
 import Background from '../images/login_background.png';
+import {Button, ButtonType} from './Button.js'
 
 var backgroundStyle = {
     backgroundPosition:"0px 0px",
@@ -36,26 +37,18 @@ class Login extends React.Component {
                     
                 <div className="centered">
                     <h1>Login</h1>
-
-                    <div>
-                        <p className="spaced-out">Email: </p>
-                        <input className="spaced-out" name="email"
-                            type="email"
-                            placeholder="Email"/>                    
-                    </div>
-                    <div>
-                        <p className="spaced-out">Password: </p>
-                        <input className="spaced-out" name="password"
-                            type="password"
-                            placeholder="Password"/>
-                    </div>                   
-                    <div >
-                        <button type="submit">Login</button>
-                    </div>
+                    <input className="login-input" name="email"
+                        type="email"
+                        placeholder="Email"/>                    
+                    <input className="login-input" name="password"
+                        type="password"
+                        placeholder="Password"/>
+                    <Button variant={ButtonType.PRIMARY} type="submit" text='Login'/>
                     <br/>
-                    <div>
-                        <a href="/signup">Need an account?</a>
-                    </div>
+                    <Button 
+                        variant={ButtonType.SECONDARY} 
+                        text='Need an account?'
+                        onClick={() => window.location.href='/signup'}/>    
                 </div>
                 </form>
                 <div>{this.props.error}</div>

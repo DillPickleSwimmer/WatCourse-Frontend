@@ -7,7 +7,7 @@ import {
 } from '../actions/types';
 import { authRef } from '../base';  
 import { getTerms } from '../actions/termActions';
-import { takeEvery } from 'redux-saga';
+import { takeEvery } from 'redux-saga/effects';
 import { putUser } from '../api/userEndpoint';
 
 function* authenticateSaga(action) {
@@ -23,10 +23,11 @@ function* authenticateSaga(action) {
 
 function* signupSaga(action) {
     try {
+        const {email, password, program} = action;
         // Get user from Firebase
-        const user = yield authRef.createUserWithEmailAndPassword(action.email, action.password);
+        const user = yield authRef.createUserWithEmailAndPassword(email, password);
         // Add user to our backend
-        yield putUser(user.user.qa, user.user.uid);
+        yield putUser(user.user.qa, program);
         yield put({ type: SIGNUP_SUCCESS, user });
     } catch (error) {
         yield put({ type: SIGNUP_ERROR, error });
