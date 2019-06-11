@@ -5,24 +5,32 @@ import TermCard from './TermCard.js';
 import { TermType, CourseType } from '../types/types';
 import { openSearchModal } from '../actions/modalActions';
 import { selectTerm } from '../actions/selectTermActions';
+import { addTerm } from '../actions/termActions';
 
 class TermSlider extends React.Component {
     render() {
         const { courses } = this.props; 
         return (
             <div className="TermSlider">
-                {this.props.terms.map((term, index) => 
-                    <TermCard 
-                        key={index} 
-                        term={term} 
-                        addCourses={()=>{   // UPDATE TO USE TERM ID NOT INDEX
-                            this.props.dispatch(selectTerm(term.id));
-                            this.props.dispatch(openSearchModal(true));
-                        }}
-                        courses={courses.filter( course => term.courses.indexOf(course.id) !== -1)}
-                        dispatch={this.props.dispatch}
-                    />)
-                }
+                {this.props.terms.map((term, index) => {
+                    return term && (<div>
+                        <TermCard 
+                            key={index} 
+                            term={term} 
+                            addCourses={()=>{   // UPDATE TO USE TERM ID NOT INDEX
+                                this.props.dispatch(selectTerm(term.id));
+                                this.props.dispatch(openSearchModal(true));
+                            }}
+                            courses={courses.filter( course => term.courses.indexOf(course.id) !== -1)}
+                            dispatch={this.props.dispatch}
+                        />
+                    </div>)
+                })}
+                <button onClick={ () =>
+                    this.props.dispatch(addTerm(this.props.terms.length ? this.props.terms[this.props.terms.length-1] : null))
+                } >
+                        (+) Term
+                </button>   
             </div>
         );
     }

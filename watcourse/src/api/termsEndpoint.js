@@ -8,3 +8,32 @@ export const getTermsEndpoint = (accessToken, userId) => {
             return json;
         });
 };
+
+export const addTermEndpoint = (accessToken, userId, termNum, termYear) => {
+    const ENDPOINT = '/term'; 
+    return fetch(ENDPOINT, { 
+        method: 'POST',
+        headers: { 
+            'Authorization': accessToken, 
+            'UserID' : userId 
+        },
+        body: JSON.stringify({
+            'term_number': termNum,
+            'year': termYear,
+        })
+    });
+}
+
+export const removeTermEndpoint = (accessToken, userId, termId) => {
+    const ENDPOINT = '/term'; 
+    return fetch(ENDPOINT, { 
+        method: 'DELETE',
+        headers: { 
+            'Authorization': accessToken, 
+            'UserID' : userId 
+        },
+        body: JSON.stringify({
+            'term_id': termId
+        })
+    });
+}

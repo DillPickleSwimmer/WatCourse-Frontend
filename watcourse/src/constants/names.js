@@ -1,0 +1,1 @@
+export const TERMNAMES = ['Winter', 'Spring', 'Fall'];

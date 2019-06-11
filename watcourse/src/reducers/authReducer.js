@@ -40,6 +40,7 @@ export default function (state = initialState, action) {
             error: null,
             shortlist: [],
         };
+    case LOGOUT_ERROR:
     default:
         return state;
     }
