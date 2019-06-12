@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router';
 import { PropTypes } from 'prop-types';
 import { signup } from '../actions/authActions';
 import { getPrograms } from '../actions/programsActions';
-import {Button, ButtonType} from './Button.js'
+import {WatButton, WatButtonType} from './WatButton'
 import '../styles/Signup.css';
 import Background from '../images/login_background.png';
 
@@ -11,7 +11,6 @@ var backgroundStyle = {
     backgroundPosition:'0px 0px',
     backgroundSize: 'cover',
     height:'100vh',
-    
     backgroundRepeat: 'no-repeat',
     backgroundImage: `url(${Background})`
   };
@@ -52,7 +51,6 @@ class SignUp extends React.Component {
                             name='email'
                             type='email'
                             placeholder='Email'/>
-                        <span class="focus-border"></span>
                         <input className='signup-input' 
                             name='password'
                             type='password'
@@ -77,14 +75,13 @@ class SignUp extends React.Component {
                             className='signup-input'
                             name='startYear'
                             type="number"
-                            min="2013"
-                            max="2099"
+                            min='2013'
+                            max='2099'
                             step="1"
-                            placeholder='Starting year' />
-                        <Button type='submit' variant={ButtonType.PRIMARY} text='Sign up'/>
-                        <br/>
-                        <Button 
-                            variant={ButtonType.SECONDARY} 
+                            placeholder='Starting year'/>
+                        <WatButton type='submit' variant={WatButtonType.PRIMARY} text='Sign up'/>
+                        <WatButton 
+                            variant={WatButtonType.SECONDARY} 
                             text='Already have an account?' 
                             onClick={() => window.location.href='/login'}/>
                 </div>

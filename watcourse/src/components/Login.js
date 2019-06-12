@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types';
 import { login } from '../actions/authActions';
 import '../styles/Login.css';
 import Background from '../images/login_background.png';
-import {Button, ButtonType} from './Button.js'
+import {WatButton, WatButtonType} from './WatButton'
 
 var backgroundStyle = {
     backgroundPosition:"0px 0px",
@@ -43,10 +43,10 @@ class Login extends React.Component {
                     <input className="login-input" name="password"
                         type="password"
                         placeholder="Password"/>
-                    <Button variant={ButtonType.PRIMARY} type="submit" text='Login'/>
+                    <WatButton variant={WatButtonType.PRIMARY} type="submit" text='Login'/>
                     <br/>
-                    <Button 
-                        variant={ButtonType.SECONDARY} 
+                    <WatButton 
+                        variant={WatButtonType.SECONDARY} 
                         text='Need an account?'
                         onClick={() => window.location.href='/signup'}/>    
                 </div>

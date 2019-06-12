@@ -1,7 +1,42 @@
 @import url("theme.css");
+
+@media (max-width: 720px) {
+    .centered-signup {
+        width: 75%;
+    }
+}
+
+@media  (max-height: 719px) {
+    .centered-signup {
+        height: 75%;
+    }
+}
+
+
+@media (min-width: 721px) and (max-width: 1239px) {
+    .centered-signup {
+        width: 45%;
+    }
+}
+
+@media (min-width: 1240px) {
+    .centered-signup {
+        width: 20%;
+    }
+}
+
+@media (min-height: 720px) {
+    .centered-signup {
+        height: 50%; 
+    }
+}
+
 .centered-signup {
-    width: 225px;
-    height: 350px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.719);
     position: absolute;
