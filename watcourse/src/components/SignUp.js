@@ -30,14 +30,15 @@ class SignUp extends React.Component {
 
     handleSignUp = async event => {
         event.preventDefault();
-        const { email, password, reenteredPassword, program} = event.target.elements;
+        const { email, password, reenteredPassword, program, startTrimester, startYear } = event.target.elements;
 
         if(password.value !== reenteredPassword.value){
             alert('The passwords you\'ve entered not match');
             return;
         }
 
-        this.props.dispatch(signup( email.value, password.value, program.value ));
+        this.props.dispatch(signup( email.value, password.value, program.value, 
+            startYear.value, startTrimester.value ));
     };
 
     render() {
@@ -71,6 +72,20 @@ class SignUp extends React.Component {
                                 ))
                             }
                         </select>
+                        <select name='startTrimester' required className='signup-input'>
+                            <option value=''>
+                                Which term did you start in?
+                            </option>
+                            <option value='3'>
+                                Fall
+                            </option>
+                            <option value='1'>
+                                Winter
+                            </option>
+                            <option value='2'>
+                                Summer
+                            </option>
+                        </select>
                         <input 
                             className='signup-input'
                             name='startYear'
@@ -78,7 +93,7 @@ class SignUp extends React.Component {
                             min='2013'
                             max='2099'
                             step="1"
-                            placeholder='Starting year'/>
+                            placeholder='Which year did you start in?'/>
                         <WatButton type='submit' variant={WatButtonType.PRIMARY} text='Sign up'/>
                         <WatButton 
                             variant={WatButtonType.SECONDARY} 
