@@ -9,7 +9,8 @@ export const CourseType = PropTypes.shape({
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     prereqs: PropTypes.string, 
-    defaultCourse: PropTypes.bool
+    defaultCourse: PropTypes.bool,
+    isValid: PropTypes.bool
 });
 
 // Term Type

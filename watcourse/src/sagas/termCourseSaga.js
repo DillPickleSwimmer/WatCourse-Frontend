@@ -18,8 +18,7 @@ export function* getTermCoursesSaga(term) {
     try {
         const user = yield select(getUser); 
         const token = user['qa'] || user.stsTokenManager.accessToken;
-
-        const courses = yield call(getTermCoursesEndpoint, term.id, token, user.uid);
+        let courses = yield call(getTermCoursesEndpoint, term.id, token, user.uid);
         const custom_term = {
             id: term.id,
             name: term.name, 
@@ -36,10 +35,13 @@ export function* addTermCourseSaga(action) {
         const user = yield select(getUser); 
         const token = user['qa'] || user.stsTokenManager.accessToken;
         const {term, course} = action;
-        yield call(putTermCourseEndpoint, token, user.uid,  action.term, action.course);
-        yield put({ type: ADD_TERM_COURSE_SUCCESS, term, course});
+        // TODO use response
+        const response = yield call(putTermCourseEndpoint, token, user.uid,  action.term, action.course);
+        const arePrereqsMet = response.arePrereqsMet;
+        yield put({ type: ADD_TERM_COURSE_SUCCESS, term, course, arePrereqsMet});
         yield put({ type: DELETE_SHORTLIST_SUCCESS, course });
     } catch (error) {
+        console.log(JSON.stringify(error.message));
         yield put({ type: ADD_TERM_COURSE_ERROR, error });
     }
 }
