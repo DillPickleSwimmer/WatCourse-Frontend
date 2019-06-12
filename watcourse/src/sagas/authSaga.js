@@ -23,11 +23,11 @@ function* authenticateSaga(action) {
 
 function* signupSaga(action) {
     try {
-        const {email, password, program} = action;
+        const {email, password, program, startYear, startTrimester} = action;
         // Get user from Firebase
         const user = yield authRef.createUserWithEmailAndPassword(email, password);
         // Add user to our backend
-        yield putUser(user.user.qa, program);
+        yield putUser(user.user.qa, program, startYear, startTrimester);
         yield put({ type: SIGNUP_SUCCESS, user });
     } catch (error) {
         yield put({ type: SIGNUP_ERROR, error });
