@@ -1,4 +1,4 @@
-export const putUser = (accessToken, userId) => {
+export const putUser = (accessToken, program_id) => {
     const ENDPOINT = '/signup';
     return fetch(ENDPOINT, {
         method: 'POST',
@@ -6,8 +6,7 @@ export const putUser = (accessToken, userId) => {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': accessToken,
-            'USERID': userId,
         },
-        body: {},
+        body: JSON.stringify({ program_id : program_id < 0 ? null : program_id }) 
     });
 };
