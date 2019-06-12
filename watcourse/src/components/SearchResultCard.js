@@ -6,14 +6,14 @@ import { CourseSearchType } from '../types/types';
 class SearchResultCard extends React.Component {
     render() {
         return (
-            <div className="SearchResultCard" onClick={this.props.onClick}>
+            <div className="SearchResultCard">
                 <div className="summary">
-                    <div className="title">
+                    <div className="title" onClick={this.props.onClick}>
                         <div>{this.props.course.subject + this.props.course.num}</div>
                         <div>{this.props.course.title}</div>
                     </div>
                     <div className="links">
-                        <div onClick={this.props.addToShortlist}>Add to Shortlist</div>
+                        {this.props.addToShortlistText !== null  && <div onClick={this.props.addToShortlist}>{this.props.addToShortlistText}</div>}
                         {this.props.selectedTerm !== null && <div onClick={this.props.addToTerm}>Add to Term </div>}
                     </div>
                 </div>
@@ -33,6 +33,7 @@ SearchResultCard.propTypes = {
     selectedTerm: PropTypes.number, 
     addToShortlist: PropTypes.func.isRequired,
     addToTerm: PropTypes.func,
+    addToShortlistText: PropTypes.string,
 };
 
 export default SearchResultCard;

@@ -6,6 +6,7 @@ import {
 } from '../api/termCourseEndpoint';
 
 import {
+    DELETE_SHORTLIST_SUCCESS,
     GET_TERM_COURSES_REQUEST, GET_TERM_COURSES_SUCCESS, GET_TERM_COURSES_ERROR,
     ADD_TERM_COURSE_REQUEST, ADD_TERM_COURSE_SUCCESS, ADD_TERM_COURSE_ERROR,
     REMOVE_TERM_COURSE_REQUEST, REMOVE_TERM_COURSE_SUCCESS, REMOVE_TERM_COURSE_ERROR, 
@@ -37,6 +38,7 @@ export function* addTermCourseSaga(action) {
         const {term, course} = action;
         yield call(putTermCourseEndpoint, token, user.uid,  action.term, action.course);
         yield put({ type: ADD_TERM_COURSE_SUCCESS, term, course});
+        yield put({ type: DELETE_SHORTLIST_SUCCESS, course });
     } catch (error) {
         yield put({ type: ADD_TERM_COURSE_ERROR, error });
     }
