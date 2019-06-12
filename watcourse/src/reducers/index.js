@@ -20,7 +20,6 @@ const baseRootReducer = combineReducers({
     selectedTerm: selectTermReducer,
     shortlist: shortlistReducer,
     programs: programsReducer,
-    persist: persistReducer,
 });
 
 const rootReducer = (state, action) => {

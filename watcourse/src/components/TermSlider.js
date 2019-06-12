@@ -1,7 +1,8 @@
 import  React from 'react';
 import { PropTypes } from 'prop-types';
 import '../styles/TermSlider.css';
-import TermCard from './TermCard.js';
+import TermCard from './TermCard';
+import AddTerm from './AddTerm';
 import { TermType, CourseType } from '../types/types';
 import { openSearchModal } from '../actions/modalActions';
 import { selectTerm } from '../actions/selectTermActions';
@@ -9,7 +10,7 @@ import { addTerm } from '../actions/termActions';
 
 class TermSlider extends React.Component {
     render() {
-        const { courses } = this.props; 
+        const { courses, terms } = this.props; 
         return (
             <div className="TermSlider">
                 {this.props.terms.map((term, index) => {
@@ -26,11 +27,10 @@ class TermSlider extends React.Component {
                         />
                     </div>)
                 })}
-                <button onClick={ () =>
-                    this.props.dispatch(addTerm(this.props.terms.length ? this.props.terms[this.props.terms.length-1] : null))
-                } >
-                        (+) Term
-                </button>   
+                <AddTerm 
+                    lastTerm={terms.length ? terms[terms.length-1] : null}
+                    dispatch={this.props.dispatch}
+                />
             </div>
         );
     }

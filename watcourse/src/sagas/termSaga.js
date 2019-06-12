@@ -37,8 +37,8 @@ export function* addTermSaga(action) {
         var nextTermType;
         var nextTermYear;
         if ( action.term ) {
-            nextTermType = action.term.term_number + 1;
-            nextTermYear = action.term.year;
+            nextTermType = action.prevTerm.term_number + 1;
+            nextTermYear = action.prevTerm.year;
             if ( nextTermType >= TERMNAMES.length ) {
                 nextTermType = 0;
                 nextTermYear++;
@@ -50,7 +50,7 @@ export function* addTermSaga(action) {
             nextTermType = Math.floor(today.getMonth()/4);
         }
 
-        yield call(addTermEndpoint, token, user.uid, nextTermType, nextTermYear);
+        yield call(addTermEndpoint, token, user.uid, nextTermType, nextTermYear, action.name);
         
         yield put({ type: ADD_TERM_SUCCESS });
     } catch (error) {

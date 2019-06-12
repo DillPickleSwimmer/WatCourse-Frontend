@@ -6,8 +6,8 @@ export const getTerms = () => ({
     type: GET_TERMS_REQUEST,
 });
 
-export const addTerm = (prevTerm) => ({
-    type: ADD_TERM_REQUEST, prevTerm,
+export const addTerm = (prevTerm, name) => ({
+    type: ADD_TERM_REQUEST, prevTerm, name
 })
 
 export const removeTerm = (term) => ({

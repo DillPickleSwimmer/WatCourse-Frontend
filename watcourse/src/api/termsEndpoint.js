@@ -9,17 +9,19 @@ export const getTermsEndpoint = (accessToken, userId) => {
         });
 };
 
-export const addTermEndpoint = (accessToken, userId, termNum, termYear) => {
+export const addTermEndpoint = (accessToken, userId, termNum, termYear, name) => {
     const ENDPOINT = '/term'; 
     return fetch(ENDPOINT, { 
         method: 'POST',
         headers: { 
+            'Content-Type': 'application/json',
             'Authorization': accessToken, 
             'UserID' : userId 
         },
         body: JSON.stringify({
             'term_number': termNum,
             'year': termYear,
+            'name': name,
         })
     });
 }
@@ -29,6 +31,7 @@ export const removeTermEndpoint = (accessToken, userId, termId) => {
     return fetch(ENDPOINT, { 
         method: 'DELETE',
         headers: { 
+            'Content-Type': 'application/json',
             'Authorization': accessToken, 
             'UserID' : userId 
         },

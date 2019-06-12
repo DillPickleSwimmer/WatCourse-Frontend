@@ -16,6 +16,8 @@ export const CourseType = PropTypes.shape({
 
 export const TermType = PropTypes.shape({
     id: PropTypes.number.isRequired,
+    termNum: PropTypes.number.isRequired,
+    termYear: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired, 
     courses: PropTypes.arrayOf(PropTypes.number)
 });
