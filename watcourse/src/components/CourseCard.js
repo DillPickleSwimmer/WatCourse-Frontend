@@ -10,7 +10,7 @@ class CourseCard extends React.Component {
         return (
             <div 
                 className={`CourseCard ${defaultCourse ? 'default' : 'elective'} 
-                    ${arePrereqsMet ? '' : 'error'}`}>  
+                    ${arePrereqsMet ? '' : 'prereq-error'}`}>  
                 <div className="summary">{`${subject}${num}`}<br />{title}</div>
                 <div className="icon"><RemoveIcon onClick={this.props.removeFromTerm}/></div>
             </div>

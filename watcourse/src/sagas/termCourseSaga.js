@@ -35,13 +35,11 @@ export function* addTermCourseSaga(action) {
         const user = yield select(getUser); 
         const token = user['qa'] || user.stsTokenManager.accessToken;
         const {term, course} = action;
-        // TODO use response
         const response = yield call(putTermCourseEndpoint, token, user.uid,  action.term, action.course);
         const arePrereqsMet = response.arePrereqsMet;
         yield put({ type: ADD_TERM_COURSE_SUCCESS, term, course, arePrereqsMet});
         yield put({ type: DELETE_SHORTLIST_SUCCESS, course });
     } catch (error) {
-        console.log(JSON.stringify(error.message));
         yield put({ type: ADD_TERM_COURSE_ERROR, error });
     }
 }
@@ -51,9 +49,7 @@ export function* removeTermCourseSaga(action) {
         const user = yield select(getUser); 
         const token = user['qa'] || user.stsTokenManager.accessToken;
         const {term, course} = action;
-        console.log('delete action is:' + JSON.stringify(action));
         yield call(deleteTermCourseEndpoint, token, user.uid,  term, course);
-        console.log('delete done');
         yield put({ type: REMOVE_TERM_COURSE_SUCCESS, term, course });
     } catch (error) {
         yield put({ type: REMOVE_TERM_COURSE_ERROR, error });
