@@ -9,8 +9,8 @@ export const authenticate = () => ({
     type: AUTH_REQUEST,
 });
 
-export const signup = (email, password, program) => ({
-    type: SIGNUP_REQUEST, email, password, program
+export const signup = (email, password, program, startYear, startTrimester) => ({
+    type: SIGNUP_REQUEST, email, password, program, startYear, startTrimester
 });
 
 export const login = (email, password) => ({
