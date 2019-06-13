@@ -90,7 +90,7 @@ class SearchModal extends React.Component {
                                 expanded={this.state.openResult === index}
                                 addToShortlist={() => {this.props.dispatch(addToShortlist(result))}}
                                 addToTerm={() => {this.props.dispatch(addToTerm(this.props.selectedTerm.id, result))}}
-                                addToTermText={this.props.selectedTerm.courses.findIndex(c => c.id === result.id) >= 0 ? null : "Add to Term"}
+                                addToTermText={this.props.selectedTerm && this.props.selectedTerm.courses.findIndex(c => c.id === result.id) < 0 ? "Add to Term" : null}
                                 addToShortlistText={this.props.shortlist.findIndex(c => c.id === result.id) >= 0 ? null : "Add to Shortlist"}
                             />
                         )}
@@ -106,7 +106,7 @@ class SearchModal extends React.Component {
                                     expanded={this.state.openShortlist === index}
                                     removeFromShortlist={()=>{this.props.dispatch(removeFromShortlist(course))}}
                                     addToTerm={() => {this.props.dispatch(addToTerm(this.props.selectedTerm.id, course))}}
-                                    addToTermText={this.props.selectedTerm.courses.findIndex(c => c.id === course.id) >= 0 ? null : "Add to Term"}
+                                    addToTermText={this.props.selectedTerm && this.props.selectedTerm.courses.findIndex(c => c.id === course.id) <  0 ? "Add to Term" : null}
                                 />    
                             )}
                         </div>

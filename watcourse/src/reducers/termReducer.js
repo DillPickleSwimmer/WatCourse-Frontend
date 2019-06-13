@@ -3,6 +3,7 @@ import {
     ADD_TERM_COURSE_SUCCESS,
     REMOVE_TERM_COURSE_SUCCESS, 
     REMOVE_TERM_SUCCESS,
+    MOVE_TERM_COURSE_SUCCESS,
 } from '../actions/types';
 
 // todo set this to []
@@ -20,7 +21,7 @@ export default function (state = initialState, action) {
         var addTerm = state.find(term=>term.id === action.term);
         addTerm.courses = [
             ...addTerm.courses.filter(id => id !== action.course.id),
-            action.course.id 
+            { id : action.course.id, arePrereqsMet : action.arePrereqsMet } 
         ];
         return [
             ...state.filter(term =>term.id !== addTerm.id), 
@@ -29,7 +30,7 @@ export default function (state = initialState, action) {
     case REMOVE_TERM_COURSE_SUCCESS: 
         var removeTerm = state.find(term => term.id === action.term);
         removeTerm.courses = [
-            ...removeTerm.courses.filter(id => id !== action.course.id),
+            ...removeTerm.courses.filter(course => course.id !== action.course.id),
         ];
         return [
             ...state.filter(term => term.id !== removeTerm.id), 
@@ -39,6 +40,21 @@ export default function (state = initialState, action) {
         return [
             ...state.filter(term => term.id !== action.termId), 
         ]; 
+    case MOVE_TERM_COURSE_SUCCESS:
+        var removeTerm = state.find(term => term.id === action.fromTerm);
+        removeTerm.courses = [
+            ...removeTerm.courses.filter(course => course.id !== action.course.id),
+        ];
+        var addTerm = state.find(term=>term.id === action.toTerm);
+        addTerm.courses = [
+            ...addTerm.courses.filter(course => course.id !== action.course.id),
+            action.course
+        ];
+        return [
+            ...state.filter(term => term.id !== action.fromTerm && term.id !== action.toTerm), 
+            removeTerm,
+            addTerm,
+        ];
     default:
         return state;
     }

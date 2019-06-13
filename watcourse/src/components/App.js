@@ -17,7 +17,7 @@ class App extends React.Component {
 
 
     componentWillUpdate(nextProps) {
-        if(this.props.auth && !nextProps.auth && !noAuthPages.find((page)=>page === window.location.pathname)) browserHistory.push('/login'); 
+        if(this.props.auth && !nextProps.auth && !noAuthPages.find((page)=>page === window.location.pathname)) browserHistory.push('/login');
     }
 
     render() {

@@ -6,6 +6,11 @@ import { ReactComponent as AddIcon } from '../images/icon_add.svg';
 import { TermType, CourseType } from '../types/types';
 import { removeFromTerm } from '../actions/termCourseActions';
 import { removeTerm } from '../actions/termActions';
+import { Droppable } from 'react-beautiful-dnd';
+
+class TermCardList extends React.Component {
+    render() {return (<div></div>);}
+}
 
 class TermCard extends React.Component {
       
@@ -24,17 +29,29 @@ class TermCard extends React.Component {
                     &nbsp;
                     <AddIcon className="add-button" onClick={this.props.addCourses}/>
                 </div>
-                <div className="courses">
-                    {courses.map((course, index) => 
-                        <CourseCard 
-                            key={index} 
-                            course={course} 
-                            removeFromTerm={()=>{
-                                this.props.dispatch(removeFromTerm(this.props.term.id, course));
-                            }}
-                        />
-                    )}
-                </div>
+                <Droppable
+                    droppableId={this.props.term.id}
+                    type="COURSES"
+                >
+                    {(provided)=>(<div className="courses">
+                        <div
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                        >
+                            {courses.map((course, index) => 
+                                <CourseCard 
+                                    key={index} 
+                                    index={index}
+                                    course={course} 
+                                    removeFromTerm={()=>{
+                                        this.props.dispatch(removeFromTerm(this.props.term.id, course));
+                                    }}
+                                />
+                            )}
+                            {provided.placeholder}
+                        </div>
+                    </div>)}
+                </Droppable>
             </div>
         );
     }

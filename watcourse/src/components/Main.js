@@ -5,7 +5,7 @@ import { ReactComponent as ClosedLock } from '../images/icon_lock_closed.svg';
 import { ReactComponent as OpenLock } from '../images/icon_lock_open.svg';
 import TermSliderContainer from '../containers/TermSliderContainer';
 import { getCourses } from '../actions/courseActions';
-import { getTerms } from '../actions/termActions';  
+import { getTerms } from '../actions/termActions';
 
 
 class Main extends React.Component {
