@@ -19,10 +19,14 @@ export function* getTermCoursesSaga(term) {
     try {
         const user = yield select(getUser); 
         const token = user['qa'] || user.stsTokenManager.accessToken;
+
         let courses = yield call(getTermCoursesEndpoint, term.id, token, user.uid);
+
         const custom_term = {
             id: term.id,
-            name: term.name, 
+            name: term.name,
+            termNum: term.term_number, 
+            termYear: term.year,  
             courses: courses, 
         };
         yield put({ type: GET_TERM_COURSES_SUCCESS, term: custom_term });

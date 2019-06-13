@@ -1,7 +1,8 @@
 import  React from 'react';
 import { PropTypes } from 'prop-types';
 import '../styles/TermSlider.css';
-import TermCard from './TermCard.js';
+import TermCard from './TermCard';
+import AddTerm from './AddTerm';
 import { TermType, CourseType } from '../types/types';
 import { openSearchModal } from '../actions/modalActions';
 import { selectTerm } from '../actions/selectTermActions';
@@ -34,31 +35,36 @@ class TermSlider extends React.Component {
     
 
     render() {
-        const { courses } = this.props; 
+        const { courses, terms } = this.props; 
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <div className="TermSlider">
-                {this.props.terms.map((term, index) => 
-                    <TermCard 
-                        key={index} 
-                        term={term} 
-                        addCourses={()=>{   // UPDATE TO USE TERM ID NOT INDEX
-                            this.props.dispatch(selectTerm(term.id));
-                            this.props.dispatch(openSearchModal(true));
-                        }}
-                        courses={courses.filter( course => 
-                            term.courses.map(c => c.id).indexOf(course.id) !== -1)
-                            .map(c => {
-                                let arePrereqsMet =  term.courses
-                                    .find(termCourse => termCourse.id === c.id).arePrereqsMet === true;
-                                c.arePrereqsMet = arePrereqsMet;
-                                return c;
-                            })
-                        }
+                    {this.props.terms.map((term, index) => 
+                        <TermCard 
+                            key={index} 
+                            term={term} 
+                            addCourses={()=>{   // UPDATE TO USE TERM ID NOT INDEX
+                                this.props.dispatch(selectTerm(term.id));
+                                this.props.dispatch(openSearchModal(true));
+                            }}
+                            courses={courses.filter( course => 
+                                term.courses.map(c => c.id).indexOf(course.id) !== -1)
+                                .map(c => {
+                                    let arePrereqsMet =  term.courses
+                                        .find(termCourse => termCourse.id === c.id).arePrereqsMet === true;
+                                    c.arePrereqsMet = arePrereqsMet;
+                                    return c;
+                                })
+                            }
+                            dispatch={this.props.dispatch}
+                        />)
+                    }
+                    <AddTerm 
+                        lastTerm={terms.length ? terms[terms.length-1] : null}
+                        termNames={terms.map(term => term.name)}
                         dispatch={this.props.dispatch}
-                    />)
-                }
-            </div>
+                    />
+                </div>
             </DragDropContext>
         );
     }

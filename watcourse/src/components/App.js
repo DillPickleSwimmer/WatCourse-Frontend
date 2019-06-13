@@ -6,7 +6,6 @@ import '../styles/App.css';
 import Header from './Header';
 import SearchContainer from '../containers/SearchContainer';
 import { authenticate } from '../actions/authActions';
-import { getTerms } from '../actions/termActions';
 
 export const noAuthPages = ['/login', '/signup', '/sample'];
 

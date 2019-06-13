@@ -5,6 +5,7 @@ import CourseCard from './CourseCard';
 import { ReactComponent as AddIcon } from '../images/icon_add.svg';
 import { TermType, CourseType } from '../types/types';
 import { removeFromTerm } from '../actions/termCourseActions';
+import { removeTerm } from '../actions/termActions';
 import { Droppable } from 'react-beautiful-dnd';
 
 class TermCardList extends React.Component {
@@ -12,12 +13,20 @@ class TermCardList extends React.Component {
 }
 
 class TermCard extends React.Component {
+      
     render() {
         const { courses, term } = this.props; 
         return (
             <div className="TermCard">
                 <div className="header">
                     <div className="title">{`${term.name}`}</div>
+                    {/* TODO: CLEAN THIS BUTTON UP */}
+                    <button onClick={ () =>
+                        this.props.dispatch(removeTerm(this.props.term))
+                    } >
+                        (-) Term
+                    </button>
+                    &nbsp;
                     <AddIcon className="add-button" onClick={this.props.addCourses}/>
                 </div>
                 <Droppable

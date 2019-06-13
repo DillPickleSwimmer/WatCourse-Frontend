@@ -1,0 +1,26 @@
+@import url("theme.css");
+
+.AddTerm {
+    color: var(--theme-text-grey);
+    padding: 20px;
+    margin: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--theme-med-grey);
+    border-radius: 5px;
+    flex: 0 0 50px;
+    height: fit-content;
+}
+
+.AddTerm * {
+    font-size: 16px;
+}
+
+.AddTerm div {
+    margin-bottom: 5px;
+}
+
+.AddTerm .name-select * {
+    width: 100%;
+}

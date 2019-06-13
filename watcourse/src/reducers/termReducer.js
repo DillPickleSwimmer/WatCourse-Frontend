@@ -2,6 +2,7 @@ import {
     GET_TERM_COURSES_SUCCESS,
     ADD_TERM_COURSE_SUCCESS,
     REMOVE_TERM_COURSE_SUCCESS, 
+    REMOVE_TERM_SUCCESS,
     MOVE_TERM_COURSE_SUCCESS,
 } from '../actions/types';
 
@@ -35,6 +36,10 @@ export default function (state = initialState, action) {
             ...state.filter(term => term.id !== removeTerm.id), 
             removeTerm
         ];
+    case REMOVE_TERM_SUCCESS: 
+        return [
+            ...state.filter(term => term.id !== action.termId), 
+        ]; 
     case MOVE_TERM_COURSE_SUCCESS:
         var removeTerm = state.find(term => term.id === action.fromTerm);
         removeTerm.courses = [

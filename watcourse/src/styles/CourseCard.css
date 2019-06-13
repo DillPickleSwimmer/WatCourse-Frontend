@@ -27,6 +27,9 @@
 
 .CourseCard .summary {
     flex-grow: 1;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    white-space: normal;
 }
 
 .CourseCard .icon {
