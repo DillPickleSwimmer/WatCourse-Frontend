@@ -1,7 +1,7 @@
 import  React from 'react';
 import { PropTypes } from 'prop-types';
 import '../styles/SearchModal.css';
-import { CourseSearchType } from '../types/types';
+import { CourseSearchType, TermType } from '../types/types';
 import { ReactComponent as CloseIcon } from '../images/icon_close.svg';
 import { toggleSearchModal } from '../actions/modalActions';
 import { deselectTerm } from '../actions/selectTermActions';
@@ -90,7 +90,7 @@ class SearchModal extends React.Component {
                                 expanded={this.state.openResult === index}
                                 addToShortlist={() => {this.props.dispatch(addToShortlist(result))}}
                                 addToTerm={() => {this.props.dispatch(addToTerm(this.props.selectedTerm, result))}}
-                                selectedTerm={this.props.selectedTerm}
+                                addToTermText={this.props.selectedTerm.courses.findIndex(c => c.id === result.id) >= 0 ? null : "Add to Term"}
                                 addToShortlistText={this.props.shortlist.findIndex(c => c.id === result.id) >= 0 ? null : "Add to Shortlist"}
                             />
                         )}
@@ -106,7 +106,7 @@ class SearchModal extends React.Component {
                                     expanded={this.state.openShortlist === index}
                                     removeFromShortlist={()=>{this.props.dispatch(removeFromShortlist(course))}}
                                     addToTerm={() => {this.props.dispatch(addToTerm(this.props.selectedTerm, course))}}
-                                    selectedTerm={this.props.selectedTerm}
+                                    addToTermText={this.props.selectedTerm.courses.findIndex(c => c.id === course.id) >= 0 ? null : "Add to Term"}
                                 />    
                             )}
                         </div>
@@ -120,7 +120,7 @@ class SearchModal extends React.Component {
 SearchModal.propTypes = {
     courses: PropTypes.arrayOf(CourseSearchType).isRequired,
     shortlist: PropTypes.arrayOf(CourseSearchType).isRequired,
-    selectedTerm: PropTypes.number,
+    selectedTerm: TermType,
 };
 
 export default SearchModal;

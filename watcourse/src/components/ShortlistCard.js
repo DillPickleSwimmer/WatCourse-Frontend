@@ -15,7 +15,7 @@ class ShortlistCard extends React.Component {
                     </div>
                     <div className="links">
                         <RemoveIcon className="icon" onClick={this.props.removeFromShortlist} />
-                        {this.props.selectedTerm !== null && <div onClick={this.props.addToTerm}>Add to Term </div>}
+                        {this.props.addToTermText !== null && <div onClick={this.props.addToTerm}>{this.props.addToTermText} </div>}
                     </div>
                 </div>
                 {this.props.expanded && <div className="content">
@@ -33,6 +33,7 @@ ShortlistCard.propTypes = {
     onClick: PropTypes.func.isRequired,
     removeFromShortlist: PropTypes.func.isRequired, 
     addToTerm: PropTypes.func,
+    addToTermText: PropTypes.string,
 };
 
 export default ShortlistCard;
