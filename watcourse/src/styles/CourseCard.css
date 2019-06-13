@@ -22,7 +22,8 @@
 }
 
 .prereq-error {
-    border: 2px solid var(--theme-pink);
+    border: 1px solid var(--theme-pink);
+    background-color: var(--theme-pink-light);
 }
 
 .CourseCard .summary {
