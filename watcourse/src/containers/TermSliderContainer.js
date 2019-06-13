@@ -3,9 +3,7 @@ import TermSlider from '../components/TermSlider';
 
 // subscribe to redux store & merge into component props
 const mapStateToProps = (state) => ({
-    terms: state.terms ? state.terms.sort( 
-        (a, b) => ( a.year < b.year ? -1 : (a.term_number < b.term_number ? -1 : 1))
-    ) : [],
+    terms: state.terms ? state.terms.sort( (a, b) => ( a.name < b.name ? -1 : 1)) : [],
     courses: state.courses || []
 });
 

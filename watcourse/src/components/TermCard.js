@@ -5,7 +5,7 @@ import CourseCard from './CourseCard';
 import { ReactComponent as AddIcon } from '../images/icon_add.svg';
 import { TermType, CourseType } from '../types/types';
 import { removeFromTerm } from '../actions/termCourseActions';
-import { TERMNAMES } from '../constants/names.js';
+import { removeTerm } from '../actions/termActions';
 
 class TermCard extends React.Component {
       
@@ -15,7 +15,13 @@ class TermCard extends React.Component {
             <div className="TermCard">
                 <div className="header">
                     <div className="title">{`${term.name}`}</div>
-                    <div>{`${TERMNAMES[term.term_number]} ${term.year}`}</div>
+                    {/* TODO: CLEAN THIS BUTTON UP */}
+                    <button onClick={ () =>
+                        this.props.dispatch(removeTerm(this.props.term))
+                    } >
+                        (-) Term
+                    </button>
+                    &nbsp;
                     <AddIcon className="add-button" onClick={this.props.addCourses}/>
                 </div>
                 <div className="courses">

@@ -36,10 +36,10 @@ export function* addTermSaga(action) {
         // calculate next term
         var nextTermType;
         var nextTermYear;
-        if ( action.term ) {
-            nextTermType = action.prevTerm.term_number + 1;
-            nextTermYear = action.prevTerm.year;
-            if ( nextTermType >= TERMNAMES.length ) {
+        if ( action.lastTerm ) {
+            nextTermType = action.prevTerm.termNum + 1;
+            nextTermYear = action.prevTerm.termYear;
+            if ( nextTermType - 1 >= TERMNAMES.length ) {
                 nextTermType = 0;
                 nextTermYear++;
             }
@@ -53,6 +53,8 @@ export function* addTermSaga(action) {
         yield call(addTermEndpoint, token, user.uid, nextTermType, nextTermYear, action.name);
         
         yield put({ type: ADD_TERM_SUCCESS });
+        // TODO: only get the one term, not all terms
+        yield put({ type: GET_TERMS_REQUEST });
     } catch (error) {
         yield put({ type: ADD_TERM_ERROR, error });
     }
@@ -65,7 +67,9 @@ export function* removeTermSaga(action) {
 
         yield call(removeTermEndpoint, token, user.uid, action.term.id);
         
-        yield put({ type: REMOVE_TERM_SUCCESS });
+        yield put({ type: REMOVE_TERM_SUCCESS, termId: action.term.id });
+        // TODO: only get the one term, not all terms
+        yield put({ type: GET_TERMS_REQUEST });
     } catch (error) {
         yield put({ type: REMOVE_TERM_ERROR, error });
     }

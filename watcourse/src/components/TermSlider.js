@@ -6,7 +6,6 @@ import AddTerm from './AddTerm';
 import { TermType, CourseType } from '../types/types';
 import { openSearchModal } from '../actions/modalActions';
 import { selectTerm } from '../actions/selectTermActions';
-import { addTerm } from '../actions/termActions';
 
 class TermSlider extends React.Component {
     render() {
@@ -14,7 +13,7 @@ class TermSlider extends React.Component {
         return (
             <div className="TermSlider">
                 {this.props.terms.map((term, index) => {
-                    return term && (<div>
+                    return term ? (<div>
                         <TermCard 
                             key={index} 
                             term={term} 
@@ -25,10 +24,11 @@ class TermSlider extends React.Component {
                             courses={courses.filter( course => term.courses.indexOf(course.id) !== -1)}
                             dispatch={this.props.dispatch}
                         />
-                    </div>)
+                    </div>) : null
                 })}
                 <AddTerm 
                     lastTerm={terms.length ? terms[terms.length-1] : null}
+                    termNames={terms.map(term => term.name)}
                     dispatch={this.props.dispatch}
                 />
             </div>

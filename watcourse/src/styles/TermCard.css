@@ -1,7 +1,7 @@
 @import url("theme.css");
 
 .TermCard {
-    max-width: 100%;
+    width: 350px;  
     border: 1px solid var(--theme-pink);
     border-radius: 4px;
     display: flex;
