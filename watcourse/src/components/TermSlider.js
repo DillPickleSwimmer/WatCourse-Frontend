@@ -5,12 +5,39 @@ import TermCard from './TermCard.js';
 import { TermType, CourseType } from '../types/types';
 import { openSearchModal } from '../actions/modalActions';
 import { selectTerm } from '../actions/selectTermActions';
+import { DragDropContext } from 'react-beautiful-dnd';
+import { moveBetweenTerms } from '../actions/termCourseActions';
 
 class TermSlider extends React.Component {
+
+    onDragEnd = (result) => {
+        // dropped nowhere
+        if (!result.destination) {
+            return;
+        }
+
+        // did not move
+        if (result.destination.droppableId === result.source.droppableId) {
+            return;
+        }
+
+        switch(result.type) {
+            case "COURSES":       // course moved between terms
+                this.props.dispatch(moveBetweenTerms(
+                    this.props.courses.find(course => course.id === result.draggableId), 
+                    result.source.droppableId, 
+                    result.destination.droppableId)
+                )
+                break;
+        }
+    };
+    
+
     render() {
         const { courses } = this.props; 
         return (
-            <div className="TermSlider">
+            <DragDropContext onDragEnd={this.onDragEnd}>
+                <div className="TermSlider">
                 {this.props.terms.map((term, index) => 
                     <TermCard 
                         key={index} 
@@ -32,6 +59,7 @@ class TermSlider extends React.Component {
                     />)
                 }
             </div>
+            </DragDropContext>
         );
     }
 }

@@ -2,6 +2,7 @@ import {
     GET_TERM_COURSES_SUCCESS,
     ADD_TERM_COURSE_SUCCESS,
     REMOVE_TERM_COURSE_SUCCESS, 
+    MOVE_TERM_COURSE_SUCCESS,
 } from '../actions/types';
 
 // todo set this to []
@@ -33,6 +34,21 @@ export default function (state = initialState, action) {
         return [
             ...state.filter(term => term.id !== removeTerm.id), 
             removeTerm
+        ];
+    case MOVE_TERM_COURSE_SUCCESS:
+        var removeTerm = state.find(term => term.id === action.fromTerm);
+        removeTerm.courses = [
+            ...removeTerm.courses.filter(course => course.id !== action.course.id),
+        ];
+        var addTerm = state.find(term=>term.id === action.toTerm);
+        addTerm.courses = [
+            ...addTerm.courses.filter(course => course.id !== action.course.id),
+            action.course
+        ];
+        return [
+            ...state.filter(term => term.id !== action.fromTerm && term.id !== action.toTerm), 
+            removeTerm,
+            addTerm,
         ];
     default:
         return state;
