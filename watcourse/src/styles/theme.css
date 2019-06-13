@@ -3,6 +3,7 @@
 :root {
     /* theme colors */
     --theme-pink: #E91E63;
+    --theme-pink-light: #fce3eb;
     --theme-dark-pink: #963A58;
     --theme-blue: #7FDEDD;
     --theme-text-grey: #0D0D0D;
