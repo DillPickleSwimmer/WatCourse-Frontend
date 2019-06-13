@@ -10,7 +10,7 @@ export const getTermCoursesEndpoint = (termId, accesToken, userId) => {
         });
 };
 
-export const putTermCourseEndpoint = (accessToken, userId, term, courseId) => {
+export const putTermCourseEndpoint = (accessToken, userId, term, course) => {
     const ENDPOINT = `/term/${term}/courses`;
     return fetch(ENDPOINT, {
         method: 'POST',
@@ -20,11 +20,15 @@ export const putTermCourseEndpoint = (accessToken, userId, term, courseId) => {
             'Authorization': accessToken,
             'UserID': userId
         },
-        body: JSON.stringify({ 'course_id': courseId })
+        body: JSON.stringify({ 'course_id': course.id })
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        return json;
     });
 };
 
-export const deleteTermCourseEndpoint = (accessToken, userId, term, courseId) => {
+export const deleteTermCourseEndpoint = (accessToken, userId, term, course) => {
     const ENDPOINT = `/term/${term}/courses`;
     return fetch(ENDPOINT, {
         method: 'DELETE',
@@ -34,6 +38,6 @@ export const deleteTermCourseEndpoint = (accessToken, userId, term, courseId) =>
             'Authorization': accessToken,
             'UserID': userId
         },
-        body: JSON.stringify({ 'course_id': courseId })
+        body: JSON.stringify({ 'course_id': course.id })
     });
 };

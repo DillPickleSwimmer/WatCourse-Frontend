@@ -4,7 +4,7 @@ import SearchModal from '../components/SearchModal';
 // subscribe to redux store & merge into component props
 const mapStateToProps = (state) => ({
     courses: state.courses,
-    selectedTerm: state.selectedTerm,
+    selectedTerm: state.terms.find(term => term.id === state.selectedTerm),
     shortlist: state.shortlist,
 });
 

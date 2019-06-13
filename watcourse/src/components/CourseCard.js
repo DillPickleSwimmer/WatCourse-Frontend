@@ -7,13 +7,14 @@ import { Draggable } from 'react-beautiful-dnd';
 
 class CourseCard extends React.Component {
     render() {
-        const {id, subject, num, title, defaultCourse} = this.props.course;
+        const {id, subject, num, title, defaultCourse, arePrereqsMet} = this.props.course;
 
         return (
             <Draggable draggableId={id} index={this.props.index}>
                 {(provided)=>(
                 <div 
-                    className={`CourseCard ${defaultCourse ? 'default' : 'elective'}`}
+                    className={`CourseCard ${defaultCourse ? 'default' : 'elective'} 
+                    ${arePrereqsMet ? '' : 'prereq-error'}`}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}

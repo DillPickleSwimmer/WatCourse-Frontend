@@ -23,7 +23,11 @@ class TermSlider extends React.Component {
 
         switch(result.type) {
             case "COURSES":       // course moved between terms
-                this.props.dispatch(moveBetweenTerms(result.draggableId, result.source.droppableId, result.destination.droppableId))
+                this.props.dispatch(moveBetweenTerms(
+                    this.props.courses.find(course => course.id === result.draggableId), 
+                    result.source.droppableId, 
+                    result.destination.droppableId)
+                )
                 break;
         }
     };
@@ -34,19 +38,27 @@ class TermSlider extends React.Component {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <div className="TermSlider">
-                    {this.props.terms.map((term, index) => 
-                        <TermCard 
-                            key={index} 
-                            term={term} 
-                            addCourses={()=>{   // UPDATE TO USE TERM ID NOT INDEX
-                                this.props.dispatch(selectTerm(term.id));
-                                this.props.dispatch(openSearchModal(true));
-                            }}
-                            courses={courses.filter( course => term.courses.indexOf(course.id) !== -1)}
-                            dispatch={this.props.dispatch}
-                        />)
-                    }
-                </div>
+                {this.props.terms.map((term, index) => 
+                    <TermCard 
+                        key={index} 
+                        term={term} 
+                        addCourses={()=>{   // UPDATE TO USE TERM ID NOT INDEX
+                            this.props.dispatch(selectTerm(term.id));
+                            this.props.dispatch(openSearchModal(true));
+                        }}
+                        courses={courses.filter( course => 
+                            term.courses.map(c => c.id).indexOf(course.id) !== -1)
+                            .map(c => {
+                                let arePrereqsMet =  term.courses
+                                    .find(termCourse => termCourse.id === c.id).arePrereqsMet === true;
+                                c.arePrereqsMet = arePrereqsMet;
+                                return c;
+                            })
+                        }
+                        dispatch={this.props.dispatch}
+                    />)
+                }
+            </div>
             </DragDropContext>
         );
     }

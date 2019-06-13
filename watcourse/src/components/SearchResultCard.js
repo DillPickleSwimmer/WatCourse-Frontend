@@ -14,7 +14,7 @@ class SearchResultCard extends React.Component {
                     </div>
                     <div className="links">
                         {this.props.addToShortlistText !== null  && <div onClick={this.props.addToShortlist}>{this.props.addToShortlistText}</div>}
-                        {this.props.selectedTerm !== null && <div onClick={this.props.addToTerm}>Add to Term </div>}
+                        {this.props.addToTermText !== null && <div onClick={this.props.addToTerm}>{this.props.addToTermText}</div>}
                     </div>
                 </div>
                 {this.props.expanded && <div className="content">
@@ -30,7 +30,7 @@ SearchResultCard.propTypes = {
     course: CourseSearchType,
     expanded: PropTypes.bool,
     onClick: PropTypes.func.isRequired,
-    selectedTerm: PropTypes.number, 
+    addToTermText: PropTypes.string,
     addToShortlist: PropTypes.func.isRequired,
     addToTerm: PropTypes.func,
     addToShortlistText: PropTypes.string,
