@@ -3,18 +3,25 @@ import { PropTypes } from 'prop-types';
 import '../styles/CourseCard.css';
 import { CourseType } from '../types/types';
 import { ReactComponent as RemoveIcon } from '../images/icon_minus.svg';
+import { Draggable } from 'react-beautiful-dnd';
 
 class CourseCard extends React.Component {
     render() {
-        const {subject, num, title, defaultCourse} = this.props.course;
+        const {id, subject, num, title, defaultCourse} = this.props.course;
 
         return (
-            <div 
-                className={`CourseCard ${defaultCourse ? 'default' : 'elective'}`}
-            >  
-                <div className="summary">{`${subject}${num}`}<br />{title}</div>
-                <div className="icon"><RemoveIcon onClick={this.props.removeFromTerm}/></div>
-            </div>
+            <Draggable draggableId={id} index={this.props.index}>
+                {(provided)=>(
+                <div 
+                    className={`CourseCard ${defaultCourse ? 'default' : 'elective'}`}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    ref={provided.innerRef}
+                >  
+                    <div className="summary">{`${subject}${num}`}<br />{title}</div>
+                    <div className="icon"><RemoveIcon onClick={this.props.removeFromTerm}/></div>
+                </div>)}
+            </Draggable>
         );
     }
 }
@@ -22,6 +29,7 @@ class CourseCard extends React.Component {
 CourseCard.propTypes = {
     course: CourseType,
     removeFromTerm: PropTypes.func.isRequired,
+    index: PropTypes.number.isRequired,
 };
 
 export default CourseCard;
