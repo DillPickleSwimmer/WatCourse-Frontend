@@ -17,7 +17,7 @@ class TermSlider extends React.Component {
                         <TermCard 
                             key={index} 
                             term={term} 
-                            addCourses={()=>{   // UPDATE TO USE TERM ID NOT INDEX
+                            addCourses={()=>{   
                                 this.props.dispatch(selectTerm(term.id));
                                 this.props.dispatch(openSearchModal(true));
                             }}

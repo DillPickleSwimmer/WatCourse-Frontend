@@ -11,7 +11,7 @@ const initialState = [];
 //need to sort these terms in order to maintain order
 export default function (state = initialState, action) {
     switch (action.type) {
-    case GET_TERM_COURSES_SUCCESS:  
+    case GET_TERM_COURSES_SUCCESS:
         return [
             ...state.filter(term => action.term.id !== term.id), 
             action.term
