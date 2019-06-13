@@ -21,6 +21,10 @@ export const putTermCourseEndpoint = (accessToken, userId, term, course) => {
             'UserID': userId
         },
         body: JSON.stringify({ 'course_id': course.id })
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        return json;
     });
 };
 

@@ -6,12 +6,11 @@ import { ReactComponent as RemoveIcon } from '../images/icon_minus.svg';
 
 class CourseCard extends React.Component {
     render() {
-        const {subject, num, title, defaultCourse} = this.props.course;
-
+        const {subject, num, title, defaultCourse, arePrereqsMet} = this.props.course;
         return (
             <div 
-                className={`CourseCard ${defaultCourse ? 'default' : 'elective'}`}
-            >  
+                className={`CourseCard ${defaultCourse ? 'default' : 'elective'} 
+                    ${arePrereqsMet ? '' : 'prereq-error'}`}>  
                 <div className="summary">{`${subject}${num}`}<br />{title}</div>
                 <div className="icon"><RemoveIcon onClick={this.props.removeFromTerm}/></div>
             </div>

@@ -19,7 +19,15 @@ class TermSlider extends React.Component {
                             this.props.dispatch(selectTerm(term.id));
                             this.props.dispatch(openSearchModal(true));
                         }}
-                        courses={courses.filter( course => term.courses.indexOf(course.id) !== -1)}
+                        courses={courses.filter( course => 
+                            term.courses.map(c => c.id).indexOf(course.id) !== -1)
+                            .map(c => {
+                                let arePrereqsMet =  term.courses
+                                    .find(termCourse => termCourse.id === c.id).arePrereqsMet === true;
+                                c.arePrereqsMet = arePrereqsMet;
+                                return c;
+                            })
+                        }
                         dispatch={this.props.dispatch}
                     />)
                 }
