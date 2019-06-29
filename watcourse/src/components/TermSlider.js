@@ -37,6 +37,7 @@ class TermSlider extends React.Component {
     
 
     render() {
+        console.log(this.props)
         const { courses, terms } = this.props; 
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>

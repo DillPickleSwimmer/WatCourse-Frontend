@@ -6,6 +6,7 @@ import authReducer from './authReducer';
 import searchModalReducer from './searchModalReducer';
 import selectTermReducer from './selectTermReducer';
 import shortlistReducer from './shortlistReducer';
+import prereqReducer from './prereqReducer';
 import programsReducer from './programsReducer';
 import { LOGOUT_SUCCESS } from '../actions/types';
 
@@ -18,6 +19,7 @@ const baseRootReducer = combineReducers({
     selectedTerm: selectTermReducer,
     shortlist: shortlistReducer,
     programs: programsReducer,
+    prereqs: prereqReducer,
 });
 
 const rootReducer = (state, action) => {
