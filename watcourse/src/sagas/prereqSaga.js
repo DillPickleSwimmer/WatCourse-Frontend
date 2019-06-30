@@ -7,7 +7,6 @@ import {
 export function* getCoursePrereqsSaga(action) {
     try {
         const prereqMap = yield call(getCoursePrereqsEndpoint, action.subject, action.number);
-        console.log(prereqMap)
         yield put({ type: GET_COURSE_PREREQS_SUCCESS, rules: prereqMap.rules });
     } catch (error) {
         yield put({ type: GET_COURSE_PREREQS_ERROR, error });
