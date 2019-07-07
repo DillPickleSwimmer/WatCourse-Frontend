@@ -3,7 +3,6 @@ import { browserHistory } from 'react-router';
 import { PropTypes } from 'prop-types';
 import { login } from '../actions/authActions';
 import '../styles/Login.css';
-import Background from '../images/login_background.png';
 import {WatButton, WatButtonType} from './WatButton'
   
 class Login extends React.Component {
