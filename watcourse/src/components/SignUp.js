@@ -5,15 +5,6 @@ import { signup } from '../actions/authActions';
 import { getPrograms } from '../actions/programsActions';
 import {WatButton, WatButtonType} from './WatButton'
 import '../styles/Signup.css';
-import Background from '../images/login_background.png';
-
-var backgroundStyle = {
-    backgroundPosition:'0px 0px',
-    backgroundSize: 'cover',
-    height:'100vh',
-    backgroundRepeat: 'no-repeat',
-    backgroundImage: `url(${Background})`
-  };
 
 class SignUp extends React.Component {
     componentWillMount() {
@@ -44,7 +35,7 @@ class SignUp extends React.Component {
     render() {
         const { programs } = this.props;
         return (
-            <div className='Signup' style={backgroundStyle}>
+            <div className='signup'>
                 <form onSubmit={this.handleSignUp}>
                 <div className='centered-signup'>
                     <h1>Sign up</h1>

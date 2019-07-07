@@ -58,6 +58,14 @@
     border-bottom: 1px solid #ccc;
 }
 
-.Signup h1 {
+.signup {
+    background-position:0px 0px;
+    background-size: cover;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-image: url('../images/login_background.png');
+}
+
+.signup h1 {
     color: var(--theme-pink);
 }

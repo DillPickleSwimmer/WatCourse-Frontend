@@ -5,15 +5,6 @@ import { login } from '../actions/authActions';
 import '../styles/Login.css';
 import Background from '../images/login_background.png';
 import {WatButton, WatButtonType} from './WatButton'
-
-var backgroundStyle = {
-    backgroundPosition:"0px 0px",
-    backgroundSize: 'cover',
-    height:"100vh",
-    
-    backgroundRepeat: 'no-repeat',
-    backgroundImage: `url(${Background})`
-  };
   
 class Login extends React.Component {
     componentWillMount() {
@@ -32,7 +23,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="Login" style={backgroundStyle}>
+            <div className="login">
                 <form onSubmit={this.handleLogin}>
                     
                 <div className="centered">
