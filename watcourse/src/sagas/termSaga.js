@@ -11,8 +11,7 @@ import {
     ADD_TERM_REQUEST, ADD_TERM_SUCCESS, ADD_TERM_ERROR,
     REMOVE_TERM_REQUEST, REMOVE_TERM_SUCCESS, REMOVE_TERM_ERROR, 
 } from '../actions/types';
-
-export const getUser = (state) => state.auth.user.user;
+import { getUser } from './authSaga';
 
 export function* getTermsSaga() {
     try {
@@ -78,5 +77,5 @@ export function* removeTermSaga(action) {
 export default function* termSaga() {
     yield takeLatest(GET_TERMS_REQUEST, getTermsSaga);   
     yield takeEvery(ADD_TERM_REQUEST, addTermSaga);
-    yield takeEvery(REMOVE_TERM_REQUEST, removeTermSaga)
+    yield takeEvery(REMOVE_TERM_REQUEST, removeTermSaga);
 }
