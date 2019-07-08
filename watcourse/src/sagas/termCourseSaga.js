@@ -16,6 +16,7 @@ import {
 export const getUser = (state) => state.auth.user.user;
 
 export function* getTermCoursesSaga(term) {
+
     try {
         const user = yield select(getUser); 
         const token = user['qa'] || user.stsTokenManager.accessToken;

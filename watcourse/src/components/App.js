@@ -24,8 +24,10 @@ class App extends React.Component {
         return (
             <div className="App">
                 {this.props.searchModalOpen && <SearchContainer />}
-                <Header />
-                {this.props.children}
+                <div className="inner">
+                    <Header className="header"/>
+                    <div className="content">{this.props.children}</div>
+                </div>
             </div>
         );
     }

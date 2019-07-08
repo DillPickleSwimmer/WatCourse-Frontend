@@ -1,13 +1,13 @@
-@import url("theme.css");
+@import url("./shared/Theme.css");
 
 .AddTerm {
-    color: var(--theme-text-grey);
+    color: var(--theme-text-color);
     padding: 20px;
     margin: 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    background-color: var(--theme-med-grey);
+    background-color: var(--theme-light-grey);
     border-radius: 5px;
     flex: 0 0 50px;
     height: fit-content;

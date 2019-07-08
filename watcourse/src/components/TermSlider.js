@@ -30,6 +30,7 @@ class TermSlider extends React.Component {
                     result.destination.droppableId)
                 )
                 break;
+            default: 
         }
     };
     
@@ -54,7 +55,7 @@ class TermSlider extends React.Component {
                                         .find(termCourse => termCourse.id === c.id).arePrereqsMet === true;
                                     c.arePrereqsMet = arePrereqsMet;
                                     return c;
-                                })
+                                }) || []
                             }
                             dispatch={this.props.dispatch}
                         />)
