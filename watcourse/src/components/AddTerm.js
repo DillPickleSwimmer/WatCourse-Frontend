@@ -10,7 +10,7 @@ class AddTerm extends React.Component {
         super(props);
         this.state = {
             termLabel: TERMLABELS[0],
-        }
+        };
 
         this.handleSelectLabel = this.handleSelectLabel.bind(this);
     }  

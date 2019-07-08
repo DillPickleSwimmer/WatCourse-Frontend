@@ -12,8 +12,7 @@ import {
     REMOVE_TERM_COURSE_REQUEST, REMOVE_TERM_COURSE_SUCCESS, REMOVE_TERM_COURSE_ERROR, 
     MOVE_TERM_COURSE_REQUEST, MOVE_TERM_COURSE_SUCCESS, MOVE_TERM_COURSE_ERROR, 
 } from '../actions/types';
-
-export const getUser = (state) => state.auth.user.user;
+import { getUser } from './authSaga';
 
 export function* getTermCoursesSaga(term) {
     try {
