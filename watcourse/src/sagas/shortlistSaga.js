@@ -5,8 +5,8 @@ import {
     POST_SHORTLIST_SUCCESS, POST_SHORTLIST_ERROR, POST_SHORTLIST_REQUEST,
     DELETE_SHORTLIST_SUCCESS, DELETE_SHORTLIST_ERROR, DELETE_SHORTLIST_REQUEST,
 } from '../actions/types';
+import { getUser } from './authSaga';
 
-export const getUser = (state) => state.auth.user.user;
 const getCourses = (state) => state.courses;
 
 
