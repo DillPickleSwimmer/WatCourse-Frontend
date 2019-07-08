@@ -31,6 +31,7 @@ class TermSlider extends React.Component {
                 )
                 break;
             default: 
+                console.log("unsupported drag/drop type: " + result.type);
         }
     };
     
