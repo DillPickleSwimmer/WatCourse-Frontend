@@ -4,6 +4,7 @@ import { PropTypes } from 'prop-types';
 import { login, togglePasswordReset } from '../actions/authActions';
 import '../styles/Login.css';
 import {WatButton, WatButtonType} from './WatButton';
+import PasswordResetContainer from '../containers/PasswordResetContainer';
   
 class Login extends React.Component {
     constructor(props) {
