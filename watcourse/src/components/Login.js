@@ -1,7 +1,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import { PropTypes } from 'prop-types';
-import { login } from '../actions/authActions';
+import { login, togglePasswordReset } from '../actions/authActions';
 import '../styles/Login.css';
 import {WatButton, WatButtonType} from './WatButton';
   
@@ -11,6 +11,7 @@ class Login extends React.Component {
         this.state = { email: '', password: '',};
         this.handleLogin = this.handleLogin.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleResetPassword = this.handleResetPassword.bind(this);
     }
 
     componentWillMount() {
@@ -31,31 +32,54 @@ class Login extends React.Component {
         this.props.dispatch(login(event.target.name, email, password));
     }
 
+    handleResetPassword() { 
+        this.props.dispatch(togglePasswordReset(true));
+    }
+
     render() {
         return (
-            <div className='login'>                    
-                <div className='centered'>
-                    <h1>Login</h1>
-                    <input className='login-input' 
-                        name='email'
-                        onChange={this.handleChange}
-                        type='email'
-                        placeholder='Email'/>                    
-                    <input className='login-input' 
-                        name='password'
-                        onChange={this.handleChange}
-                        type='password'
-                        placeholder='Password'/>
-                    <WatButton name={'EMAIL'} onClick={this.handleLogin} variant={WatButtonType.PRIMARY} text='Login with Email'/>
-                    <WatButton name={'FACEBOOK'} onClick={this.handleLogin} variant={WatButtonType.FACEBOOK} text='Login with Facebook'/>
-                    <WatButton name={'GOOGLE'} onClick={this.handleLogin} variant={WatButtonType.GOOGLE} text='Login with Google'/>
-                    <br/>
-                    <WatButton 
-                        variant={WatButtonType.SECONDARY} 
-                        text='Need an account?'
-                        onClick={() => window.location.href='/signup'}/>    
-                </div>
-                <div>{this.props.error}</div>
+            <div className='login'>
+                { this.props.showPasswordReset ?
+                    <PasswordResetContainer/> : 
+                    <div className='centered'>
+                        <h1>Login</h1>
+                        <p className='error-text login-text'>{this.props.error}</p>
+                        <input className='login-input' 
+                            name='email'
+                            onChange={this.handleChange}
+                            type='email'
+                            placeholder='Email'/>
+                        <input className='login-input' 
+                            name='password'
+                            onChange={this.handleChange}
+                            type='password'
+                            placeholder='Password'/>
+                        <WatButton className='login-input'
+                            name={'EMAIL'} 
+                            className='login-input'
+                            onClick={this.handleLogin} 
+                            variant={WatButtonType.PRIMARY} 
+                            text='Login with Email'/>
+                        <WatButton className='login-input'
+                            name={'FACEBOOK'}
+                            onClick={this.handleLogin}
+                            variant={WatButtonType.FACEBOOK}
+                            text='Login with Facebook'/>
+                        <WatButton className='login-input'
+                            name={'GOOGLE'} 
+                            onClick={this.handleLogin} 
+                            variant={WatButtonType.GOOGLE} 
+                            text='Login with Google'/>
+                        <WatButton className='login-input' 
+                            variant={WatButtonType.SECONDARY} 
+                            text='Need an account?'
+                            onClick={() => window.location.href='/signup'}/>
+                        <WatButton className='login-input'
+                            variant={WatButtonType.SECONDARY} 
+                            text='Forgot your password?'
+                            onClick={this.handleResetPassword}/>
+                    </div>
+                }
             </div>
         );
     }

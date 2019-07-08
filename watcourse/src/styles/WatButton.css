@@ -3,6 +3,7 @@
 
 .button {
     font-size: 14px;
+    margin: 5px;
     border-radius : 5px;
     padding:0.75em 1.5em;
     text-align: center;
