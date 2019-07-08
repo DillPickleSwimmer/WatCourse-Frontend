@@ -55,6 +55,14 @@
     border-bottom: 1px solid #ccc;
 }
 
-.Login h1 {
+.login {
+    background-position:0px 0px;
+    background-size: cover;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-image: url('../images/login_background.png');
+}
+
+.login h1 {
     color: var(--theme-pink);
 }
