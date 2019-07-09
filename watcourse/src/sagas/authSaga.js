@@ -78,7 +78,7 @@ function* loginSaga(action) {
         const user = authRef.currentUser;
         const isUserSignedUp = yield getUserExists(user.qa);
         if(!isUserSignedUp) {
-            // The uid is not in our database thus the user did not finish the 
+            // The user is not in our database thus the user did not finish the 
             // signup details step.
             yield put({ type: SIGNUP_SUCCESS, user });
             return;
