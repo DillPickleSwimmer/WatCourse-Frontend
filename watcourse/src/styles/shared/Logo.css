@@ -1,0 +1,20 @@
+@import url("Theme.css");
+
+.Logo { 
+    font-family: var(--theme-special-font);
+    display: flex;
+    align-items: center;
+    flex-direction: row; 
+}
+
+.Logo .W, .Logo .C {
+    font-weight: 700;
+}
+
+.Logo .C {
+    margin-top: 2px;
+}
+
+.Logo span {
+    height: auto;
+}

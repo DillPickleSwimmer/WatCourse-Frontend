@@ -1,4 +1,4 @@
-@import url("theme.css");
+@import url("./shared/Theme.css");
 
 .Main {
     margin: 0;
@@ -32,7 +32,7 @@
 .footer .content a {
     padding: 10px;
     text-decoration: none;
-    color: var(--theme-text-grey);
+    color: var(--theme-text-color);
 }
 
 .footer .content a:hover {

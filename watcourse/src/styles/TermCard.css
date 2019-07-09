@@ -1,8 +1,8 @@
-@import url("theme.css");
+@import url("./shared/Theme.css");
 
 .TermCard {
     width: 350px;  
-    border: 1px solid var(--theme-pink);
+    border: 1px solid var(--theme-purple);
     border-radius: 4px;
     display: flex;
     flex-direction: column;
@@ -13,7 +13,7 @@
 }
 
 .TermCard .header {
-    color: var(--theme-pink);
+    color: var(--theme-purple);
     font-size: 22px;
     font-weight: bold;
     min-height: 35px;
@@ -29,7 +29,7 @@
 .TermCard .header .add-button {
     width: 25px;
     height: 25px;
-    fill: var(--theme-icon-grey);
+    fill: var(--theme-icon-color);
 }
 
 .TermCard .header .add-button:hover {

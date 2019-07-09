@@ -1,9 +1,9 @@
-@import url("theme.css");
+@import url("./shared/Theme.css");
 
 .CourseCard {
     min-height: 60px;
     width: 100%;
-    color: var(--theme-text-grey);
+    color: var(--theme-text-color);
     padding: 10px;
     margin-bottom: 5px;
     box-sizing: border-box;
@@ -13,7 +13,7 @@
 }
 
 .default {
-    background-color: var(--theme-med-grey);
+    background-color: var(--theme-light-grey);
 }
 
 .elective {
@@ -22,8 +22,8 @@
 }
 
 .prereq-error {
-    border: 1px solid var(--theme-pink);
-    background-color: var(--theme-pink-light);
+    border: 1px solid var(--theme-error);
+    background-color: var(--theme-error-highlight);
 }
 
 .CourseCard .summary {

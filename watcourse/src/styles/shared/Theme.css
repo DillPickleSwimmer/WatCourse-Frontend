@@ -1,0 +1,22 @@
+/* user variables like this: var(--var-name) */
+
+:root {
+    /* main colors */
+    --theme-purple: #8860D0;
+    --theme-light-purple: rgb(204, 195, 241);
+    --theme-dark-blue: #5680E9;
+    --theme-blue: #5AB9EA;
+    --theme-light-blue: #84CEEB;
+    --theme-light-grey: #f0f0f0;
+
+    /* additional colors */
+    --theme-error: #d04041;
+    --theme-error-highlight: #fff4f3;
+    --theme-success: #46b942;
+    --theme-success-highlight: #f3fbf4;
+    --theme-text-color: #0D0D0D;
+    --theme-icon-color: #919190;
+
+    /* font */
+    --theme-special-font: 'Raleway', sans-serif;
+}
