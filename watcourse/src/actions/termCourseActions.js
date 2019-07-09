@@ -17,6 +17,6 @@ export const removeFromTerm = (term, course) => ({
     type: REMOVE_TERM_COURSE_REQUEST, term, course
 });
 
-export const moveBetweenTerms = (course, fromTerm, toTerm) => ({
-    type: MOVE_TERM_COURSE_REQUEST, course, fromTerm, toTerm
+export const moveBetweenTerms = (course, fromTermId, toTermId) => ({
+    type: MOVE_TERM_COURSE_REQUEST, course, fromTermId, toTermId
 });

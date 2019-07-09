@@ -1,42 +1,96 @@
-@import url("theme.css");
+@import url("./shared/Theme.css");
 
 .TermCard {
-    width: 350px;  
-    border: 1px solid var(--theme-pink);
-    border-radius: 4px;
+    border: 1px solid var(--theme-light-purple);
+    border-radius: var(--theme-border-radius);
+    margin: var(--theme-default-margin);
+    position: relative;
+}
+
+.TermCard .contents {
     display: flex;
-    flex-direction: column;
-    margin: 10px;
-    padding: 10px;
+    padding: var(--theme-default-padding);
     box-sizing:border-box;
-    flex: 0 0 320px; /* grow, shrink, basis */
+    flex-direction: column;
 }
 
 .TermCard .header {
-    color: var(--theme-pink);
+    color: var(--theme-purple);
     font-size: 22px;
     font-weight: bold;
     min-height: 35px;
-    padding-bottom: 10px;
+    padding: var(--theme-default-padding);
     display: flex;
     flex-direction: row;
 }
 
 .TermCard .header .title {
     flex-grow: 1;
+    font-family: var(--theme-special-font);
+    display: flex;
+    align-items: center;
 }
 
-.TermCard .header .add-button {
-    width: 25px;
-    height: 25px;
-    fill: var(--theme-icon-grey);
-}
-
-.TermCard .header .add-button:hover {
-    cursor: pointer;
+.TermCard .header .title .edit input, .TermCard .header .title .edit select {
+    border-radius: var(--theme-border-radius);
+    padding: var(--theme-default-padding);
+    border: 1px solid var(--theme-light-grey);
 }
 
 .TermCard .courses {
+    display: flex;
+    flex-shrink: 1;
+    align-items: flex-start;
+}
+
+.Slider.horizontal .TermCard .courses {
+    flex-direction: column;
     overflow-x: hidden;
     overflow-y: auto;
 }
+
+.Slider.vertical .TermCard .courses {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.TermCard .course-placeholder {
+    margin: var(--theme-default-margin);
+    width: calc(100% - 2*var(--theme-default-margin)); /* TODO this is weird, try to find another way */
+    min-height: 50px;
+    background-color: var(--theme-light-grey);
+    border-radius: var(--theme-border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.TermCard .placeholder {
+    position: absolute;
+}
+
+.TermCard .course-placeholder:hover {
+    background-color: var(--theme-light-purple);
+}
+
+.TermCard .course-placeholder .icon {
+    fill: var(--theme-purple);
+}
+
+/* disabled styles */
+.TermCard.disabled * {
+    pointer-events:none;
+}
+
+.TermCard .disabled-overlay {
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--theme-light-grey);
+    border-radius: var(--theme-border-radius);
+}
+

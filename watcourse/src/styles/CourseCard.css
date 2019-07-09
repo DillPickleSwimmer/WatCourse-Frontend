@@ -1,29 +1,29 @@
-@import url("theme.css");
+@import url("./shared/Theme.css");
 
 .CourseCard {
     min-height: 60px;
-    width: 100%;
-    color: var(--theme-text-grey);
-    padding: 10px;
-    margin-bottom: 5px;
+    width: 350px;
+    color: var(--theme-text-color);
+    padding: var(--theme-default-padding);
     box-sizing: border-box;
     font-size: 14px;
     display: flex;
     flex-direction: row;
+    margin: var(--theme-default-margin);
 }
 
 .default {
-    background-color: var(--theme-med-grey);
+    background-color: var(--theme-light-grey);
 }
 
 .elective {
     border: 1px solid var(--theme-blue);
-    border-radius: 4px;
+    border-radius: var(--theme-border-radius);
 }
 
 .prereq-error {
-    border: 1px solid var(--theme-pink);
-    background-color: var(--theme-pink-light);
+    border: 1px solid var(--theme-error);
+    background-color: var(--theme-error-highlight);
 }
 
 .CourseCard .summary {
@@ -31,13 +31,4 @@
     overflow-wrap: break-word;
     max-width: 100%;
     white-space: normal;
-}
-
-.CourseCard .icon {
-    width: 15px;
-    height: 15px;
-}
-
-.CourseCard .icon:hover {
-    cursor: pointer; 
 }

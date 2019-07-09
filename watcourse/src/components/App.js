@@ -2,9 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { PropTypes } from 'prop-types';
+
 import '../styles/App.css';
+
 import Header from './Header';
 import SearchContainer from '../containers/SearchContainer';
+// import { ReactComponent as ClosedLock } from '../images/icon_lock_closed.svg';
+// import { ReactComponent as OpenLock } from '../images/icon_lock_open.svg';
+
 import { authenticate } from '../actions/authActions';
 import SIGNUP_DETAILS from '../reducers/authReducer';
 
@@ -27,8 +32,16 @@ class App extends React.Component {
         return (
             <div className="App">
                 {this.props.searchModalOpen && <SearchContainer />}
-                <Header />
-                {this.props.children}
+                <div className="inner">
+                    <Header className="header"/>
+                    <div className="content">{this.props.children}</div>
+                    <div className="footer">
+                        <div className="innerFooter">
+                            <a href="https://github.com/DillPickleSwimmer/WatCourse-Frontend">Frontend Github</a>
+                            <a href="https://github.com/SiddharthVaknalli/WatCourse-backend">Backend Github</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

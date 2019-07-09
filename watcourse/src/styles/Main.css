@@ -1,4 +1,4 @@
-@import url("theme.css");
+@import url("./shared/Theme.css");
 
 .Main {
     margin: 0;
@@ -11,36 +11,8 @@
     flex-grow: 1;
 }
 
-.slider {
+.content {
     flex-grow: 1;
-}
-
-.footer {
-    height: 60px;
+    overflow: hidden;
     display: flex; 
-    flex-direction: row;
-    align-items: center;
-    padding: 5px;
-}
-
-.footer .content {
-    flex-grow: 1;
-    text-align: center;
-    font-size: 14px;
-}
-
-.footer .content a {
-    padding: 10px;
-    text-decoration: none;
-    color: var(--theme-text-grey);
-}
-
-.footer .content a:hover {
-    text-decoration: underline;
-}
-
-.footer .lock {
-    width: 28px;
-    height: 28px;
-    padding: 10px;
 }

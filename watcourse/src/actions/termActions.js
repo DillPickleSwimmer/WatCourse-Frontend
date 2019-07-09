@@ -1,5 +1,5 @@
 import {
-    GET_TERMS_REQUEST, ADD_TERM_REQUEST, REMOVE_TERM_REQUEST,
+    GET_TERMS_REQUEST, ADD_TERM_REQUEST, REMOVE_TERM_REQUEST, EDIT_TERM_REQUEST,
 } from '../actions/types';
 
 export const getTerms = () => ({
@@ -12,4 +12,8 @@ export const addTerm = (prevTerm, name) => ({
 
 export const removeTerm = (term) => ({
     type: REMOVE_TERM_REQUEST, term
+})
+
+export const editTerm = (term, name, termNum, termYear) => ({
+    type: EDIT_TERM_REQUEST, term: term, name: name, termNum: termNum, termYear: termYear
 })

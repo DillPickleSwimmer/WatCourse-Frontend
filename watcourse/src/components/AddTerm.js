@@ -1,9 +1,14 @@
 import  React from 'react';
 import { PropTypes } from 'prop-types';
+
 import { TermType } from '../types/types';
+
 import { addTerm } from '../actions/termActions';
 import { TERMLABELS } from '../constants/names.js';
+
 import '../styles/AddTerm.css';
+
+import { ReactComponent as AddTermButton } from '../images/icon_add.svg';
 
 class AddTerm extends React.Component {
     constructor(props) {
@@ -23,6 +28,7 @@ class AddTerm extends React.Component {
         var filteredTermLabels = TERMLABELS.filter(name => !this.props.termNames.find(tname => tname === name));
         return (
             <div className="AddTerm">
+                <div className="title">Add Term:</div>
                 <div className="name-select">
                     <select value={this.state.termLabel} onChange={this.handleSelectLabel}>
                         {filteredTermLabels.map((label, index) => (
@@ -30,12 +36,11 @@ class AddTerm extends React.Component {
                         ))}
                     </select>
                 </div>
-                <div className="submit">
-                    <button onClick={ () =>
+                <div className="submit" onClick={ () =>
                         this.props.dispatch(addTerm(this.props.lastTerm, this.state.termLabel))
-                    } >
-                        (+) Term
-                    </button>   
+                    }>
+                    <AddTermButton className="icon" /> 
+                    &nbsp;Add
                 </div>
             </div>
         );

@@ -14,7 +14,7 @@ class ShortlistCard extends React.Component {
                         <div>{this.props.course.title}</div>
                     </div>
                     <div className="links">
-                        <RemoveIcon className="icon" onClick={this.props.removeFromShortlist} />
+                        <RemoveIcon className="small-icon" onClick={this.props.removeFromShortlist} />
                         {this.props.addToTermText !== null && <div onClick={this.props.addToTerm}>{this.props.addToTermText} </div>}
                     </div>
                 </div>

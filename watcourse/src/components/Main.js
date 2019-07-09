@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import '../styles/Main.css';
-import { ReactComponent as ClosedLock } from '../images/icon_lock_closed.svg';
-import { ReactComponent as OpenLock } from '../images/icon_lock_open.svg';
+
 import TermSliderContainer from '../containers/TermSliderContainer';
+
 import { getCourses } from '../actions/courseActions';
 import { getTerms } from '../actions/termActions';
 
@@ -27,15 +28,8 @@ class Main extends React.Component {
     render() {
         return (
         <div className="Main">
-            <TermSliderContainer className="slider" />
-            <div className="footer">
-                <div className="content">
-                    <a href="https://github.com/DillPickleSwimmer/WatCourse-Frontend">Frontend Github</a>
-                    <a href="https://github.com/SiddharthVaknalli/WatCourse-backend">Backend Github</a>
-                </div>
-                <div className="lock" onClick={this.handleLockClick}>
-                    {this.state.locked ? <ClosedLock /> : <OpenLock />}
-                </div>
+            <div className="content">
+                <TermSliderContainer/>
             </div>
         </div>
         );

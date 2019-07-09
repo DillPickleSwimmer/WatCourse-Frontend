@@ -34,7 +34,7 @@ function* signupSaga(action) {
         } else if (provider === 'GOOGLE') {
             yield authRef.signInWithPopup(googleProvider);
         } else {
-            throw 'Invalid Provider';  
+            throw Error('Invalid Provider');  
         }
         const user = authRef.currentUser;
         yield put({ type: SIGNUP_SUCCESS, user });
@@ -57,14 +57,14 @@ function* signupDetailsSaga(action) {
 
 function* loginSaga(action) {
     try {
-        if (action.provider == 'EMAIL'){
+        if (action.provider === 'EMAIL'){
             yield authRef.signInWithEmailAndPassword(action.email, action.password);
         } else if (action.provider === 'FACEBOOK') {
             yield authRef.signInWithPopup(fbProvider);
         } else if (action.provider === 'GOOGLE') {
             yield authRef.signInWithPopup(googleProvider);
         } else {
-            throw 'Invalid Provider';
+            throw Error('Invalid Provider');
         }
 
         const user = authRef.currentUser;

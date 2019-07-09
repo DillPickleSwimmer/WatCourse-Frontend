@@ -1,26 +1,47 @@
-@import url("theme.css");
+@import url("./shared/Theme.css");
 
 .AddTerm {
-    color: var(--theme-text-grey);
-    padding: 20px;
-    margin: 20px;
+    color: var(--theme-text-color);
+    padding: var(--theme-default-padding);
+    margin: var(--theme-default-margin);
     box-sizing: border-box;
     display: flex;
-    flex-direction: column;
-    background-color: var(--theme-med-grey);
-    border-radius: 5px;
-    flex: 0 0 50px;
+    flex-direction: row;
+    background-color: var(--theme-light-grey);
+    border-radius: var(--theme-border-radius);;
     height: fit-content;
+    align-items: center;
+    min-width: 350px;
 }
 
-.AddTerm * {
-    font-size: 16px;
+.AddTerm > * {
+    padding: var(--theme-default-padding);
 }
 
-.AddTerm div {
-    margin-bottom: 5px;
+.AddTerm .title {
+    font-family: var(--theme-special-font);
+    font-size: 20px;
+    color: var(--theme-purple);
 }
 
-.AddTerm .name-select * {
+.AddTerm .name-select {
+    flex-grow: 1;
+}
+
+.AddTerm .name-select select {
     width: 100%;
+    font-size: 16px;
+    border-radius: var(--theme-border-radius);
+    padding: var(--theme-default-padding);
+}
+
+.AddTerm .submit {
+    display: flex;
+    align-items: center;
+    border-radius: var(--theme-border-radius);
+}
+
+.AddTerm .submit:hover {
+    cursor: pointer;
+    background-color: var(--theme-light-purple)
 }
