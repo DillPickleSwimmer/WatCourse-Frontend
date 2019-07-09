@@ -30,6 +30,8 @@ class TermSlider extends React.Component {
                     result.destination.droppableId)
                 )
                 break;
+            default: 
+                console.log("unsupported drag/drop type: " + result.type);
         }
     };
     
@@ -54,7 +56,7 @@ class TermSlider extends React.Component {
                                         .find(termCourse => termCourse.id === c.id).arePrereqsMet === true;
                                     c.arePrereqsMet = arePrereqsMet;
                                     return c;
-                                })
+                                }) || []
                             }
                             dispatch={this.props.dispatch}
                         />)

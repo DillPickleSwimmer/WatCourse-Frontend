@@ -1,4 +1,4 @@
-@import url("theme.css");
+@import url("./shared/Theme.css");
 
 body {
     margin: 0;
@@ -6,13 +6,18 @@ body {
     font-family: "Roboto", "Oxygen", "Segoe UI",
         "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
         sans-serif;
-    color: var(--theme-text-grey);
+    color: var(--theme-text-color);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    height: 100vh
+}
+
+body #root {
+    height: 100%;
 }
 
 svg {
-    fill: var(--theme-icon-grey);
+    fill: var(--theme-icon-color);
 }
 
 a {
@@ -27,6 +32,6 @@ a {
 }
 
 ::-webkit-scrollbar-thumb:horizontal, ::-webkit-scrollbar-thumb:vertical {
-    background: var(--theme-icon-grey);
+    background: var(--theme-icon-color);
     border-radius: 10px;
 }

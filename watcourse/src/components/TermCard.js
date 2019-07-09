@@ -8,14 +8,11 @@ import { removeFromTerm } from '../actions/termCourseActions';
 import { removeTerm } from '../actions/termActions';
 import { Droppable } from 'react-beautiful-dnd';
 
-class TermCardList extends React.Component {
-    render() {return (<div></div>);}
-}
-
 class TermCard extends React.Component {
       
     render() {
         const { courses, term } = this.props; 
+
         return (
             <div className="TermCard">
                 <div className="header">

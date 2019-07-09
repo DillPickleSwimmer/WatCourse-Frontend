@@ -1,4 +1,4 @@
-@import url("theme.css");
+@import url("./shared/Theme.css");
 
 .SearchBar {
     width: 100%;
@@ -15,7 +15,7 @@
     padding: 7px;
     box-sizing: border-box;
     border-radius: 5px;
-    border: 2px solid var(--theme-med-grey);
+    border: 2px solid var(--theme-light-grey);
 }
 
 .SearchBar input:focus {

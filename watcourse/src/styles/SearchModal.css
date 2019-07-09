@@ -1,4 +1,4 @@
-@import url("theme.css");
+@import url("./shared/Theme.css");
 
 .SearchModal {
     position: absolute; 
@@ -10,7 +10,7 @@
 
 .SearchModal .background {
     position: absolute; 
-    background-color: var(--theme-icon-grey);
+    background-color: var(--theme-icon-color);
     opacity: .5;
     width: 100%;
     height: 100%;
@@ -40,7 +40,7 @@
 
 .SearchModal .inner-modal .modal-header .title {
     flex-grow: 1;
-    color: var(--theme-pink);
+    color: var(--theme-purple);
     font-weight: bold;
     font-size: 26px;  
     padding-left: 10px;  
@@ -50,7 +50,7 @@
     width: 25px;
     height: 25px;
     padding: 5px;
-    fill: var(--theme-icon-grey);
+    fill: var(--theme-icon-color);
 }
 
 .SearchModal .inner-modal .modal-header .close-icon:hover {
@@ -81,7 +81,7 @@
 }
 
 .SearchModal .inner-modal .shortlist .title {
-    color: var(--theme-text-grey);
+    color: var(--theme-text-color);
     font-size: 20px;
     font-weight: bold;
     padding: 5px;

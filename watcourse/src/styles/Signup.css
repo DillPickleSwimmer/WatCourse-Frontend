@@ -1,4 +1,4 @@
-@import url("theme.css");
+@import url("./shared/Theme.css");
 
 @media (max-width: 720px) {
     .centered-signup {
@@ -67,5 +67,5 @@
 }
 
 .signup h1 {
-    color: var(--theme-pink);
+    color: var(--theme-purple);
 }
