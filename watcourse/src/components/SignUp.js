@@ -17,7 +17,7 @@ class SignUp extends React.Component {
     }
 
     componentWillUpdate(nextProps) {
-        if (this.props.auth && nextProps.page === LOGGED_IN) browserHistory.push('/');
+        if (nextProps.auth  && nextProps.page === LOGGED_IN) browserHistory.push('/');
     }
 
     render() {

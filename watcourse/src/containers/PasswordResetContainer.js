@@ -3,7 +3,7 @@ import PasswordReset from '../components/PasswordReset';
 
 const mapStateToProps = (state) => ({
     msg: state.auth.msg,
-    error: state.auth.error && state.auth.error.message,
+    error: state.auth.error,
 });
 
 // connect component w/ redux store

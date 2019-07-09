@@ -10,19 +10,19 @@ import {
 import { authRef, fbProvider, googleProvider } from '../base';  
 import { getTerms } from '../actions/termActions';
 import { takeEvery } from 'redux-saga/effects';
-import { putUser } from '../api/userEndpoint';
+import { putUser, getUserExists } from '../api/userEndpoint';
 
 export const getUser = (state) => state.auth.user;
 
 function* authenticateSaga() {
-    yield authRef.onAuthStateChanged(user => {
-        if (user) {
-            put({ type: AUTH_SUCCESS, user });
-        } else {
-            put({ type: AUTH_ERROR, user: null, error: 'unknown' });
-        }
-    });
-    // onIdTokenChanged
+    if (authRef.currentUser) {
+        yield authRef.currentUser.getIdToken()
+            .then(function() {
+                put({ type: AUTH_SUCCESS, user: authRef.currentUser });
+            }).catch(function(error) {
+                put({type: AUTH_ERROR, user: null, error: error });
+            });
+    }
 }
 
 function* signupSaga(action) {
@@ -38,6 +38,13 @@ function* signupSaga(action) {
             throw 'Invalid Provider';  
         }
         const user = authRef.currentUser;
+        const userExists = yield getUserExists(user.qa);
+        if(userExists) {
+            // User is in our database, send them to the home screen.
+            yield put({ type: LOGIN_SUCCESS, user });
+            return;
+        }
+
         yield put({ type: SIGNUP_SUCCESS, user });
     } catch (error) {
         yield put({ type: SIGNUP_ERROR, error });
@@ -69,6 +76,14 @@ function* loginSaga(action) {
         }
 
         const user = authRef.currentUser;
+        const isUserSignedUp = yield getUserExists(user.qa);
+        if(!isUserSignedUp) {
+            // The uid is not in our database thus the user did not finish the 
+            // signup details step.
+            yield put({ type: SIGNUP_SUCCESS, user });
+            return;
+        }
+
         yield put({ type: LOGIN_SUCCESS, user });
     } catch (error) {
         yield put({ type: LOGIN_ERROR, error });

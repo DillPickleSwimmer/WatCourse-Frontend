@@ -1,7 +1,8 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import { PropTypes } from 'prop-types';
-import { login, togglePasswordReset } from '../actions/authActions';
+import { login, togglePasswordReset, clearAuthMessages } from '../actions/authActions';
+import  {LOGGED_IN, SIGNUP_DETAILS} from '../reducers/authReducer';
 import '../styles/Login.css';
 import {WatButton, WatButtonType} from './WatButton';
 import PasswordResetContainer from '../containers/PasswordResetContainer';
@@ -13,14 +14,26 @@ class Login extends React.Component {
         this.handleLogin = this.handleLogin.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleResetPassword = this.handleResetPassword.bind(this);
+        this.handleSignup = this.handleSignup.bind(this);
     }
 
     componentWillMount() {
-        if(this.props.auth) browserHistory.push('/');
+        if(this.props.auth && this.props.page === LOGGED_IN) 
+            browserHistory.push('/');
+        if(this.props.auth && this.props.page === SIGNUP_DETAILS) 
+            browserHistory.push('/signup');
     }
 
     componentWillUpdate(nextProps) {
-        if(!this.props.auth && nextProps.auth) browserHistory.push('/');
+        if(!this.props.auth && nextProps.auth && nextProps.page === LOGGED_IN) 
+            browserHistory.push('/');
+        if(!this.props.auth && nextProps.auth && nextProps.page === SIGNUP_DETAILS) 
+            browserHistory.push('/signup');
+    }
+
+    handleSignup() {
+        this.props.dispatch(clearAuthMessages());
+        browserHistory.push('/signup');
     }
     
     handleChange({ target }) {
@@ -74,7 +87,7 @@ class Login extends React.Component {
                         <WatButton className='login-input' 
                             variant={WatButtonType.SECONDARY} 
                             text='Need an account?'
-                            onClick={() => window.location.href='/signup'}/>
+                            onClick={this.handleSignup}/>
                         <WatButton className='login-input'
                             variant={WatButtonType.SECONDARY} 
                             text='Forgot your password?'
