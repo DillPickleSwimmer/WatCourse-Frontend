@@ -4,6 +4,8 @@ import {
     SIGNUP_DETAILS_REQUEST,
     LOGIN_REQUEST,
     LOGOUT_REQUEST,
+    PASSWORD_RESET_TOGGLE,
+    PASSWORD_RESET_REQUEST,
 } from '../actions/types';
 
 export const authenticate = () => ({
@@ -20,6 +22,14 @@ export const signupDetails = (program, startYear, startTrimester) => ({
 
 export const login = (provider, email, password) => ({
     type: LOGIN_REQUEST, provider, email, password
+});
+
+export const togglePasswordReset = (showPasswordReset) => ({
+    type: PASSWORD_RESET_TOGGLE, showPasswordReset
+});
+
+export const passwordReset = (email) => ({
+    type: PASSWORD_RESET_REQUEST, email
 });
 
 export const logout = () => ({

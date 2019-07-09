@@ -5,6 +5,7 @@ import {
     SIGNUP_DETAILS_REQUEST, SIGNUP_DETAILS_SUCCESS, SIGNUP_DETAILS_ERROR,
     LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR,
     LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR,
+    PASSWORD_RESET_REQUEST, PASSWORD_RESET_SUCCESS, PASSWORD_RESET_ERROR,
 } from '../actions/types';
 import { authRef, fbProvider, googleProvider } from '../base';  
 import { getTerms } from '../actions/termActions';
@@ -83,6 +84,16 @@ function* logoutSaga() {
     }
 }
 
+function* resetPasswordSaga(action) {
+    try {
+        const email = action.email;
+        yield authRef.sendPasswordResetEmail(email);
+        yield put({ type: PASSWORD_RESET_SUCCESS });
+    } catch (error) {
+        yield put({ type: PASSWORD_RESET_ERROR, error });
+    }
+}
+
 function* onLoginSaga() {
     yield put(getTerms());
 }
@@ -95,5 +106,6 @@ export default function* authSaga() {
         takeLatest(LOGIN_REQUEST, loginSaga),
         takeLatest(LOGOUT_REQUEST, logoutSaga),
         takeEvery(LOGIN_SUCCESS, onLoginSaga),
+        takeLatest(PASSWORD_RESET_REQUEST, resetPasswordSaga),
     ]);
 }
