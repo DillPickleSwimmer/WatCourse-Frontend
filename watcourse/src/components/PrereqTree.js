@@ -16,10 +16,10 @@ class PrereqTree extends React.Component {
         var children = [];
         for (var i = 0; i < rule.length; i++) {
             const curr_rule = rule[i];
+            var copy = rule.slice(0);
+            copy.shift();
             if (typeof curr_rule == 'number') {
-                var b = rule.slice(0);
-                b.shift();
-                var sub_children = [...this.computeChildren(b, rules, visited, queue)];
+                var sub_children = [...this.computeChildren(copy, rules, visited, queue)];
                 children.push({
                         name: curr_rule + " of",
                         children: sub_children.slice(0),
@@ -46,7 +46,7 @@ class PrereqTree extends React.Component {
         return children;
     }
 
-    computeNested = (list, visited, curr_visited = {}) => {
+    computeNestedPrereqs = (list, visited, curr_visited = {}) => {
         if (!list || !list.length) {
             return;
         }
@@ -63,18 +63,20 @@ class PrereqTree extends React.Component {
                     list[i]._collapsed = true;
                 }
             }
-            this.computeNested(list[i].children, visited, curr_visited);
+            this.computeNestedPrereqs(list[i].children, visited, curr_visited);
             if (visited[list[i].name]) {
                 curr_visited[list[i].name] = false;
             }
         }
     }
+
     getTreeDataWithKey = (key, rules) => {
         var visited = {};
         var queue = [];
 
         queue.push(key);
 
+        // Do BFS
         while (queue.length) {
             var front = queue.shift();
             var curr_rule = (rules[front] ? rules[front] : []).slice(0);
@@ -84,7 +86,7 @@ class PrereqTree extends React.Component {
             }];
             visited[front] = [...result];
         }
-        this.computeNested(visited[key][0].children, visited);
+        this.computeNestedPrereqs(visited[key][0].children, visited);
 
       
         return visited[key];
@@ -95,7 +97,7 @@ class PrereqTree extends React.Component {
         if (!rules ||  Object.entries(rules).length === 0) {
             return [];
         }
-        const { subject, number} = this.props.routeParams;
+        const { subject, number } = this.props.routeParams;
 
         let key = subject.toUpperCase() + number;
         return this.getTreeDataWithKey(key, rules);
