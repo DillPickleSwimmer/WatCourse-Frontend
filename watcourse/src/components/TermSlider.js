@@ -26,6 +26,7 @@ class TermSlider extends React.Component {
         this.toggleLock = this.toggleLock.bind(this);
         this.termInPast = this.termInPast.bind(this);
         this.scrollTo = this.scrollTo.bind(this);
+        this.performScroll = this.performScroll.bind(this);
 
         this.courseRefs = {};
         this.props.terms.forEach(term => this.courseRefs["course-"+term.id] = React.createRef());
@@ -35,6 +36,7 @@ class TermSlider extends React.Component {
             direction: Slider.types.vertical,
             dragging: false,
             locked: true,
+            recentlySelectedTermId: null,
         }
     }
 
@@ -72,11 +74,11 @@ class TermSlider extends React.Component {
     toggleDirection() {
         var direction = this.state.direction === Slider.types.vertical ? 
             Slider.types.horizontal : Slider.types.vertical;
-        this.setState({direction});
+        this.setState({direction}, this.performScroll);
     }
 
     toggleLock() {
-        this.setState({locked: !this.state.locked});
+        this.setState({locked: !this.state.locked}, this.performScroll);
     }
 
     termInPast(term) {
@@ -96,13 +98,17 @@ class TermSlider extends React.Component {
         }
     }
 
-    componentDidUpdate() {
+    performScroll() {
         var firstEnabled = this.props.terms.find(term => !this.state.locked || !this.termInPast(term));
         if(firstEnabled) {
             this.scrollTo(`course-${firstEnabled.id}`);
         } else {
             this.scrollTo("END");
         }
+    }
+
+    componentDidMount() {
+        this.performScroll()
     }
 
     render() {
