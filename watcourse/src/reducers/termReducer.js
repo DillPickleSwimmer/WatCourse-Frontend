@@ -81,7 +81,8 @@ export default function (state = initialState, action) {
             ...removeTerm.courses.filter(course => course.id !== action.course.id),
         ];
         addTerm = state.find(term=>term.id === action.toTermId);
-        action.course.tempState = false;
+        action.course.requestFailed = false;
+        action.course.pending = false;
         addTerm.courses = [
             ...addTerm.courses.filter(course => course.id !== action.course.id),
             action.course
