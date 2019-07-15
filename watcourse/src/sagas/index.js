@@ -6,6 +6,7 @@ import courseSaga from './courseSaga';
 import authSaga from './authSaga';
 import shortlistSaga from './shortlistSaga';
 import programsSaga from './programsSaga';
+import prereqsSaga from './prereqSaga';
 
 export default function* startForman() {
     yield all([
@@ -16,5 +17,6 @@ export default function* startForman() {
         fork(authSaga),
         fork(shortlistSaga),
         fork(programsSaga),
+        fork(prereqsSaga),
     ]);
 }

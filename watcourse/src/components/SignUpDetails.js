@@ -18,7 +18,10 @@ class SignUpDetails extends React.Component {
     render() {
         const { programs } = this.props;
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form className='centered-signup centered-signup-details' onSubmit={this.handleSubmit}>
+                <h1> Sign Up </h1>
+                <p className='error-text signup-text'>{this.props.error}</p>
+                <p className='signup-text'> Please provide us with some more information to create your account. </p>
                 <select name='program' required className='signup-input'>
                     <option value=''>
                             Select a program

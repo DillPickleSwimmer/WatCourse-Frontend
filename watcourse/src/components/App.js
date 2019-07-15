@@ -49,7 +49,7 @@ class App extends React.Component {
 
 App.propTypes = {
     auth: PropTypes.bool.isRequired,
-    page: PropTypes.string.isRequired,
+    page: PropTypes.string,
     searchModalOpen: PropTypes.bool,
     children: PropTypes.object.isRequired
 };

@@ -1,5 +1,5 @@
 import {
-    GET_COURSES_REQUEST
+    GET_COURSES_REQUEST,
 } from '../actions/types';
 
 export const getCourses = () => ({

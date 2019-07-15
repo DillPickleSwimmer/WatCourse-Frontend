@@ -17,19 +17,17 @@ class SignUp extends React.Component {
     }
 
     componentWillUpdate(nextProps) {
-        if (this.props.auth && nextProps.page === LOGGED_IN) browserHistory.push('/');
+        if (nextProps.auth  && nextProps.page === LOGGED_IN) browserHistory.push('/');
     }
 
     render() {
+        let { error, 
+            page } = this.props;
         return (
             <div className='signup'>
-                <div className='centered-signup'>
-                    <h1>Sign Up</h1>
-                    {/* TODO Turn these into wrappers */}
-                    {this.props.page === SIGNUP_DETAILS ? <SignUpDetails dispatch={this.props.dispatch} 
-                        programs={this.props.programs}/> : <SignUpProvider dispatch={this.props.dispatch} />}    
-                    <div>{this.props.error}</div>
-                </div>
+                { page === SIGNUP_DETAILS ?
+                    <SignUpDetails error={error} dispatch={this.props.dispatch} programs={this.props.programs}/> : 
+                    <SignUpProvider error={error} dispatch={this.props.dispatch} />}    
             </div>
         );
     }

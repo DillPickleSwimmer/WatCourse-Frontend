@@ -15,3 +15,14 @@ export const putUser = (accessToken, programId, startYear, startTrimester) => {
             }) 
     });
 };
+
+export const getUserExists = (accesToken) => {
+    const ENDPOINT = 'user_exists';
+    return fetch(ENDPOINT, { headers: { 'Authorization': accesToken } })
+        .then(response => {
+            return response.json();
+        })
+        .then(json => {
+            return json;
+        });
+};

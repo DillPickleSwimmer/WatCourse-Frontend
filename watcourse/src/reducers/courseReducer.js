@@ -70,7 +70,7 @@ const initialState = [
 export default function (state = initialState, action) {
     switch (action.type) {
     case GET_COURSES_SUCCESS:
-        return action.courses || state;   
+        return action.courses || state;
     default:
         return state;
     }
