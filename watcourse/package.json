@@ -8,6 +8,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.8.6",
     "react-beautiful-dnd": "^11.0.4",
+    "react-d3-tree": "^1.13.0",
     "react-dom": "^16.8.6",
     "react-redux": "^5.1.1",
     "react-router": "^3.2.1",

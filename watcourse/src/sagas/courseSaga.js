@@ -14,5 +14,5 @@ export function* getCoursesSaga() {
 }
 
 export default function* coursesSaga() {
-    yield takeLatest(GET_COURSES_REQUEST, getCoursesSaga);  
+    yield takeLatest(GET_COURSES_REQUEST, getCoursesSaga); 
 }
