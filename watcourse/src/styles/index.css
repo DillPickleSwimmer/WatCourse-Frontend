@@ -16,10 +16,6 @@ body #root {
     height: 100%;
 }
 
-svg {
-    fill: var(--theme-icon-color);
-}
-
 a {
     text-decoration: none;
     color: inherit;

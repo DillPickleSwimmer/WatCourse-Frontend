@@ -1,15 +1,22 @@
 import  React from 'react';
 import { PropTypes } from 'prop-types';
+
 import { TermType } from '../types/types';
-import { addTerm } from '../actions/termActions';
 import { TERMLABELS } from '../constants/names.js';
+
+import { addTerm } from '../actions/termActions';
+
 import '../styles/AddTerm.css';
+
+import { ReactComponent as AddTermButton } from '../images/icon_add.svg';
+
+import TermDropdown from './shared/TermDropdown';
 
 class AddTerm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            termLabel: TERMLABELS[0],
+            termLabel: 0,
         };
 
         this.handleSelectLabel = this.handleSelectLabel.bind(this);
@@ -20,22 +27,17 @@ class AddTerm extends React.Component {
     }
 
     render() {
-        var filteredTermLabels = TERMLABELS.filter(name => !this.props.termNames.find(tname => tname === name));
         return (
             <div className="AddTerm">
+                <div className="title">Add Term:</div>
                 <div className="name-select">
-                    <select value={this.state.termLabel} onChange={this.handleSelectLabel}>
-                        {filteredTermLabels.map((label, index) => (
-                            <option value={label} key={index}>{label}</option>
-                        ))}
-                    </select>
+                    <TermDropdown onChange={this.handleSelectLabel} />
                 </div>
-                <div className="submit">
-                    <button onClick={ () =>
-                        this.props.dispatch(addTerm(this.props.lastTerm, this.state.termLabel))
-                    } >
-                        (+) Term
-                    </button>   
+                <div className="submit" onClick={ () =>
+                        this.props.dispatch(addTerm(this.props.lastTerm, TERMLABELS[this.state.termLabel]))
+                    }>
+                    <AddTermButton className="icon" /> 
+                    &nbsp;Add
                 </div>
             </div>
         );

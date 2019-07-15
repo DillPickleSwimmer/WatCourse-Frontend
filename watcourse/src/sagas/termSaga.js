@@ -10,6 +10,7 @@ import {
     GET_TERMS_REQUEST, GET_TERMS_SUCCESS, GET_TERMS_ERROR, 
     ADD_TERM_REQUEST, ADD_TERM_SUCCESS, ADD_TERM_ERROR,
     REMOVE_TERM_REQUEST, REMOVE_TERM_SUCCESS, REMOVE_TERM_ERROR, 
+    EDIT_TERM_REQUEST, EDIT_TERM_SUCCESS, EDIT_TERM_ERROR,
 } from '../actions/types';
 import { getUser } from './authSaga';
 
@@ -18,9 +19,9 @@ export function* getTermsSaga() {
         const user = yield select(getUser); 
         const token = user['qa'] || user.stsTokenManager.accessToken;
 
-        const terms_ids = yield call(getTermsEndpoint, token, user.uid);
-        
-        yield all( terms_ids.map( term => call( getTermCoursesSaga, term))); 
+        const terms = yield call(getTermsEndpoint, token, user.uid);
+
+        yield all( terms.map( term => call( getTermCoursesSaga, term))); 
         yield put({ type: GET_TERMS_SUCCESS });
     } catch (error) {
         yield put({ type: GET_TERMS_ERROR, error });
@@ -74,8 +75,24 @@ export function* removeTermSaga(action) {
     }
 }
 
+export function* editTermSaga(action) {
+    try {
+        /* TODO: Make a way to update term details in backend */
+        //const user = yield select(getUser); 
+        //const token = user['qa'] || user.stsTokenManager.accessToken;
+
+        //yield call(editTermEndpoint, token, user.uid, action.term.id);
+        
+        yield put({ type: EDIT_TERM_SUCCESS, term: action.term});
+    } catch (error) {
+        yield put({ type: EDIT_TERM_ERROR, term: action.term, error });
+    }
+}
+
+
 export default function* termSaga() {
     yield takeLatest(GET_TERMS_REQUEST, getTermsSaga);   
     yield takeEvery(ADD_TERM_REQUEST, addTermSaga);
     yield takeEvery(REMOVE_TERM_REQUEST, removeTermSaga);
+    yield takeEvery(EDIT_TERM_REQUEST, editTermSaga);
 }

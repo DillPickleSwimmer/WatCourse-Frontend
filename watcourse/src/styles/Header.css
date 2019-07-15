@@ -48,8 +48,3 @@
 .Header .link:hover .link-text {
     text-decoration: underline;
 }
-
-.Header .link svg {
-    width: 25px;
-    height: 25px;
-}

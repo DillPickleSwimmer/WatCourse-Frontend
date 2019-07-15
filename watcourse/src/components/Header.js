@@ -26,7 +26,7 @@ class Header extends React.Component {
                             <div className="link-text">logout</div>
                         </div>
                         <a className="link" href="/account">
-                            <Profile/>
+                            <Profile className="icon"/>
                         </a>
                     </div>}
                 </div>

@@ -71,7 +71,7 @@ class SearchModal extends React.Component {
                         <div className="title">
                             Search
                         </div>
-                        <div className="close-icon" onClick={()=> {
+                        <div className="icon" onClick={()=> {
                             this.props.dispatch(deselectTerm());
                             this.props.dispatch(toggleSearchModal(false));
                         }}>

@@ -46,17 +46,6 @@
     padding-left: 10px;  
 }
 
-.SearchModal .inner-modal .modal-header .close-icon {
-    width: 25px;
-    height: 25px;
-    padding: 5px;
-    fill: var(--theme-icon-color);
-}
-
-.SearchModal .inner-modal .modal-header .close-icon:hover {
-    cursor: pointer;
-}
-
 .SearchModal .inner-modal .search-bar {
     height: 50px;
     min-height: 50px;

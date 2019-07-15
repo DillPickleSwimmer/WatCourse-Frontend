@@ -1,10 +1,55 @@
+@import url("./shared/Theme.css");
+
 .TermSlider {
-    overflow-x: auto;
-    overflow-y: hidden;
     white-space: nowrap;
-    flex-grow: 1;
     padding: 10px 0px;
-    max-height: 1500px;
-    display: flex; 
-    flex-wrap: nowrap; 
+    overflow: hidden;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.TermSlider .options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 10px;
+}
+
+.TermSlider .options .icon {
+    padding: 5px;
+}
+
+.TermSlider .options > *:hover::before {
+    margin-top: 30px;
+    width: auto;
+    height: auto;
+    font-size: 8px;
+    text-align: center;
+    display: inline-block;
+    background-color: var(--theme-light-grey);
+    padding: var(--theme-default-padding);
+    border-radius: var(--theme-border-radius);
+    overflow: hidden;
+    position: absolute;
+    margin-left: -30px;
+}
+
+.TermSlider .options .direction.horizontal:hover::before { 
+    content: 'Vertical Term Layout';
+    margin-left: -50px;
+}
+
+.TermSlider .options .direction.vertical:hover::before { 
+    content: 'Horizontal Term Layout';
+    margin-left: -50px;
+}
+
+.TermSlider .options .lock.locked:hover::before { 
+    content: 'Unlock Courses';
+}
+
+.TermSlider .options .lock.unlocked:hover::before { 
+    content: 'Lock Courses';
 }

@@ -1,9 +1,11 @@
-import  React from 'react';
+import React from 'react';
+import '../../styles/test/Test.css';
 
 class Test extends React.Component {
     render() {
         return (
-            <div></div>
+            <div className="Test">
+            </div>
         );
     }
 }

@@ -11,16 +11,21 @@ export const CourseType = PropTypes.shape({
     prereqs: PropTypes.string, 
     defaultCourse: PropTypes.bool,
     arePrereqsMet: PropTypes.bool,
+    pending: PropTypes.bool,
+    requestFailed: PropTypes.bool,
 });
 
 // Term Type
+
+export const TermNumNames = [null, "Winter", "Spring", "Fall"];
 
 export const TermType = PropTypes.shape({
     id: PropTypes.number.isRequired,
     termNum: PropTypes.number.isRequired,
     termYear: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired, 
-    courses: PropTypes.arrayOf(CourseType)
+    courses: PropTypes.arrayOf(CourseType),
+    oldDisplayInfo: PropTypes.object,
 });
 
 // Course Search Type

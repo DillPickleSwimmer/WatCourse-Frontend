@@ -97,8 +97,8 @@ class Logo extends React.Component {
 
         return (
             <div className="Logo" style={{
-                height: `${this.closedCSize}px`,
-                paddingLeft: `${0.25*this.props.size}px`
+                paddingLeft: `${0.25*this.props.size}px`,
+                paddingRight: `${0.25*this.props.size}px`
             }}>
                 <span className="W" style={{
                     fontSize: `${this.props.size}px`,

@@ -7,20 +7,20 @@ import { Draggable } from 'react-beautiful-dnd';
 
 class CourseCard extends React.Component {
     render() {
-        const {id, subject, num, title, defaultCourse, arePrereqsMet} = this.props.course;
+        const {id, subject, num, title, defaultCourse, arePrereqsMet, disabled} = this.props.course;
 
         return (
-            <Draggable draggableId={id} index={this.props.index}>
+            <Draggable draggableId={id} index={this.props.index} isDragDisabled={disabled || false}>
                 {(provided)=>(
                 <div 
-                    className={`CourseCard ${defaultCourse ? 'default' : 'elective'} 
+                    className={`CourseCard ${defaultCourse ? 'default' : 'elective'} ${disabled ? "disabled" : null} 
                     ${arePrereqsMet ? '' : 'prereq-error'}`}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
                 >  
                     <div className="summary">{`${subject}${num}`}<br />{title}</div>
-                    <div className="icon"><RemoveIcon onClick={this.props.removeFromTerm}/></div>
+                    <div className="small-icon"><RemoveIcon onClick={this.props.removeFromTerm}/></div>
                 </div>)}
             </Draggable>
         );
@@ -31,6 +31,11 @@ CourseCard.propTypes = {
     course: CourseType,
     removeFromTerm: PropTypes.func.isRequired,
     index: PropTypes.number.isRequired,
+    disabled: PropTypes.bool,
 };
+
+CourseCard.defaultProps = {
+    disabled: false,
+}
 
 export default CourseCard;

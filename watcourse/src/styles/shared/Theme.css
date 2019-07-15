@@ -8,6 +8,7 @@
     --theme-blue: #5AB9EA;
     --theme-light-blue: #84CEEB;
     --theme-light-grey: #f0f0f0;
+    --theme-white: #ffffff;
 
     /* additional colors */
     --theme-error: #d04041;
@@ -15,8 +16,56 @@
     --theme-success: #46b942;
     --theme-success-highlight: #f3fbf4;
     --theme-text-color: #0D0D0D;
-    --theme-icon-color: #919190;
+    --theme-icon-color: #a7a7a7;
+    --theme-icon-hover: #9c9c9c;
 
     /* font */
     --theme-special-font: 'Raleway', sans-serif;
+
+    /* styles */
+    --theme-border-radius: 4px;
+    --theme-default-margin: 5px;
+    --theme-default-padding: 5px;
+
+    --theme-overlay-color: #777777; 
+    --theme-overlay-opacity: 0.5;
+}
+
+/* default icon style */
+.icon, .small-icon {
+    fill: var(--theme-icon-color);
+    background-color: transparent;
+    padding: var(--theme-default-padding);
+}
+
+.icon:hover, .small-icon:hover {
+    cursor: pointer;
+    fill: var(--theme-icon-hover);
+}
+
+.icon {
+    width: 25px;
+    height: 25px;
+}
+
+.small-icon {
+    width: 15px;
+    height: 15px;
+}
+
+/* default link style */
+a {
+    text-decoration: none;
+    color: var(--theme-text-color);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* input */
+select, input {
+    border-radius: var(--theme-border-radius);
+    padding: var(--theme-default-padding);
+    border: 1px solid var(--theme-light-grey);
 }
