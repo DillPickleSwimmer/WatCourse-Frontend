@@ -113,12 +113,8 @@ export default function (state = initialState, action) {
         // attempt update
         action.term.oldDisplayInfo = {
             name: action.term.name,
-            termNum: action.term.termNum, 
-            termYear: action.term.termYear,
         }
         action.term.name = action.name;
-        action.term.termNum = action.termNum;
-        action.term.termYear = action.termYear;
         return [
             ...state.filter(term => term.id !== action.term.id), 
             action.term,
@@ -132,8 +128,6 @@ export default function (state = initialState, action) {
     case EDIT_TERM_ERROR: 
         // undo
         action.term.name = action.term.oldDisplayInfo.name;
-        action.term.termNum = action.term.oldDisplayInfo.termNum;
-        action.term.termYear = action.term.oldDisplayInfo.termYear;
         action.term.oldDisplayInfo = undefined;
         return [
             ...state.filter(term => term.id !== action.term.id), 

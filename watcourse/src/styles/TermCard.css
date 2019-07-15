@@ -31,12 +31,6 @@
     align-items: center;
 }
 
-.TermCard .header .title .edit input, .TermCard .header .title .edit select {
-    border-radius: var(--theme-border-radius);
-    padding: var(--theme-default-padding);
-    border: 1px solid var(--theme-light-grey);
-}
-
 .TermCard .courses {
     display: flex;
     flex-shrink: 1;

@@ -14,6 +14,6 @@ export const removeTerm = (term) => ({
     type: REMOVE_TERM_REQUEST, term
 })
 
-export const editTerm = (term, name, termNum, termYear) => ({
-    type: EDIT_TERM_REQUEST, term: term, name: name, termNum: termNum, termYear: termYear
+export const editTerm = (term, name) => ({
+    type: EDIT_TERM_REQUEST, term: term, name: name
 })

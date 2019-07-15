@@ -5,8 +5,10 @@ import { Droppable } from 'react-beautiful-dnd';
 import '../styles/TermCard.css';
 
 import CourseCard from './CourseCard';
+import TermDropdown from './shared/TermDropdown';
 
 import { TermType, CourseType, TermNumNames } from '../types/types';
+import { TERMLABELS } from '../constants/names.js';
 
 import { removeFromTerm } from '../actions/termCourseActions';
 import { removeTerm, editTerm } from '../actions/termActions';
@@ -25,9 +27,7 @@ class TermCard extends React.Component {
 
         this.state = {
             editMode: false,
-            year: null,
-            term: null,
-            name: null,
+            name: this.props.term.name,
         }
     }
 
@@ -35,24 +35,16 @@ class TermCard extends React.Component {
         if( this.state.editMode ) {
             var newTermDetails = {
                 name: this.state.name || this.props.term.name,
-                termNum: parseInt(this.state.term || this.props.term.termNum), 
-                termYear: parseInt(this.state.year || this.props.term.termYear) ,
             }
 
-            if (
-                (newTermDetails.termYear !== this.props.term.termYear) ||
-                (newTermDetails.termNum !== this.props.term.termNum) ||
-                (newTermDetails.name !== this.props.term.name)
-            ) {
-                this.props.dispatch(editTerm(this.props.term, newTermDetails.name, newTermDetails.termNum, newTermDetails.termYear));
+            if (newTermDetails.name !== this.props.term.name) {
+                this.props.dispatch(editTerm(this.props.term, TERMLABELS[newTermDetails.name]));
             }
         }
 
         this.setState({
             editMode: !this.state.editMode,
-            year: null,
-            term: null,
-            name: null,
+            name: this.props.term.name,
         });
     }
 
@@ -78,18 +70,11 @@ class TermCard extends React.Component {
                         <div className="title">
                             {this.state.editMode ?
                                 <div className="edit">
-                                    <input value={this.state.name || term.name} onChange={this.updateEditState.bind(this,"name")}/>
-                                    {' - '}
-                                    <select value={this.state.term || term.termNum} onChange={this.updateEditState.bind(this,"term")}>
-                                        {TermNumNames.map((name,index) => {
-                                            if ( name ) {
-                                                return (<option key={index} value={index}>{name}</option>);
-                                            }
-                                            return null;
-                                        })}
-                                    </select>
-                                    {" "}
-                                    <input type="number" value={this.state.year || term.termYear} onChange={this.updateEditState.bind(this,"year")}/>
+                                    <TermDropdown 
+                                        onChange={this.updateEditState.bind(this,"name")}
+                                        defaultValue={this.props.term.name}
+                                    />
+                                    {` - ${TermNumNames[term.termNum]} ${term.termYear}`}
                                 </div>
                             :
                                 `${term.name} - ${TermNumNames[term.termNum]} ${term.termYear}`

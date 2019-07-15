@@ -31,8 +31,6 @@
 .AddTerm .name-select select {
     width: 100%;
     font-size: 16px;
-    border-radius: var(--theme-border-radius);
-    padding: var(--theme-default-padding);
 }
 
 .AddTerm .submit {

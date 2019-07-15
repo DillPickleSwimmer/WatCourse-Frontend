@@ -7,8 +7,6 @@ import '../styles/App.css';
 
 import Header from './Header';
 import SearchContainer from '../containers/SearchContainer';
-// import { ReactComponent as ClosedLock } from '../images/icon_lock_closed.svg';
-// import { ReactComponent as OpenLock } from '../images/icon_lock_open.svg';
 
 import { authenticate } from '../actions/authActions';
 import SIGNUP_DETAILS from '../reducers/authReducer';

@@ -93,7 +93,7 @@ class TermSlider extends React.Component {
     }
 
     scrollTo(id) {
-        if( this.courseRefs[id].current ) {
+        if( this.courseRefs[id] && this.courseRefs[id].current ) {
             this.courseRefs[id].current.scrollIntoView({behavior: 'smooth'});
         }
     }
