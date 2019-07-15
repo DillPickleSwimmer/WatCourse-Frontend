@@ -1,5 +1,6 @@
 import React from 'react';
-import { signup } from '../actions/authActions';
+import { signup, clearAuthMessages } from '../actions/authActions';
+import { browserHistory } from 'react-router';
 import { WatButton, WatButtonType } from './WatButton';
 import '../styles/Signup.css';
 
@@ -9,6 +10,7 @@ class SignUpProvider extends React.Component {
         this.state = { email: '', password: '', reenteredPassword: '', };
         this.handleSignUp = this.handleSignUp.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleLogin = this.handleLogin.bind(this);
     }
 
     handleSignUp(event) {
@@ -23,6 +25,11 @@ class SignUpProvider extends React.Component {
 
     handleChange({ target }) {
         this.setState({ [target.name]: target.value });
+    }
+
+    handleLogin() {
+        this.props.dispatch(clearAuthMessages());
+        browserHistory.push('/login');
     }
 
     render() {
@@ -54,7 +61,7 @@ class SignUpProvider extends React.Component {
                 <WatButton
                     variant={WatButtonType.SECONDARY}
                     text='Already have an account?'
-                    onClick={() => window.location.href = '/login'} />
+                    onClick={this.handleLogin} />
             </div>
         );
     }

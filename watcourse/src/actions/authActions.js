@@ -6,6 +6,7 @@ import {
     LOGOUT_REQUEST,
     PASSWORD_RESET_TOGGLE,
     PASSWORD_RESET_REQUEST,
+    CLEAR_AUTH_MESSAGES,
 } from '../actions/types';
 
 export const authenticate = () => ({
@@ -34,4 +35,8 @@ export const passwordReset = (email) => ({
 
 export const logout = () => ({
     type: LOGOUT_REQUEST,
+});
+
+export const clearAuthMessages = () => ({
+    type: CLEAR_AUTH_MESSAGES,
 });
