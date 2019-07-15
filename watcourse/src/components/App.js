@@ -29,7 +29,6 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                {this.props.searchModalOpen && <SearchContainer />}
                 <div className="inner">
                     <Header className="header"/>
                     <div className="content">{this.props.children}</div>
@@ -40,6 +39,7 @@ class App extends React.Component {
                         </div>
                     </div>
                 </div>
+                {this.props.searchModalOpen && <SearchContainer />}
             </div>
         );
     }
