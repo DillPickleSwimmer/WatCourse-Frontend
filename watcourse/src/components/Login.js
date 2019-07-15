@@ -2,7 +2,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import { PropTypes } from 'prop-types';
 import { login, togglePasswordReset, clearAuthMessages } from '../actions/authActions';
-import  {LOGGED_IN, SIGNUP_DETAILS} from '../reducers/authReducer';;
+import  {LOGGED_IN, SIGNUP_DETAILS} from '../reducers/authReducer';
 import '../styles/Login.css';
 import {WatButton, WatButtonType} from './WatButton';
 import PasswordResetContainer from '../containers/PasswordResetContainer';
