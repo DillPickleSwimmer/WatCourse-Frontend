@@ -3,8 +3,8 @@
 
 .button {
     font-size: 14px;
-    margin: 5px;
-    border-radius : 5px;
+    margin: var(--theme-default-margin);
+    border-radius : var(--theme-border-radius);
     padding:0.75em 1.5em;
     text-align: center;
     cursor: pointer;
@@ -12,7 +12,9 @@
 
 .primary-button {
     background-image: linear-gradient(to bottom, var(--theme-blue), var(--theme-purple));
-    color: #ffffff
+    color: var(--theme-white);
+    background-color: var(--theme-light-blue);
+    border: none;
 }
 
 .primary-button:hover {
@@ -42,7 +44,11 @@
     text-decoration: none;
     line-height: 1;
     position: relative;
-    border-radius: 5px;
+    border-radius: var(--theme-border-radius);
+    border: none;
+    box-shadow: 1px 1px 0px 1px rgba(0,0,0,0.05);
+    width: 230px;
+    box-sizing: border-box;
 }
 
 .connect:before {
@@ -93,8 +99,10 @@
     vertical-align: middle;
     font-weight: bold;
     font-family: 'Roboto',arial,sans-serif;
+    width: 230px; 
   }
 
+  .fb:focus, .fb:hover,
   .google-button:focus,
   .google-button:hover {
     box-shadow: 1px 4px 5px 1px rgba(0,0,0,0.1);

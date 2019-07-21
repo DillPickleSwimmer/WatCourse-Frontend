@@ -10,7 +10,11 @@ class CourseCard extends React.Component {
         const {id, subject, num, title, defaultCourse, arePrereqsMet, disabled} = this.props.course;
 
         return (
-            <Draggable draggableId={id} index={this.props.index} isDragDisabled={disabled || false}>
+            <Draggable 
+                draggableId={JSON.stringify({type: "COURSE", id: id})}
+                index={this.props.index} 
+                isDragDisabled={disabled || false}
+            >
                 {(provided)=>(
                 <div 
                     className={`CourseCard ${defaultCourse ? 'default' : 'elective'} ${disabled ? "disabled" : null} 
@@ -20,7 +24,9 @@ class CourseCard extends React.Component {
                     ref={provided.innerRef}
                 >  
                     <div className="summary">{`${subject}${num}`}<br />{title}</div>
-                    <div className="small-icon"><RemoveIcon onClick={this.props.removeFromTerm}/></div>
+                    {this.props.removeFromTerm ?
+                        <div className="small-icon"><RemoveIcon onClick={this.props.removeFromTerm}/></div>
+                    : null}
                 </div>)}
             </Draggable>
         );
@@ -29,7 +35,7 @@ class CourseCard extends React.Component {
 
 CourseCard.propTypes = {
     course: CourseType,
-    removeFromTerm: PropTypes.func.isRequired,
+    removeFromTerm: PropTypes.func,
     index: PropTypes.number.isRequired,
     disabled: PropTypes.bool,
 };

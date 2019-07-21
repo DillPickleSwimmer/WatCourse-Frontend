@@ -1,0 +1,45 @@
+@import url("./shared/Theme.css");
+
+.Sidebar {
+    border-right: 1px solid var(--theme-light-grey);
+    display: flex;
+    align-items: stretch;
+}
+
+.Sidebar .drag-bar {
+    display: flex;
+    align-items: center;
+    color: var(--theme-light-blue);
+    font-size: 18px;
+}
+
+.Sidebar .drag-bar:hover, .Sidebar .drag-bar:active {
+    background-color: var(--theme-light-grey);
+    cursor: ew-resize !important;
+}
+
+.Sidebar .content {
+    display: flex;
+    flex-direction: column;
+}
+
+.Sidebar .load-more {
+    color: var(--theme-dark-blue);
+}
+
+.Sidebar .load-more:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.Sidebar .padding-sidebar-section {
+    flex-grow: 1;
+    border-top: 1px solid var(--theme-light-grey);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.Sidebar .shortlist .course-card-placeholder {
+    width: 100%;
+    min-height: 80px;
+}

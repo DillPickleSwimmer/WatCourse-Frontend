@@ -36,31 +36,31 @@ export function* getTermCoursesSaga(term) {
 }
 
 export function* addTermCourseSaga(action) {
+    const {termId, course} = action;
     try {
         const user = yield select(getUser); 
         const token = user['qa'] || user.stsTokenManager.accessToken;
-        const {term, course} = action;
 
-        const response = yield call(putTermCourseEndpoint, token, user.uid,  action.term, action.course);
+        const response = yield call(putTermCourseEndpoint, token, user.uid,  action.termId, action.course);
         const arePrereqsMet = response.arePrereqsMet;
-        yield put({ type: ADD_TERM_COURSE_SUCCESS, term, course, arePrereqsMet});
+        yield put({ type: ADD_TERM_COURSE_SUCCESS, termId, course, arePrereqsMet});
 
-        yield put({ type: DELETE_SHORTLIST_SUCCESS, course });
+        yield put({ type: DELETE_SHORTLIST_SUCCESS, termId, course });
     } catch (error) {
-        yield put({ type: ADD_TERM_COURSE_ERROR, error });
+        yield put({ type: ADD_TERM_COURSE_ERROR, error, termId, course });
     }
 }
 
 export function* removeTermCourseSaga(action) {
+    const {termId, course} = action;
     try {
         const user = yield select(getUser); 
         const token = user['qa'] || user.stsTokenManager.accessToken;
-        const {term, course} = action;
-        yield call(deleteTermCourseEndpoint, token, user.uid,  term, course);
+        yield call(deleteTermCourseEndpoint, token, user.uid,  termId, course);
 
-        yield put({ type: REMOVE_TERM_COURSE_SUCCESS, term, course });
+        yield put({ type: REMOVE_TERM_COURSE_SUCCESS, termId, course });
     } catch (error) {
-        yield put({ type: REMOVE_TERM_COURSE_ERROR, error });
+        yield put({ type: REMOVE_TERM_COURSE_ERROR, error, termId, course });
     }
 }
 

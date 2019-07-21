@@ -69,3 +69,27 @@ select, input {
     padding: var(--theme-default-padding);
     border: 1px solid var(--theme-light-grey);
 }
+
+/* no select */
+.no-select {
+    /* disable selection */
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+/* hover notification */
+.hover-notif:hover::after {
+    width: auto;
+    height: auto;
+    font-size: 8px;
+    text-align: center;
+    display: inline-block;
+    background-color: var(--theme-light-grey);
+    padding: var(--theme-default-padding);
+    border-radius: var(--theme-border-radius);
+    overflow: hidden;
+    position: absolute;
+}
