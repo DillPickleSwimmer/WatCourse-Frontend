@@ -215,7 +215,7 @@ class Sidebar extends React.Component {
                     >
                         {shortlistDroppable}
                     </SidebarSection>
-                    <SidebarSection title="Tools" forceOpen={true}>
+                    <SidebarSection title="Tools" forceOpen={!this.props.searchResults.length && !this.props.shortlist.length}>
                         <div className="tool">Prerequisite Tree</div>
                         <div className="tool coming-soon">Auto-plan Courses (COMING SOON)</div>
                         <div className="tool coming-soon">Import Transcript (COMING SOON)</div>

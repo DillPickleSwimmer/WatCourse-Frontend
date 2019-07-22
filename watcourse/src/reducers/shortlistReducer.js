@@ -26,7 +26,7 @@ export default function (state = initialState, action) {
     case POST_SHORTLIST_REQUEST:
     case TERM_TO_SHORTLIST_REQUEST:
         return moveCourseRequest(function(course) {
-            return [...state.filter(c=>c !== course), course];
+            return [...state.filter(c=>c.id !== course.id), course];
         }, action.course, state);
     case POST_SHORTLIST_SUCCESS:
     case TERM_TO_SHORTLIST_SUCCESS:
@@ -34,19 +34,19 @@ export default function (state = initialState, action) {
     case POST_SHORTLIST_ERROR:
     case TERM_TO_SHORTLIST_ERROR:
         return moveCourseError(function(course) {
-            return [...state.filter(c=>c !== course)];
+            return [...state.filter(c=>c.id !== course.id)];
         }, action.course, state);
 
     // REMOVE FROM SHORTLIST
     case DELETE_SHORTLIST_REQUEST:
         return moveCourseRequest(function(course) {
-            return [...state.filter(c=>c !== course)];
+            return [...state.filter(c=>c.id !== course.id)];
         }, action.course, state);
     case DELETE_SHORTLIST_SUCCESS:
         return moveCourseSuccess(function() {return state}, action.course, state);
     case DELETE_SHORTLIST_ERROR:
         return moveCourseRequest(function(course) {
-            return [...state.filter(c=>c !== course), course];
+            return [...state.filter(c=>c.id !== course.id), course];
         }, action.course, state);
 
     default:

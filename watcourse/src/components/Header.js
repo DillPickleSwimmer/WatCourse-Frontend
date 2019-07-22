@@ -11,7 +11,7 @@ import { ReactComponent as SearchIcon } from '../images/icon_search.svg';
 import SearchBar from './shared/SearchBar';
 
 import { logout } from '../actions/authActions';
-import { toggleSidebar, openSidebarSearch, closeSidebarSearch } from '../actions/sidebarActions'; 
+import { toggleSidebar, openSidebarSearch } from '../actions/sidebarActions'; 
 import { updateCourseSearchQuery } from '../actions/searchActions';
 
 import Logo from './shared/Logo';
@@ -24,7 +24,10 @@ class Header extends React.Component {
                     {this.props.auth ? <MenuIcon className="icon" onClick={()=>this.props.dispatch(toggleSidebar())} /> : null}
                     {this.props.auth ? <div className="search-bar">
                         <SearchBar 
-                            updateQuery={(q)=>this.props.dispatch(updateCourseSearchQuery(q))}
+                            updateQuery={(q)=>{
+                                this.props.dispatch(updateCourseSearchQuery(q));
+                                this.props.dispatch(openSidebarSearch());
+                            }}
                             defaultValue={this.props.defaultSearchValue}
                         />
                     </div> : null}

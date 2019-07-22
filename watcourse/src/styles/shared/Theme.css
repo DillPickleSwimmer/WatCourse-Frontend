@@ -31,6 +31,10 @@
     --theme-overlay-opacity: 0.5;
 }
 
+* {
+    outline: none;
+}
+
 /* default icon style */
 .icon, .small-icon {
     fill: var(--theme-icon-color);
