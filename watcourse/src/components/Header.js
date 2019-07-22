@@ -6,7 +6,6 @@ import '../styles/Header.css';
 
 import { ReactComponent as Profile } from '../images/icon_profile.svg';
 import { ReactComponent as MenuIcon } from '../images/icon_menu.svg';
-import { ReactComponent as SearchIcon } from '../images/icon_search.svg';
 
 import SearchBar from './shared/SearchBar';
 

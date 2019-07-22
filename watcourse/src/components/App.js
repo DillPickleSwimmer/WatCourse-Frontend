@@ -11,7 +11,7 @@ import SidebarContainer from '../containers/SidebarContainer';
 
 import { authenticate } from '../actions/authActions';
 import SIGNUP_DETAILS from '../reducers/authReducer';
-import { moveBetweenTerms, addToTerm, addToTermFromShortlist, removeFromTermToShortlist } from '../actions/termCourseActions';
+import { moveBetweenTerms, addToTerm, removeFromTermToShortlist } from '../actions/termCourseActions';
 import { addToShortlist } from '../actions/shortlistActions';
 import { CourseType } from '../types/types';
 

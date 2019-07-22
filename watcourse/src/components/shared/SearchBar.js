@@ -3,8 +3,6 @@ import { PropTypes } from 'prop-types';
 
 import '../../styles/shared/SearchBar.css';
 
-import { CourseSearchType } from '../../types/types';
-
 import { ReactComponent as SearchIcon } from '../../images/icon_search.svg';
 
 class SearchBar extends React.Component {

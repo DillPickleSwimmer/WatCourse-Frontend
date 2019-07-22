@@ -20,11 +20,12 @@ const DEFAULTRESULTS = 20;
 const initialState = {query: '', results: [], numDisplayedResults: DEFAULTRESULTS, numResults: 0};
 
 export default function (state = initialState, action) {
+    var results;
     switch (action.type) {
     case UPDATE_COURSE_SEARCH:
         if ( !action.query || !action.query.length ) return initialState;    // reset
         var filteredQuery = filterString(action.query);
-        var results = getResults(action.courses, filteredQuery);
+        results = getResults(action.courses, filteredQuery);
         return {
             query: filteredQuery,
             numDisplayedResults: DEFAULTRESULTS, 
@@ -32,7 +33,7 @@ export default function (state = initialState, action) {
             numResults: results.length,
         }
     case INCREASE_COURSE_SEARCH_RESULTS:
-        var results = getResults(action.courses, state.query);
+        results = getResults(action.courses, state.query);
         return {
             query: state.query,
             numDisplayedResults: state.numDisplayedResults + DEFAULTRESULTS,
