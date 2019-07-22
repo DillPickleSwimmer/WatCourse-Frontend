@@ -14,6 +14,7 @@ import CourseCard from './CourseCard';
 import { removeFromShortlist } from '../actions/shortlistActions';
 import { openSidebar, closeSidebar } from '../actions/sidebarActions';
 import { loadMoreResults } from '../actions/searchActions';
+import { getShortlist } from '../actions/shortlistActions';
 
 // TODO: Set animation timeout / no animation mode for slow computers
 
@@ -52,6 +53,7 @@ class Sidebar extends React.Component {
     }
 
     componentDidMount() {
+        this.props.dispatch(getShortlist());
         if ( this.props.open ) {
             this.triggerOpen();
         } else {
@@ -207,12 +209,16 @@ class Sidebar extends React.Component {
                     >
                         {searchResultsDroppable}
                     </SidebarSection>
-                    <SidebarSection title="Shortlist">
+                    <SidebarSection 
+                        title="Shortlist"
+                        forceOpen={this.props.shortlist.length > 0}
+                    >
                         {shortlistDroppable}
                     </SidebarSection>
-                    <SidebarSection title="Tools">
-                        <div className="coming-soon">Auto-plan Courses</div>
-                        <div>Prerequisite Tree</div>
+                    <SidebarSection title="Tools" forceOpen={true}>
+                        <div className="tool">Prerequisite Tree</div>
+                        <div className="tool coming-soon">Auto-plan Courses (COMING SOON)</div>
+                        <div className="tool coming-soon">Import Transcript (COMING SOON)</div>
                     </SidebarSection>
                     <div className="padding-sidebar-section" />
                 </div>

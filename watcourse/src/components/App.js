@@ -38,8 +38,6 @@ class App extends React.Component {
     /* DRAG & DROP */
 
     onDragEnd = (result) => {
-        console.log(result);
-
         // dropped nowhere
         if (!result.destination) {
             return;
@@ -67,7 +65,7 @@ class App extends React.Component {
                 } 
                 // term to shortlist 
                 else if ( source.type === "TERM" && destination.type === "SHORTLIST" ) {
-                    this.props.dispatch(removeFromTermToShortlist(destination.id, fullCourse));
+                    this.props.dispatch(removeFromTermToShortlist(source.id, fullCourse));
                 }   
                 // search to term
                 else if ( source.type === "SEARCH" && destination.type === "TERM" ) {

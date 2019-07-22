@@ -8,7 +8,7 @@ import shortlistReducer from './shortlistReducer';
 import prereqReducer from './prereqReducer';
 import programsReducer from './programsReducer';
 import sidebarReducer from './sidebarReducer';
-import { LOGOUT_SUCCESS, RESET_STORE, UPDATE_COURSE_SEARCH } from '../actions/types';
+import { LOGOUT_SUCCESS, RESET_STORE } from '../actions/types';
 
 const baseRootReducer = combineReducers({
     courses: courseReducer,

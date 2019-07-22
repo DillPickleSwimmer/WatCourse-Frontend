@@ -13,7 +13,11 @@ import {
     EDIT_TERM_REQUEST,
     EDIT_TERM_SUCCESS,
     EDIT_TERM_ERROR,
+    TERM_TO_SHORTLIST_REQUEST,
+    TERM_TO_SHORTLIST_SUCCESS,
+    TERM_TO_SHORTLIST_ERROR,
 } from '../actions/types';
+import { moveCourseRequest, moveCourseSuccess, moveCourseError } from './moveCourseReducerUtilities';
 
 const initialState = []; 
 
@@ -31,76 +35,66 @@ export default function (state = initialState, action) {
 
     // ADD COURSE TO TERM
     case ADD_TERM_COURSE_REQUEST:
-        if (action.course.pending) {
-            // don't move a course in temp state
-            action.course.requestFailed = true;
-            return state;
-        }
-        action.course.requestFailed = false;
-        addTerm = state.find(term=>term.id === action.termId);
-        action.course.pending = true;
-        action.course.arePrereqsMet = action.arePrereqsMet;
-        addTerm.courses = [
-            ...addTerm.courses.filter(id => id !== action.course.id),
-            action.course,
-        ];
-        return [
-            ...state.filter(term =>term.id !== addTerm.id), 
-            addTerm
-        ];
+        return moveCourseRequest(function(course) {
+            addTerm = state.find(term => term.id === action.termId);
+            if ( !addTerm ) return state;
+            addTerm.courses = [
+                ...addTerm.courses.filter(c => c.id !== course.id),
+                course,
+            ];
+            return [
+                ...state.filter(term => term.id !== addTerm.id), 
+                addTerm
+            ];
+        }, action.course, state);
     case ADD_TERM_COURSE_SUCCESS: 
-        addTerm = state.find(term=>term.id === action.termId);
-        action.course.pending = false;
-        addTerm.courses = [
-            ...addTerm.courses.filter(id => id !== action.course.id),
-            action.course,
-        ];
-        return [
-            ...state.filter(term =>term.id !== addTerm.id), 
-            addTerm
-        ];
+        return moveCourseSuccess(function() {return state;}, action.course, state);
     case ADD_TERM_COURSE_ERROR:
-        addTerm = state.find(term=>term.id === action.termId);
-        action.course.pending = false;
-        addTerm.courses = [
-            ...addTerm.courses.filter(id => id !== action.course.id),
-        ];
-        return [
-            ...state.filter(term =>term.id !== addTerm.id), 
-            addTerm
-        ];
+        return moveCourseError(function(course) {
+            addTerm = state.find(term => term.id === action.termId);
+            if ( !addTerm ) return state;
+            addTerm.courses = [
+                ...addTerm.courses.filter(c => c.id !== course.id),
+            ];
+            return [
+                ...state.filter(term => term.id !== addTerm.id), 
+                addTerm
+            ];
+        }, action.course, state);
 
     // REMOVE COURSE FROM TERM 
     case REMOVE_TERM_COURSE_REQUEST:
-        if (action.course.pending) {
-            // don't move a course in temp state
-            action.course.requestFailed = true;
-            return state;
-        }
-        action.course.requestFailed = false;
-        action.course.pending = true;
-        removeTerm = state.find(term => term.id === action.termId);
-        removeTerm.courses = [
-            ...removeTerm.courses.filter(course => course.id !== action.course.id),
-        ];
-        return [
-            ...state.filter(term => term.id !== removeTerm.id), 
-            removeTerm
-        ];
+    case TERM_TO_SHORTLIST_REQUEST:
+        return moveCourseRequest(function(course) {
+            removeTerm = state.find(term => term.id === action.termId);
+            if ( !removeTerm ) return state;
+            removeTerm.courses = [
+                ...removeTerm.courses.filter(c => c.id !== course.id),
+            ];
+            return [
+                ...state.filter(term => term.id !== removeTerm.id), 
+                removeTerm
+            ];
+        }, action.course, state);
     case REMOVE_TERM_COURSE_SUCCESS: 
-        return state;
+    case TERM_TO_SHORTLIST_SUCCESS:
+        return moveCourseSuccess(function() {return state;}, action.course, state);
     case REMOVE_TERM_COURSE_ERROR:
-        action.course.pending = false;
-        removeTerm = state.find(term => term.id === action.termId);
-        removeTerm.courses = [
-            ...removeTerm.courses.filter(course => course.id !== action.course.id),
-            action.course, 
-        ];
-        return [
-            ...state.filter(term => term.id !== removeTerm.id), 
-            removeTerm
-        ];
+    case TERM_TO_SHORTLIST_ERROR:
+        return moveCourseError(function(course) {
+            removeTerm = state.find(term => term.id === action.termId);
+            if ( !removeTerm ) return state;
+            removeTerm.courses = [
+                ...removeTerm.courses.filter(c => c.id !== course.id),
+                course,
+            ];
+            return [
+                ...state.filter(term => term.id !== removeTerm.id), 
+                removeTerm
+            ];
+        }, action.course, state);
 
+    // REMOVE TERM    
     case REMOVE_TERM_SUCCESS: 
         return [
             ...state.filter(term => term.id !== action.termId), 
@@ -108,64 +102,56 @@ export default function (state = initialState, action) {
 
     // MOVE COURSE BETWEEN TERMS
     case MOVE_TERM_COURSE_REQUEST:
-        // attempt to move the course (to avoid drag lag), adds a temporary state to prevent future action
-        if (action.course.pending) {
-            // don't move a course in temp state
-            action.course.requestFailed = true;
-            return state;
-        }
-        action.course.requestFailed = false;
-        action.course.pending = true;
-        removeTerm = state.find(term => term.id === action.fromTermId);
-        removeTerm.courses = [
-            ...removeTerm.courses.filter(course => course.id !== action.course.id),
-        ];
-        addTerm = state.find(term=>term.id === action.toTermId);
-        addTerm.courses = [
-            ...addTerm.courses.filter(course => course.id !== action.course.id),
-            action.course
-        ];
-        return [
-            ...state.filter(term => term.id !== action.fromTermId && term.id !== action.toTermId), 
-            removeTerm,
-            addTerm,
-        ];
+        return moveCourseRequest(function(course) {
+            removeTerm = state.find(term => term.id === action.fromTermId);
+            if ( !removeTerm ) return state;
+            removeTerm.courses = [
+                ...removeTerm.courses.filter(c => c.id !== course.id),
+            ];
+            addTerm = state.find(term=>term.id === action.toTermId);
+            if ( !addTerm ) return state;
+            addTerm.courses = [
+                ...addTerm.courses.filter(c => c.id !== course.id),
+                course
+            ];
+            return [
+                ...state.filter(term => term.id !== action.fromTermId && term.id !== action.toTermId), 
+                removeTerm,
+                addTerm,
+            ];
+        }, action.course, state);
     case MOVE_TERM_COURSE_SUCCESS:
-        // remove temp state of course 
-        removeTerm = state.find(term => term.id === action.fromTermId);
-        removeTerm.courses = [
-            ...removeTerm.courses.filter(course => course.id !== action.course.id),
-        ];
-        addTerm = state.find(term=>term.id === action.toTermId);
-        action.course.requestFailed = false;
-        action.course.pending = false;
-        addTerm.courses = [
-            ...addTerm.courses.filter(course => course.id !== action.course.id),
-            action.course
-        ];
-        return [
-            ...state.filter(term => term.id !== action.fromTermId && term.id !== action.toTermId), 
-            removeTerm,
-            addTerm,
-        ];
+        return moveCourseSuccess(function(course) {
+            addTerm = state.find(term=>term.id === action.toTermId);
+            if ( !addTerm ) return state;
+            addTerm.courses = [
+                ...addTerm.courses.filter(c => c.id !== course.id),
+                course
+            ];
+            return [
+                ...state.filter(term => term.id !== action.toTermId), 
+                addTerm,
+            ];
+        }, action.course, state);
     case MOVE_TERM_COURSE_ERROR:
-        // undo the move
-        removeTerm = state.find(term => term.id === action.fromTermId);
-        action.course.requestFailed = false;
-        action.course.pending = false;
-        removeTerm.courses = [
-            ...removeTerm.courses.filter(course => course.id !== action.course.id),
-            action.course
-        ];
-        addTerm = state.find(term=>term.id === action.toTermId);
-        addTerm.courses = [
-            ...addTerm.courses.filter(course => course.id !== action.course.id),
-        ];
-        return [
-            ...state.filter(term => term.id !== action.fromTermId && term.id !== action.toTermId), 
-            removeTerm,
-            addTerm,
-        ];
+        return moveCourseError(function(course) {
+            removeTerm = state.find(term => term.id === action.toTermId);
+            if ( !removeTerm ) return state;
+            removeTerm.courses = [
+                ...removeTerm.courses.filter(c => c.id !== course.id),
+            ];
+            addTerm = state.find(term=>term.id === action.fromTermId);
+            if ( !addTerm ) return state;
+            addTerm.courses = [
+                ...addTerm.courses.filter(c => c.id !== course.id),
+                course
+            ];
+            return [
+                ...state.filter(term => term.id !== action.fromTermId && term.id !== action.toTermId), 
+                removeTerm,
+                addTerm,
+            ];
+        }, action.course, state);
 
     // EDIT TERM DETAILS
     case EDIT_TERM_REQUEST: 

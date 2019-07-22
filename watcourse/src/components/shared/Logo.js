@@ -30,6 +30,8 @@ class Logo extends React.Component {
         this.type = this.type.bind(this);
         this.reset = this.reset.bind(this);
 
+        var props = this.props; 
+
         this.state = {
             open: props.open,
             timer: 0,

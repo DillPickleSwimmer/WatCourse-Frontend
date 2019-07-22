@@ -6,6 +6,7 @@ import {
     DELETE_SHORTLIST_SUCCESS, DELETE_SHORTLIST_ERROR, DELETE_SHORTLIST_REQUEST,
 } from '../actions/types';
 import { getUser } from './authSaga';
+import { validateMoveCourseRequest } from '../reducers/moveCourseReducerUtilities';
 
 const getCourses = (state) => state.courses;
 
@@ -24,13 +25,14 @@ export function* getShortlistSaga() {
 
 export function* postShortlistSaga(action) {
     try {
+        validateMoveCourseRequest(action.course);
         const user = yield select(getUser); 
         const token = user['qa'] || user.stsTokenManager.accessToken;        
         const course  = action.course;
         yield call(postShortlistEndpoint, token, user.uid, course.id);
         yield put({ type: POST_SHORTLIST_SUCCESS, course });
     } catch (error) {
-        yield put({ type: POST_SHORTLIST_ERROR, error });
+        yield put({ type: POST_SHORTLIST_ERROR, course: action.course, error });
     }
 }
 
@@ -42,7 +44,7 @@ export function* deleteShortlistSaga(action) {
         yield call(deleteShortlistEndpoint, token, user.uid, course.id);
         yield put({ type: DELETE_SHORTLIST_SUCCESS, course });
     } catch (error) {
-        yield put({ type: DELETE_SHORTLIST_ERROR, error });
+        yield put({ type: DELETE_SHORTLIST_ERROR, course: action.course, error });
     }
 }
 
