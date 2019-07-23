@@ -91,14 +91,11 @@ export function* moveTermCourseSaga(action) {
 
 // TODO: this should be 1 endpoint in the backend 
 export function* termToShortlistSaga(action) {
-    console.log(action);
     try {
         validateMoveCourseRequest(action.course);
-        console.log("valid");
         const user = yield select(getUser); 
         const token = user['qa'] || user.stsTokenManager.accessToken;
         yield call(postShortlistEndpoint, token, user.uid, action.course.id);
-        console.log("shortlist");
         try {
             yield call(deleteTermCourseEndpoint, token, user.uid, action.termId, action.course);
         } catch(error) {

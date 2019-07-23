@@ -12,7 +12,7 @@
 }
 
 .Slider.horizontal.hover-notif:hover::after {
-    content: "Hold SHIFT & Scroll";
+    content: "Hold SHIFT to Scroll with Mousewheel";
     margin-top: -25px;
 }
 

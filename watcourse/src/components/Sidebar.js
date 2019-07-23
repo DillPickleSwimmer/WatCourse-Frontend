@@ -22,6 +22,9 @@ class Sidebar extends React.Component {
     MINWIDTH = 375;
     DEFAULTWIDTH = 380;
 
+    ANIMATIONINTERVAL = 10;
+    ANIMATIONAMOUNT = 80;
+
     constructor(props) {
         super(props);
 
@@ -75,6 +78,7 @@ class Sidebar extends React.Component {
 
     initDrag(event) {
         if ( event ) {
+            console.log(event);
             event.dataTransfer.setDragImage(event.target, -99999, -99999);   // hide drag ghost
             this.setState({initDif: event.pageX - this.state.width});
         }
@@ -100,7 +104,7 @@ class Sidebar extends React.Component {
 
     triggerOpen() {
         clearInterval(this.state.animateInterval);
-        this.setState({animateInterval:  setInterval(this.open, 5)});
+        this.setState({animateInterval:  setInterval(this.open, this.ANIMATIONINTERVAL)});
     }
 
     open() {
@@ -108,13 +112,13 @@ class Sidebar extends React.Component {
             clearInterval(this.state.animateInterval);
             this.setState({animateInterval: 0});
         } else {
-            this.setState({width: this.state.width + 20});
+            this.setState({width: this.state.width + this.ANIMATIONAMOUNT});
         }
     }
 
     triggerClose() {
         clearInterval(this.state.animateInterval);
-        this.setState({animateInterval:  setInterval(this.close, 5)});
+        this.setState({animateInterval:  setInterval(this.close, this.ANIMATIONINTERVAL)});
     }
 
     close() {
@@ -122,7 +126,7 @@ class Sidebar extends React.Component {
             clearInterval(this.state.animateInterval);
             this.setState({width: 0, animateInterval: 0});
         } else {
-            this.setState({width: this.state.width - 20});
+            this.setState({width: this.state.width - this.ANIMATIONAMOUNT});
         }
     }
 
@@ -134,7 +138,6 @@ class Sidebar extends React.Component {
                 droppableId={JSON.stringify({type: "SEARCH", id: 0})}
                 type="COURSE"
                 isDropDisabled={true}
-                ignoreContainerClipping={true}
             >
                 {(provided)=> (
                     <div
@@ -175,7 +178,7 @@ class Sidebar extends React.Component {
             <Droppable
                 droppableId={JSON.stringify({type: "SHORTLIST", id: 0})}
                 type="COURSE"
-                isDropDisabled={this.props.disabled || false}
+                isDropDisabled={false}
                 ignoreContainerClipping={true}
             >
                 {(provided)=> (
@@ -216,9 +219,9 @@ class Sidebar extends React.Component {
                         {shortlistDroppable}
                     </SidebarSection>
                     <SidebarSection title="Tools" forceOpen={!this.props.searchResults.length && !this.props.shortlist.length}>
-                        <div className="tool">Prerequisite Tree</div>
-                        <div className="tool coming-soon">Auto-plan Courses (COMING SOON)</div>
-                        <div className="tool coming-soon">Import Transcript (COMING SOON)</div>
+                        <button className="tool">Prerequisite Tree</button>
+                        <button className="tool coming-soon">Auto-plan Courses (COMING SOON)</button>
+                        <button className="tool coming-soon">Import Transcript (COMING SOON)</button>
                     </SidebarSection>
                     <div className="padding-sidebar-section" />
                 </div>

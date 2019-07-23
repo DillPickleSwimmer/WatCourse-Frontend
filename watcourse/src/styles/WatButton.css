@@ -102,7 +102,6 @@
     width: 230px; 
   }
 
-  .fb:focus, .fb:hover,
   .google-button:focus,
   .google-button:hover {
     box-shadow: 1px 4px 5px 1px rgba(0,0,0,0.1);

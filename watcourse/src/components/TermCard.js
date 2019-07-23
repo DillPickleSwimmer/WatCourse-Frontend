@@ -13,7 +13,6 @@ import { TERMLABELS } from '../constants/names.js';
 import { removeFromTerm } from '../actions/termCourseActions';
 import { removeTerm, editTerm } from '../actions/termActions';
 
-//import { ReactComponent as AddIcon } from '../images/icon_add.svg';
 import { ReactComponent as RemoveIcon } from '../images/icon_minus.svg';
 import { ReactComponent as EditIcon } from '../images/icon_pencil.svg';
 
@@ -88,7 +87,6 @@ class TermCard extends React.Component {
                         droppableId={JSON.stringify({type: "TERM", id: this.props.term.id})}
                         type="COURSE"
                         isDropDisabled={this.props.disabled || false}
-                        ignoreContainerClipping={true}
                     >
                         {(provided)=> (
                             <div
@@ -113,9 +111,6 @@ class TermCard extends React.Component {
                             </div>
                         )}
                     </Droppable>
-                    {/*<div className="course-placeholder" onClick={this.props.addCourses}>
-                        <AddIcon className="icon"/>
-                    </div>*/}
                 </div>
             </div>
         );
