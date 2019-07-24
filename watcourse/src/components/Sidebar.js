@@ -166,7 +166,7 @@ class Sidebar extends React.Component {
                                     : null}
                                 </div>);
                             } else {
-                                return (<div>Empty</div>);
+                                return (<div>Search for courses above!</div>);
                             }
                         })()}
                     </div>
@@ -196,7 +196,7 @@ class Sidebar extends React.Component {
                                 course={course} 
                                 removeFromTerm={()=>{this.props.dispatch(removeFromShortlist(course))}}
                             /> : null
-                        ) : <div>Empty</div>}
+                        ) : <div>Add some courses to your shortlist!</div>}
                         <div className="course-card-placeholder">{provided.placeholder}</div>
                     </div>
                 )}
