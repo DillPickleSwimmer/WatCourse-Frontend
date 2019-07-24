@@ -1,11 +1,9 @@
 @import url("./shared/Theme.css");
 
 .CourseCard {
-    min-height: 60px;
     width: 350px;
     color: var(--theme-text-color);
     padding: var(--theme-default-padding);
-    box-sizing: border-box;
     font-size: 14px;
     display: flex;
     flex-direction: row;
@@ -27,8 +25,9 @@
 }
 
 .CourseCard .summary {
-    flex-grow: 1;
     overflow-wrap: break-word;
     max-width: 100%;
     white-space: normal;
+    flex-grow: 1; 
+    min-height: 50px;
 }

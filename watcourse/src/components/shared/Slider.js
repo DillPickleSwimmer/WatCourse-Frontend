@@ -5,7 +5,7 @@ import '../../styles/shared/Slider.css';
 class Slider extends React.Component {
     render() {
         return (
-            <div className={`Slider ${this.props.direction}`}>
+            <div className={`Slider ${this.props.direction} ${this.props.direction === Slider.types.horizontal ? 'hover-notif' : null}`}>
                 {this.props.children ? this.props.children.map((child, index) => (
                     <div className="child" key={index}>
                         {child}

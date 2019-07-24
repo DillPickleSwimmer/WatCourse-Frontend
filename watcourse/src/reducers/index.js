@@ -3,28 +3,29 @@ import sampleQuoteReducer from './sampleReducer';
 import termReducer from './termReducer';
 import courseReducer from './courseReducer';
 import authReducer from './authReducer';
-import searchModalReducer from './searchModalReducer';
-import selectTermReducer from './selectTermReducer';
+import searchReducer from './searchReducer';
 import shortlistReducer from './shortlistReducer';
 import prereqReducer from './prereqReducer';
 import programsReducer from './programsReducer';
-import { LOGOUT_SUCCESS } from '../actions/types';
+import sidebarReducer from './sidebarReducer';
+import { LOGOUT_SUCCESS, RESET_STORE } from '../actions/types';
 
 const baseRootReducer = combineReducers({
+    courses: courseReducer,
     sampleQuote: sampleQuoteReducer,
     terms: termReducer, 	
-    courses: courseReducer,
     auth: authReducer, 
-    searchModal: searchModalReducer,
-    selectedTerm: selectTermReducer,
     shortlist: shortlistReducer,
     programs: programsReducer,
     prereqs: prereqReducer,
+    sidebar: sidebarReducer,
+    search: searchReducer,
 });
 
-const rootReducer = (state, action) => {
-    if (action.type === LOGOUT_SUCCESS) {
-        state = undefined;
+const rootReducer = (state = {}, action) => {
+    if (action.type === LOGOUT_SUCCESS || action.type === RESET_STORE) {
+        console.log("!!!!! RESET STORE !!!!!!!");
+        state = {};
     }
   
     return baseRootReducer(state, action);

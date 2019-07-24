@@ -8,6 +8,10 @@
     color: white;
 }
 
+a:hover, .Logo:hover, .Logo span:hover {
+    text-decoration: none;
+}
+
 .Logo .W, .Logo .C {
     font-weight: 700;
 }

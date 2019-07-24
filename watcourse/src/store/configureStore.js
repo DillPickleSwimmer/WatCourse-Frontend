@@ -4,6 +4,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web and AsyncStorage for react-native
 import rootReducer from '../reducers';
 import rootSaga from '../sagas'; 
+import thunk from 'redux-thunk';
 
 const persistConfig = {
     key: 'root',
@@ -19,7 +20,7 @@ const configureStore = () => {
     let store = {
         ...createStore(
             persistedReducer, 
-            composeEnhancers(applyMiddleware(sagaMiddleware))
+            composeEnhancers(applyMiddleware(sagaMiddleware), applyMiddleware(thunk))
         ),
         runSaga: sagaMiddleware.run(rootSaga)
     };

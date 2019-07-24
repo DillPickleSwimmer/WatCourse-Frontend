@@ -12,12 +12,20 @@
     font-family: var(--theme-special-font);
 }
 
-.Header .logo {
-    margin: 5px;
+.Header > * {
+    width: 33%;
+    height: 100%;
     box-sizing: border-box;
+    padding: var(--theme-default-padding);
 }
 
-.Header svg *, .Header svg {
+.Header .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Header .links svg, .Header .hamburger > svg {
     fill: white;
 }
 
@@ -47,4 +55,22 @@
 
 .Header .link:hover .link-text {
     text-decoration: underline;
+}
+
+.Header .hamburger {
+    display: flex;
+    align-items: center;
+}
+
+.Header .hamburger > * {
+    padding: var(--theme-default-padding);
+    margin: var(--theme-default-margin);
+}
+
+.Header .hamburger .search-bar {
+    flex-grow: 1;
+    background-color: var(--theme-white);
+    border-radius: var(--theme-border-radius);
+    display: flex;
+    max-width: 300px;
 }
