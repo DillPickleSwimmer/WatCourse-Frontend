@@ -12,13 +12,13 @@ import {
     REMOVE_TERM_COURSE_REQUEST, REMOVE_TERM_COURSE_SUCCESS, REMOVE_TERM_COURSE_ERROR, 
     MOVE_TERM_COURSE_REQUEST, MOVE_TERM_COURSE_SUCCESS, MOVE_TERM_COURSE_ERROR, 
 } from '../actions/types';
-import { getUser } from './authSaga';
+import { authRef } from '../base';  
 
 export function* getTermCoursesSaga(term) {
 
     try {
-        const user = yield select(getUser); 
-        const token = user['qa'] || user.stsTokenManager.accessToken;
+        const user = authRef.currentUser;
+        const token = yield user.getIdToken();
 
         let courses = yield call(getTermCoursesEndpoint, term.id, token, user.uid);
 
@@ -37,8 +37,9 @@ export function* getTermCoursesSaga(term) {
 
 export function* addTermCourseSaga(action) {
     try {
-        const user = yield select(getUser); 
-        const token = user['qa'] || user.stsTokenManager.accessToken;
+        const user = authRef.currentUser;
+        const token = yield user.getIdToken();
+
         const {term, course} = action;
 
         const response = yield call(putTermCourseEndpoint, token, user.uid,  action.term, action.course);
@@ -53,8 +54,9 @@ export function* addTermCourseSaga(action) {
 
 export function* removeTermCourseSaga(action) {
     try {
-        const user = yield select(getUser); 
-        const token = user['qa'] || user.stsTokenManager.accessToken;
+        const user = authRef.currentUser;
+        const token = yield user.getIdToken();
+
         const {term, course} = action;
         yield call(deleteTermCourseEndpoint, token, user.uid,  term, course);
 
@@ -67,10 +69,11 @@ export function* removeTermCourseSaga(action) {
 export function* moveTermCourseSaga(action) {
     try {
         if(action.course.requestFailed) {
-            throw Error("Failed to request course move because course is aleady pending move.");
+            throw Error('Failed to request course move because course is aleady pending move.');
         }
-        const user = yield select(getUser); 
-        const token = user['qa'] || user.stsTokenManager.accessToken;
+        const user = authRef.currentUser;
+        const token = yield user.getIdToken();
+        
         yield call(deleteTermCourseEndpoint, token, user.uid, action.fromTermId, action.course);
         yield call(putTermCourseEndpoint, token, user.uid,  action.toTermId, action.course);
         yield put({ type: MOVE_TERM_COURSE_SUCCESS, toTermId: action.toTermId, fromTermId: action.fromTermId, course: action.course });
