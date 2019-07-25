@@ -96,8 +96,9 @@ export function* moveTermCourseSaga(action) {
 export function* termToShortlistSaga(action) {
     try {
         validateMoveCourseRequest(action.course);
-        const user = yield select(getUser); 
-        const token = user['qa'] || user.stsTokenManager.accessToken;
+        const user = authRef.currentUser;
+        const token = yield user.getIdToken();
+
         yield call(postShortlistEndpoint, token, user.uid, action.course.id);
         try {
             yield call(deleteTermCourseEndpoint, token, user.uid, action.termId, action.course);

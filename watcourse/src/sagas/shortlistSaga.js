@@ -4,6 +4,7 @@ import {
     GET_SHORTLIST_SUCCESS, GET_SHORTLIST_ERROR, GET_SHORTLIST_REQUEST,
     POST_SHORTLIST_SUCCESS, POST_SHORTLIST_ERROR, POST_SHORTLIST_REQUEST,
     DELETE_SHORTLIST_SUCCESS, DELETE_SHORTLIST_ERROR, DELETE_SHORTLIST_REQUEST,
+} from '../actions/types';
 import { authRef } from '../base';  
 import { validateMoveCourseRequest } from '../reducers/moveCourseReducerUtilities';
 
