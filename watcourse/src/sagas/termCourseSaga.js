@@ -57,10 +57,10 @@ export function* addTermCourseSaga(action) {
 export function* removeTermCourseSaga(action) {
     const {termId, course} = action;
     try {
+        validateMoveCourseRequest(course);
         const user = authRef.currentUser;
         const token = yield user.getIdToken();
 
-        validateMoveCourseRequest(course);
         yield call(deleteTermCourseEndpoint, token, user.uid,  termId, course);
 
 
