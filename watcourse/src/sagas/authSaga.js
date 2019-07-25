@@ -12,8 +12,6 @@ import { getTerms } from '../actions/termActions';
 import { takeEvery } from 'redux-saga/effects';
 import { putUser, getUserExists } from '../api/userEndpoint';
 
-export const getUser = (state) => state.auth.user;
-
 function* authenticateSaga() {
     if (authRef.currentUser) {
         yield authRef.currentUser.getIdToken()
@@ -22,6 +20,8 @@ function* authenticateSaga() {
             }).catch(function(error) {
                 put({type: AUTH_ERROR, user: null, error: error });
             });
+    } else {
+        // Do nothing, no user is signed in
     }
 }
 
@@ -38,7 +38,8 @@ function* signupSaga(action) {
             throw Error('Invalid Provider');  
         }
         const user = authRef.currentUser;
-        const userExists = yield getUserExists(user.qa);
+        const token = yield user.getIdToken();
+        const userExists = yield getUserExists(token);
         if(userExists) {
             // User is in our database, send them to the home screen.
             yield put({ type: LOGIN_SUCCESS, user });
@@ -54,9 +55,9 @@ function* signupSaga(action) {
 function* signupDetailsSaga(action) {
     try {
         const {program, startYear, startTrimester} = action;
-        const user = authRef.currentUser;
+        const token = yield authRef.currentUser.getIdToken();
         // Add user to our backend
-        yield putUser(user.qa, program, startYear, startTrimester);
+        yield putUser(token, program, startYear, startTrimester);
         yield put({ type: SIGNUP_DETAILS_SUCCESS });
     } catch (error) {
         yield put({ type: SIGNUP_DETAILS_ERROR, error });
@@ -76,7 +77,8 @@ function* loginSaga(action) {
         }
 
         const user = authRef.currentUser;
-        const isUserSignedUp = yield getUserExists(user.qa);
+        const tokenId = yield user.getIdToken();
+        const isUserSignedUp = yield getUserExists(tokenId);
         if(!isUserSignedUp) {
             // The user is not in our database thus the user did not finish the 
             // signup details step.

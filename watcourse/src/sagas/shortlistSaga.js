@@ -5,7 +5,7 @@ import {
     POST_SHORTLIST_SUCCESS, POST_SHORTLIST_ERROR, POST_SHORTLIST_REQUEST,
     DELETE_SHORTLIST_SUCCESS, DELETE_SHORTLIST_ERROR, DELETE_SHORTLIST_REQUEST,
 } from '../actions/types';
-import { getUser } from './authSaga';
+import { authRef } from '../base';  
 import { validateMoveCourseRequest } from '../reducers/moveCourseReducerUtilities';
 
 const getCourses = (state) => state.courses;
@@ -13,9 +13,10 @@ const getCourses = (state) => state.courses;
 
 export function* getShortlistSaga() {
     try {
-        const user = yield select(getUser); 
+        const user = authRef.currentUser;
+        const token = yield user.getIdToken();
+        
         const courses = yield select(getCourses);
-        const token = user['qa'] || user.stsTokenManager.accessToken;        
         const shortlistCourses = yield call(getShortlistEndpoint, token, user.uid);
         yield put({ type: GET_SHORTLIST_SUCCESS, courses, shortlistCourses });
     } catch (error) {
@@ -26,8 +27,9 @@ export function* getShortlistSaga() {
 export function* postShortlistSaga(action) {
     try {
         validateMoveCourseRequest(action.course);
-        const user = yield select(getUser); 
-        const token = user['qa'] || user.stsTokenManager.accessToken;        
+        const user = authRef.currentUser;
+        const token = yield user.getIdToken();
+
         const course  = action.course;
         yield call(postShortlistEndpoint, token, user.uid, course.id);
         yield put({ type: POST_SHORTLIST_SUCCESS, course });
@@ -38,8 +40,9 @@ export function* postShortlistSaga(action) {
 
 export function* deleteShortlistSaga(action) {
     try {
-        const user = yield select(getUser); 
-        const token = user['qa'] || user.stsTokenManager.accessToken;        
+        const user = authRef.currentUser;
+        const token = yield user.getIdToken();
+
         const course  = action.course;
         yield call(deleteShortlistEndpoint, token, user.uid, course.id);
         yield put({ type: DELETE_SHORTLIST_SUCCESS, course });

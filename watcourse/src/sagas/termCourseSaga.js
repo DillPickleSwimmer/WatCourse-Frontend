@@ -14,12 +14,12 @@ import {
     REMOVE_TERM_COURSE_REQUEST, REMOVE_TERM_COURSE_SUCCESS, REMOVE_TERM_COURSE_ERROR, 
     MOVE_TERM_COURSE_REQUEST, MOVE_TERM_COURSE_SUCCESS, MOVE_TERM_COURSE_ERROR, 
 } from '../actions/types';
-import { getUser } from './authSaga';
+import { authRef } from '../base';  
 
 export function* getTermCoursesSaga(term) {
     try {
-        const user = yield select(getUser); 
-        const token = user['qa'] || user.stsTokenManager.accessToken;
+        const user = authRef.currentUser;
+        const token = yield user.getIdToken();
 
         // TODO: map the full course, not just the ID
         let courses = yield call(getTermCoursesEndpoint, term.id, token, user.uid);
@@ -41,8 +41,8 @@ export function* addTermCourseSaga(action) {
     const {termId, course} = action;
     try {
         validateMoveCourseRequest(course);
-        const user = yield select(getUser); 
-        const token = user['qa'] || user.stsTokenManager.accessToken;
+        const user = authRef.currentUser;
+        const token = yield user.getIdToken();
 
         const response = yield call(putTermCourseEndpoint, token, user.uid,  action.termId, action.course);
         const arePrereqsMet = response.arePrereqsMet;
@@ -55,13 +55,14 @@ export function* addTermCourseSaga(action) {
 }
 
 export function* removeTermCourseSaga(action) {
-    console.log(action);
     const {termId, course} = action;
     try {
         validateMoveCourseRequest(course);
-        const user = yield select(getUser); 
-        const token = user['qa'] || user.stsTokenManager.accessToken;
+        const user = authRef.currentUser;
+        const token = yield user.getIdToken();
+
         yield call(deleteTermCourseEndpoint, token, user.uid,  termId, course);
+
 
         yield put({ type: REMOVE_TERM_COURSE_SUCCESS, termId, course });
     } catch (error) {
@@ -72,9 +73,10 @@ export function* removeTermCourseSaga(action) {
 // TODO: this should be 1 endpoint in the backend 
 export function* moveTermCourseSaga(action) {
     try {
+        const user = authRef.currentUser;
+        const token = yield user.getIdToken();
+        
         validateMoveCourseRequest(action.course);
-        const user = yield select(getUser); 
-        const token = user['qa'] || user.stsTokenManager.accessToken;
         yield call(putTermCourseEndpoint, token, user.uid,  action.toTermId, action.course);
         try {
             yield call(deleteTermCourseEndpoint, token, user.uid, action.fromTermId, action.course);
@@ -93,8 +95,9 @@ export function* moveTermCourseSaga(action) {
 export function* termToShortlistSaga(action) {
     try {
         validateMoveCourseRequest(action.course);
-        const user = yield select(getUser); 
-        const token = user['qa'] || user.stsTokenManager.accessToken;
+        const user = authRef.currentUser;
+        const token = yield user.getIdToken();
+
         yield call(postShortlistEndpoint, token, user.uid, action.course.id);
         try {
             yield call(deleteTermCourseEndpoint, token, user.uid, action.termId, action.course);

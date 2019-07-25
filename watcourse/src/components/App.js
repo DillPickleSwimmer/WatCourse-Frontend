@@ -11,6 +11,7 @@ import SidebarContainer from '../containers/SidebarContainer';
 
 import { authenticate } from '../actions/authActions';
 import SIGNUP_DETAILS from '../reducers/authReducer';
+import { authRef } from '../base';
 import { moveBetweenTerms, addToTerm, removeFromTermToShortlist } from '../actions/termCourseActions';
 import { addToShortlist } from '../actions/shortlistActions';
 import { CourseType } from '../types/types';
@@ -22,11 +23,13 @@ class App extends React.Component {
     /* LIFECYCLE */
 
     componentWillMount() {
-        this.props.dispatch(authenticate());
         if(!this.props.auth && !noAuthPages.find((page)=>page === window.location.pathname)) browserHistory.push('/login');
         if(this.props.page === SIGNUP_DETAILS) browserHistory.push('/signup');
+        
+        authRef.onAuthStateChanged(user => {
+            this.props.dispatch(authenticate(user));
+        });
     }
-
 
     componentWillUpdate(nextProps) {
         if(this.props.auth && !nextProps.auth && !noAuthPages.find((page)=>page === window.location.pathname)) browserHistory.push('/login');

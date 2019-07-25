@@ -1,4 +1,4 @@
-import { put, call, takeLatest, all, select, takeEvery } from 'redux-saga/effects';
+import { put, call, takeLatest, all, takeEvery } from 'redux-saga/effects';
 import { 
     getTermsEndpoint, 
     addTermEndpoint,
@@ -12,13 +12,13 @@ import {
     REMOVE_TERM_REQUEST, REMOVE_TERM_SUCCESS, REMOVE_TERM_ERROR, 
     EDIT_TERM_REQUEST, EDIT_TERM_SUCCESS, EDIT_TERM_ERROR,
 } from '../actions/types';
-import { getUser } from './authSaga';
+import { authRef } from '../base';  
 
 export function* getTermsSaga() {
     try {
-        const user = yield select(getUser); 
-        const token = user['qa'] || user.stsTokenManager.accessToken;
-
+        const user = authRef.currentUser;
+        const token = yield user.getIdToken();
+        
         const terms = yield call(getTermsEndpoint, token, user.uid);
 
         yield all( terms.map( term => call( getTermCoursesSaga, term))); 
@@ -30,8 +30,8 @@ export function* getTermsSaga() {
 
 export function* addTermSaga(action) {
     try {
-        const user = yield select(getUser); 
-        const token = user['qa'] || user.stsTokenManager.accessToken;
+        const user = authRef.currentUser;
+        const token = yield user.getIdToken();
 
         // calculate next term
         var nextTermType;
@@ -62,8 +62,8 @@ export function* addTermSaga(action) {
 
 export function* removeTermSaga(action) {
     try {
-        const user = yield select(getUser); 
-        const token = user['qa'] || user.stsTokenManager.accessToken;
+        const user = authRef.currentUser;
+        const token = yield user.getIdToken();
 
         yield call(removeTermEndpoint, token, user.uid, action.term.id);
         
@@ -78,8 +78,8 @@ export function* removeTermSaga(action) {
 export function* editTermSaga(action) {
     try {
         /* TODO: Make a way to update term details in backend */
-        //const user = yield select(getUser); 
-        //const token = user['qa'] || user.stsTokenManager.accessToken;
+        // const user = authRef.currentUser;
+        // const token = yield user.getIdToken();
 
         //yield call(editTermEndpoint, token, user.uid, action.term.id);
         

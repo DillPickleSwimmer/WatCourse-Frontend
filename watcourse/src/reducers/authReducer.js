@@ -42,7 +42,6 @@ function determineErrorMsg(error) {
 
 export default function (state = initialState, action) {
     let errorMsg;
-
     switch (action.type) {
     case PASSWORD_RESET_TOGGLE:
         return {
