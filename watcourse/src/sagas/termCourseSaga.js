@@ -55,7 +55,6 @@ export function* addTermCourseSaga(action) {
 }
 
 export function* removeTermCourseSaga(action) {
-    console.log(action);
     const {termId, course} = action;
     try {
         const user = authRef.currentUser;
