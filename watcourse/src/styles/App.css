@@ -20,6 +20,14 @@
 .App .content {
     flex: 1;
     min-height: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row; 
+}
+
+.App .main-screen {
+    min-width: 0;
+    flex-grow: 1;
 }
 
 .footer {
@@ -29,6 +37,7 @@
     align-items: center;
     padding: var(--theme-default-padding);
     flex-grow: 0;
+    border-top: 1px solid var(--theme-light-grey);
 }
 
 .footer .innerFooter {

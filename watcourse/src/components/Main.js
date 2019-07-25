@@ -10,19 +10,9 @@ import { getTerms } from '../actions/termActions';
 
 
 class Main extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { locked: true }
-        this.handleLockClick = this.handleLockClick.bind(this);
-    }
-
     componentWillMount() {
         this.props.dispatch(getCourses());
         this.props.dispatch(getTerms());
-    }
-
-    handleLockClick = () => {
-        this.setState({ locked: !this.state.locked });
     }
 
     render() {

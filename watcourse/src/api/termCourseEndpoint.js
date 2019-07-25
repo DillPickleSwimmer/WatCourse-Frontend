@@ -10,8 +10,8 @@ export const getTermCoursesEndpoint = (termId, accesToken, userId) => {
         });
 };
 
-export const putTermCourseEndpoint = (accessToken, userId, term, course) => {
-    const ENDPOINT = `/term/${term}/courses`;
+export const putTermCourseEndpoint = (accessToken, userId, termId, course) => {
+    const ENDPOINT = `/term/${termId}/courses`;
     return fetch(ENDPOINT, {
         method: 'POST',
         mode: 'cors',
@@ -28,8 +28,8 @@ export const putTermCourseEndpoint = (accessToken, userId, term, course) => {
     });
 };
 
-export const deleteTermCourseEndpoint = (accessToken, userId, term, course) => {
-    const ENDPOINT = `/term/${term}/courses`;
+export const deleteTermCourseEndpoint = (accessToken, userId, termId, course) => {
+    const ENDPOINT = `/term/${termId}/courses`;
     return fetch(ENDPOINT, {
         method: 'DELETE',
         mode: 'cors',

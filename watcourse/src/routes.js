@@ -7,6 +7,7 @@ import SignUpContainer from './containers/SignUpContainer';
 import LoginContainer from './containers/LoginContainer';
 import PrereqTreeContainer from "./containers/PrereqTreeContainer";
 import Test from './components/test/Test';
+import Reset from './components/test/Reset';
 
 class Routes extends Component {
     render() {
@@ -17,8 +18,9 @@ class Routes extends Component {
                     <Route exact path="sample" component={sampleContainer} />
                     <Route exact path="login" component={LoginContainer} />
                     <Route exact path="signup" component={SignUpContainer} />
-                    <Route exact path="test" component={Test} />
                     <Route exact path="prereq/tree/:subject/:number" component={PrereqTreeContainer} />
+                    <Route exact path="test" component={Test} />
+                    <Route exact path="reset" component={Reset} />
                 </Route>
             </Router>
         );

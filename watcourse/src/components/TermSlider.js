@@ -1,16 +1,11 @@
 import  React from 'react';
 import { PropTypes } from 'prop-types';
-import { DragDropContext } from 'react-beautiful-dnd';
 
 import '../styles/TermSlider.css';
 
 import TermCard from './TermCard';
 import AddTerm from './AddTerm';
 import Slider from './shared/Slider';
-
-import { openSearchModal } from '../actions/modalActions';
-import { selectTerm } from '../actions/selectTermActions';
-import { moveBetweenTerms } from '../actions/termCourseActions';
 
 import { TermType, CourseType } from '../types/types';
 import { ReactComponent as Horizontal } from '../images/icon_horizontal.svg';
@@ -34,42 +29,10 @@ class TermSlider extends React.Component {
 
         this.state = {
             direction: Slider.types.vertical,
-            dragging: false,
             locked: true,
             recentlySelectedTermId: null,
         }
     }
-
-    onDragStart = (result) => {
-        this.setState({dragging: true});
-    }
-
-    onDragEnd = (result) => {
-        this.setState({dragging: false});
-
-        // dropped nowhere
-        if (!result.destination) {
-            return;
-        }
-
-        // did not move
-        if (result.destination.droppableId === result.source.droppableId) {
-            return;
-        }
-
-        switch(result.type) {
-            case "COURSES":   
-                // move btwn terms 
-                let courseId = result.draggableId;
-                let course = this.props.courses.find(course => course.id === courseId); 
-                let srcTermId = result.source.droppableId;
-                let destTermId = result.destination.droppableId;
-                this.props.dispatch(moveBetweenTerms(course, srcTermId, destTermId));
-                break;
-            default: 
-                console.log("unsupported drag/drop type: " + result.type);
-        }
-    };
     
     toggleDirection() {
         var direction = this.state.direction === Slider.types.vertical ? 
@@ -117,10 +80,6 @@ class TermSlider extends React.Component {
         const termCards = this.props.terms.map((term, index) => 
             <div ref={this.courseRefs["course-"+term.id]} key={index}><TermCard  
                 term={term} 
-                addCourses={()=>{   
-                    this.props.dispatch(selectTerm(term.id));
-                    this.props.dispatch(openSearchModal(true));
-                }}
                 courses={courses.filter( course => 
                     term.courses.map(c => c.id).indexOf(course.id) !== -1)
                     .map(c => {
@@ -131,39 +90,36 @@ class TermSlider extends React.Component {
                     }) || []
                 }
                 dispatch={this.props.dispatch}
-                dragging={this.state.dragging}
                 disabled={this.state.locked && this.termInPast(term)}
             /></div>);
 
         return (
-            <DragDropContext onDragEnd={this.onDragEnd} onDragStart={this.onDragStart}>
-                <div className="TermSlider">
-                    <Slider direction={this.state.direction}>
-                        {[...termCards,
-                            /* TODO: move this to the options menu w/ a modal */
-                            <div ref={this.courseRefs["END"]} key={terms.length}><AddTerm 
-                                lastTerm={terms.length ? terms[terms.length-1] : null}
-                                termNames={terms.map(term => term.name)}
-                                dispatch={this.props.dispatch}
-                            /></div>
-                        ]}
-                    </Slider>
-                    <div className="options">
-                        <div className={`direction ${this.state.direction === Slider.types.vertical ? "vertical" : "horizontal"}`}>
-                            {this.state.direction === Slider.types.vertical ? 
-                                <Horizontal className="icon" onClick={this.toggleDirection}/>
-                            :
-                                <Vertical className="icon" onClick={this.toggleDirection}/>
-                            }
+            <div className="TermSlider">
+                <Slider direction={this.state.direction}>
+                    {[...termCards,
+                        /* TODO: move this to the options menu w/ a modal */
+                        <div ref={this.courseRefs["END"]} key={terms.length}><AddTerm 
+                            lastTerm={terms.length ? terms[terms.length-1] : null}
+                            termNames={terms.map(term => term.name)}
+                            dispatch={this.props.dispatch}
+                        /></div>
+                    ]}
+                </Slider>
+                <div className="options">
+                    <div className={`hover-notif direction ${this.state.direction === Slider.types.vertical ? "vertical" : "horizontal"}`}>
+                        {this.state.direction === Slider.types.vertical ? 
+                            <Horizontal className="icon" onClick={this.toggleDirection}/>
+                        :
+                            <Vertical className="icon" onClick={this.toggleDirection}/>
+                        }
+                    </div>
+                    <div className={`hover-notif lock ${this.state.locked ? "locked" : "unlocked"}`}>
+                        <div className="icon" onClick={this.toggleLock}>
+                            {this.state.locked ? <ClosedLock /> : <OpenLock />}
                         </div>
-                        <div className={`lock ${this.state.locked ? "locked" : "unlocked"}`}>
-                            <div className="icon" onClick={this.toggleLock}>
-                                {this.state.locked ? <ClosedLock /> : <OpenLock />}
-                            </div>
-                        </div>
-                    </div>                   
-                </div>
-            </DragDropContext>
+                    </div>
+                </div>                   
+            </div>
         );
     }
 }
