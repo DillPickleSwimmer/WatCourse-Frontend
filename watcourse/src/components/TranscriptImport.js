@@ -16,11 +16,11 @@ class TranscriptImport extends React.Component {
         try {
             const parsedTranscript = parseTranscript(transcriptText);
             if (parsedTranscript === null || parsedTranscript.length === 0){
-                throw 'Transcript was unparsable';
+                throw 'Unparsable Transcript';
             }
             this.props.dispatch(postTranscript(parsedTranscript));
         } catch (e) {
-            this.setState({error : 'We\'re unable to parse your transcript, please try again'});
+            this.setState({error : 'We\'re unable to parse your transcript, please try again.'});
         }
     }
 
@@ -50,7 +50,7 @@ class TranscriptImport extends React.Component {
                 <textarea 
                     onChange={this.handleTranscriptChange} 
                     placeholder='Gimme da transcript!'/>
-                <p>{this.state.error}</p>
+                <p className={'error-text'}>{this.state.error}</p>
                 <p> WatCourse only stores the courses you've taken. We ignore your grades, name and student ID</p>
             </div>
         );
