@@ -1,0 +1,107 @@
+@import url("./shared/Theme.css");
+
+.Footer {
+    min-height: 60px;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    padding: var(--theme-default-padding);
+    flex-grow: 0;
+    border-top: 1px solid var(--theme-light-grey);
+    width: 100%;
+}
+
+.Footer .forms {
+    transition: 0.5s;
+    width: 100%;
+    box-sizing: border-box;
+    height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: var(--theme-default-margin);
+}
+
+.Footer .forms > .form {
+    border-bottom: 1px solid var(--theme-light-grey);
+}
+
+.Footer .forms .form {
+    flex-grow: 1;
+    padding: var(--theme-default-padding);
+    transition: 0.5s;
+    font-size: 14px;
+    max-height: 650px;
+    overflow: scroll;
+    box-sizing: border-box;
+}
+
+.Footer .forms .form > div {
+    padding: var(--theme-default-padding);
+}
+
+.Footer .forms .form textarea, .Footer .forms .form select {
+    vertical-align: top;
+    width: 100%;
+    max-width: 600px;
+    height: 100px;
+}
+
+.Footer .forms .form .title {
+    font-family: var(--theme-special-font);
+    font-size: 18px;
+}
+
+.Footer .forms .small-icon {
+    min-width: 15px;
+    margin: var(--theme-default-margin);
+}
+
+.Footer .inner-footer {
+    flex-grow: 1;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: var(--theme-default-padding);
+    box-sizing: border-box;
+}
+
+.Footer .inner-footer > div {
+    flex-grow: 1;
+    text-align: center;
+    box-sizing: border-box;
+    flex-basis: 0;
+}
+
+.Footer .inner-footer a {
+    padding: var(--theme-default-padding)   ;
+}
+
+.Footer .inner-footer .feedback {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;    
+}
+
+.Footer .inner-footer .feedback > * {
+    margin: 0 calc(3*var(--theme-default-margin));
+}
+
+.Footer .inner-footer .feedback .feedback-emotions {
+    border: 1px solid var(--theme-light-blue);
+    border-radius: var(--theme-border-radius);
+}
+
+.Footer .inner-footer .feedback .feedback-emotions .selected-emotion {
+    fill: var(--theme-dark-blue);
+}
+
+.Footer .inner-footer .feedback .feedback-emotions > * {
+    vertical-align: bottom;
+    fill: var(--theme-light-blue);
+}
