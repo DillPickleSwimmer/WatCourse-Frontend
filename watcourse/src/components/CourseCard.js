@@ -7,7 +7,7 @@ import { Draggable } from 'react-beautiful-dnd';
 
 class CourseCard extends React.Component {
     render() {
-        const {id, subject, num, title, defaultCourse, arePrereqsMet, disabled} = this.props.course;
+        const {id, subject, num, title, defaultCourse, arePrereqsMet, disabled} = this.props.course || {};
 
         return (
             <Draggable 
@@ -15,19 +15,29 @@ class CourseCard extends React.Component {
                 index={this.props.index} 
                 isDragDisabled={disabled || false}
             >
-                {(provided)=>(
-                <div 
-                    className={`CourseCard ${defaultCourse ? 'default' : 'elective'} ${disabled ? "disabled" : null} 
-                    ${arePrereqsMet ? '' : 'prereq-error'}`}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    ref={provided.innerRef}
-                >  
-                    <div className="summary">{`${subject}${num}`}<br />{title}</div>
-                    {this.props.removeFromTerm ?
-                        <div className="small-icon"><RemoveIcon onClick={this.props.removeFromTerm}/></div>
-                    : null}
-                </div>)}
+                {(provided)=>{
+                    if( this.props.course) {
+                        return(<div 
+                            className={`CourseCard ${defaultCourse ? 'default' : 'elective'} ${disabled ? "disabled" : null} 
+                            ${arePrereqsMet ? '' : 'prereq-error'}`}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
+                        >  
+                            <div className="summary">{`${subject}${num}`}<br />{title}</div>
+                            {this.props.removeFromTerm ?
+                                <div className="small-icon"><RemoveIcon onClick={this.props.removeFromTerm}/></div>
+                            : null}
+                        </div>);
+                    } else {
+                        // null course
+                        return <div 
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
+                        />
+                    }
+                }}
             </Draggable>
         );
     }

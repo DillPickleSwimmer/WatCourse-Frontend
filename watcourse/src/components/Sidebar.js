@@ -145,8 +145,13 @@ class Sidebar extends React.Component {
                         {...provided.droppableProps}
                         className="search-results"
                     > 
-                        {/* TODO: insert courses into course placeholder and don't insert between course cards 
-                            OR support re-ordering */}
+                        {/* this null course card is to temporarily fix a weird drag-drop bug */}
+                        <CourseCard 
+                            key={-1} 
+                            index={-1}
+                            course={null} 
+                            removeFromTerm={null}
+                        /> 
                         {(() => {
                             if( this.props.searchResults.length ) {
                                 return (<div>
@@ -169,6 +174,7 @@ class Sidebar extends React.Component {
                                 return (<div>Search for courses above!</div>);
                             }
                         })()}
+                        <div className="course-card-placeholder">{provided.placeholder}</div>
                     </div>
                 )}
             </Droppable>
