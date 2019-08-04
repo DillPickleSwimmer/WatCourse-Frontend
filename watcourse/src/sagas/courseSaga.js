@@ -1,13 +1,14 @@
 import { put, call, takeLatest } from 'redux-saga/effects';
 import { getCoursesEndpoint } from '../api/coursesEndpoint';
 import {
-    GET_COURSES_SUCCESS, GET_COURSES_ERROR, GET_COURSES_REQUEST,
+    GET_COURSES_SUCCESS, GET_COURSES_ERROR, GET_COURSES_REQUEST, GET_SHORTLIST_REQUEST,
 } from '../actions/types';
 
 export function* getCoursesSaga() {
     try {
         const courses = yield call(getCoursesEndpoint);
         yield put({ type: GET_COURSES_SUCCESS, courses });
+        yield put({ type: GET_SHORTLIST_REQUEST });
     } catch (error) {
         yield put({ type: GET_COURSES_ERROR, error });
     }
