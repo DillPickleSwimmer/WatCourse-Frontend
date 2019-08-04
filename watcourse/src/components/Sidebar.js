@@ -20,28 +20,25 @@ import { getShortlist } from '../actions/shortlistActions';
 
 class Sidebar extends React.Component {
     MINWIDTH = 375;
-    DEFAULTWIDTH = 380;
+    DEFAULTWIDTH = 390;
 
     ANIMATIONINTERVAL = 10;
     ANIMATIONAMOUNT = 80;
+    ANIMATIONDURATION = "0.5s";
 
     constructor(props) {
         super(props);
 
-        this.resize = throttle(this.resize.bind(this), 1, 50); //throttle to stop lag
+        this.resize = throttle(this.resize.bind(this), 1, 30); //throttle to stop lag
         this.initDrag = this.initDrag.bind(this);
         this.endDrag = this.endDrag.bind(this);
         this.onDragBarClick = this.onDragBarClick.bind(this);
 
-        this.open = this.open.bind(this);
         this.triggerOpen = this.triggerOpen.bind(this);
-        this.close = this.close.bind(this);
         this.triggerClose = this.triggerClose.bind(this);
         
         this.state = {
             width: 0,
-            initDif: 0,
-            animateInterval: 0,
         }
     }
 
@@ -56,6 +53,7 @@ class Sidebar extends React.Component {
     }
 
     componentDidMount() {
+        document.getElementById("sidebar-animation-width").style.transition = this.ANIMATIONDURATION;
         if ( this.props.open ) {
             this.triggerOpen();
         } else {
@@ -65,29 +63,24 @@ class Sidebar extends React.Component {
 
     // SIDEBAR RESIZE EVENTS
 
-    isOpen() {
-        return this.state.width >= this.MINWIDTH;
-    }
-
-    resize(event) {
+    resize(event) { 
         if( event && event.pageX !== 0) {
-            this.setState({width: event.pageX - this.state.initDif});
+            this.updateWidth(event.pageX);
         }
     }
 
     initDrag(event) {
         if ( event ) {
-            console.log(event);
             event.dataTransfer.setDragImage(event.target, -99999, -99999);   // hide drag ghost
-            this.setState({initDif: event.pageX - this.state.width});
+            document.getElementById("sidebar-animation-width").style.transition = `0s`;
         }
     }
 
     endDrag() {
+        document.getElementById("sidebar-animation-width").style.transition = this.ANIMATIONDURATION;
         if ( this.state.width < this.MINWIDTH ) {
             this.props.dispatch(closeSidebar());
         }
-        this.setState({initDif: 0});
     }
 
     onDragBarClick() {
@@ -102,31 +95,18 @@ class Sidebar extends React.Component {
     // OPEN/CLOSE ANIMATION EVENTS
 
     triggerOpen() {
-        clearInterval(this.state.animateInterval);
-        this.setState({animateInterval:  setInterval(this.open, this.ANIMATIONINTERVAL)});
-    }
-
-    open() {
-        if ( this.state.width >= this.DEFAULTWIDTH ) {
-            clearInterval(this.state.animateInterval);
-            this.setState({animateInterval: 0});
-        } else {
-            this.setState({width: this.state.width + this.ANIMATIONAMOUNT});
-        }
+        document.getElementById("sidebar-animation-width").style.transition = this.ANIMATIONDURATION;
+        this.updateWidth(this.DEFAULTWIDTH);
     }
 
     triggerClose() {
-        clearInterval(this.state.animateInterval);
-        this.setState({animateInterval:  setInterval(this.close, this.ANIMATIONINTERVAL)});
+        document.getElementById("sidebar-animation-width").style.transition = this.ANIMATIONDURATION;
+        this.updateWidth(0);
     }
 
-    close() {
-        if ( this.state.width <= 0 ) {
-            clearInterval(this.state.animateInterval);
-            this.setState({width: 0, animateInterval: 0});
-        } else {
-            this.setState({width: this.state.width - this.ANIMATIONAMOUNT});
-        }
+    updateWidth(width) {
+        document.getElementById("sidebar-animation-width").style.width = `${width}px`;
+        this.setState({width});
     }
 
     // ******
@@ -204,7 +184,7 @@ class Sidebar extends React.Component {
 
         return (
             <div className="Sidebar">
-                <div className="content" style={{width: `${this.state.width}px`}}>
+                <div className="content" id="sidebar-animation-width">
                     <SidebarSection 
                         title="Search Results" 
                         forceOpen={this.props.searchResults.length > 0}

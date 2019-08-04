@@ -5,6 +5,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    transition: 0.2s;
 }
 
 .SidebarSection .header {
