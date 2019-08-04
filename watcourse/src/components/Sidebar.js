@@ -56,7 +56,6 @@ class Sidebar extends React.Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(getShortlist());
         if ( this.props.open ) {
             this.triggerOpen();
         } else {
