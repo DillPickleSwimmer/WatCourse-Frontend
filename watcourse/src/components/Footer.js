@@ -1,9 +1,6 @@
 import  React from 'react';
-import { PropTypes } from 'prop-types';
 
 import '../styles/Footer.css';
-
-import { CourseType } from '../types/types';
 
 import { ReactComponent as Emotion0 } from '../images/icon_emotion_0.svg';
 import { ReactComponent as Emotion1 } from '../images/icon_emotion_1.svg';
@@ -173,13 +170,6 @@ class Footer extends React.Component {
             </div>
         );
     }
-}
-
-Footer.propTypes = {
-};
-
-Footer.defaultProps = {
-
 }
 
 export default Footer;
