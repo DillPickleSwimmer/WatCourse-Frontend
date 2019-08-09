@@ -42,3 +42,8 @@
     content: 'Lock Courses';
     margin-left: -30px;
 }
+
+.TermCard {
+    display: flex;
+    height: 100%;
+}
