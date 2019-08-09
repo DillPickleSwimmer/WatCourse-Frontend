@@ -76,7 +76,6 @@ class TermSlider extends React.Component {
 
     render() {
         const { courses, terms } = this.props; 
-
         const termCards = this.props.terms.map((term, index) => 
             <div ref={this.courseRefs["course-"+term.id]} key={index}><TermCard  
                 term={term} 

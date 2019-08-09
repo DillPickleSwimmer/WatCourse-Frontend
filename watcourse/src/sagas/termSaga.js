@@ -36,10 +36,11 @@ export function* addTermSaga(action) {
         // calculate next term
         var nextTermType;
         var nextTermYear;
-        if ( action.lastTerm ) {
+        if ( action.prevTerm ) {
             nextTermType = action.prevTerm.termNum + 1;
             nextTermYear = action.prevTerm.termYear;
             if ( nextTermType >= TERMNAMES.length ) {
+                nextTermYear++;
                 nextTermType = 0;
             }
         } else {
