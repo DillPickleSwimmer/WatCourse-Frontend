@@ -11,51 +11,60 @@
     width: 100%;
 }
 
-.Footer .forms {
+.Footer .forms, .Footer .forms * {
     transition: 0.5s;
+}
+
+.Footer .forms {
     width: 100%;
     box-sizing: border-box;
-    height: 0;
     overflow: hidden;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     margin-bottom: var(--theme-default-margin);
-}
-
-.Footer .forms > .form {
-    border-bottom: 1px solid var(--theme-light-grey);
+    height: auto;
+    max-height: 0px;
+    overflow: scroll;
 }
 
 .Footer .forms .form {
-    flex-grow: 1;
     padding: var(--theme-default-padding);
     transition: 0.5s;
     font-size: 14px;
-    max-height: 650px;
-    overflow: scroll;
     box-sizing: border-box;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .Footer .forms .form > div {
     padding: var(--theme-default-padding);
+    font-weight: bold;
 }
 
 .Footer .forms .form textarea, .Footer .forms .form select {
     vertical-align: top;
-    width: 100%;
-    max-width: 600px;
-    height: 100px;
+    width: 600px;
+    height: 70px;
+    box-sizing: border-box;
 }
 
 .Footer .forms .form .title {
     font-family: var(--theme-special-font);
     font-size: 18px;
+    font-weight: normal;
 }
 
 .Footer .forms .small-icon {
     min-width: 15px;
     margin: var(--theme-default-margin);
+}
+
+.Footer .forms button {
+    border-radius: var(--theme-border-radius);
+    background-color: var(--theme-light-purple);
 }
 
 .Footer .inner-footer {
