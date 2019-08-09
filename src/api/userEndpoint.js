@@ -17,7 +17,7 @@ export const putUser = (accessToken, programId, startYear, startTrimester) => {
 };
 
 export const getUserExists = (accesToken) => {
-    const ENDPOINT = 'user_exists';
+    const ENDPOINT = 'https://watcourse-api.herokuapp.com/user_exists';
     return fetch(ENDPOINT, { headers: { 'Authorization': accesToken } })
         .then(response => {
             return response.json();
