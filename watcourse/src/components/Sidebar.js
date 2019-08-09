@@ -14,34 +14,30 @@ import CourseCard from './CourseCard';
 import { removeFromShortlist } from '../actions/shortlistActions';
 import { openSidebar, closeSidebar } from '../actions/sidebarActions';
 import { loadMoreResults } from '../actions/searchActions';
-import { getShortlist } from '../actions/shortlistActions';
 
 // TODO: Set animation timeout / no animation mode for slow computers
 
 class Sidebar extends React.Component {
     MINWIDTH = 375;
-    DEFAULTWIDTH = 380;
+    DEFAULTWIDTH = 390;
 
     ANIMATIONINTERVAL = 10;
     ANIMATIONAMOUNT = 80;
+    ANIMATIONDURATION = '0.5s';
 
     constructor(props) {
         super(props);
 
-        this.resize = throttle(this.resize.bind(this), 1, 50); //throttle to stop lag
+        this.resize = throttle(this.resize.bind(this), 1, 30); //throttle to stop lag
         this.initDrag = this.initDrag.bind(this);
         this.endDrag = this.endDrag.bind(this);
         this.onDragBarClick = this.onDragBarClick.bind(this);
 
-        this.open = this.open.bind(this);
         this.triggerOpen = this.triggerOpen.bind(this);
-        this.close = this.close.bind(this);
         this.triggerClose = this.triggerClose.bind(this);
         
         this.state = {
             width: 0,
-            initDif: 0,
-            animateInterval: 0,
         }
     }
 
@@ -56,6 +52,7 @@ class Sidebar extends React.Component {
     }
 
     componentDidMount() {
+        document.getElementById('sidebar-animation-width').style.transition = this.ANIMATIONDURATION;
         if ( this.props.open ) {
             this.triggerOpen();
         } else {
@@ -65,29 +62,24 @@ class Sidebar extends React.Component {
 
     // SIDEBAR RESIZE EVENTS
 
-    isOpen() {
-        return this.state.width >= this.MINWIDTH;
-    }
-
-    resize(event) {
+    resize(event) { 
         if( event && event.pageX !== 0) {
-            this.setState({width: event.pageX - this.state.initDif});
+            this.updateWidth(event.pageX);
         }
     }
 
     initDrag(event) {
         if ( event ) {
-            console.log(event);
             event.dataTransfer.setDragImage(event.target, -99999, -99999);   // hide drag ghost
-            this.setState({initDif: event.pageX - this.state.width});
+            document.getElementById('sidebar-animation-width').style.transition = `0s`;
         }
     }
 
     endDrag() {
+        document.getElementById('sidebar-animation-width').style.transition = this.ANIMATIONDURATION;
         if ( this.state.width < this.MINWIDTH ) {
             this.props.dispatch(closeSidebar());
         }
-        this.setState({initDif: 0});
     }
 
     onDragBarClick() {
@@ -102,31 +94,18 @@ class Sidebar extends React.Component {
     // OPEN/CLOSE ANIMATION EVENTS
 
     triggerOpen() {
-        clearInterval(this.state.animateInterval);
-        this.setState({animateInterval:  setInterval(this.open, this.ANIMATIONINTERVAL)});
-    }
-
-    open() {
-        if ( this.state.width >= this.DEFAULTWIDTH ) {
-            clearInterval(this.state.animateInterval);
-            this.setState({animateInterval: 0});
-        } else {
-            this.setState({width: this.state.width + this.ANIMATIONAMOUNT});
-        }
+        document.getElementById('sidebar-animation-width').style.transition = this.ANIMATIONDURATION;
+        this.updateWidth(this.DEFAULTWIDTH);
     }
 
     triggerClose() {
-        clearInterval(this.state.animateInterval);
-        this.setState({animateInterval:  setInterval(this.close, this.ANIMATIONINTERVAL)});
+        document.getElementById('sidebar-animation-width').style.transition = this.ANIMATIONDURATION;
+        this.updateWidth(0);
     }
 
-    close() {
-        if ( this.state.width <= 0 ) {
-            clearInterval(this.state.animateInterval);
-            this.setState({width: 0, animateInterval: 0});
-        } else {
-            this.setState({width: this.state.width - this.ANIMATIONAMOUNT});
-        }
+    updateWidth(width) {
+        document.getElementById('sidebar-animation-width').style.width = `${width}px`;
+        this.setState({width});
     }
 
     // ******
@@ -134,15 +113,15 @@ class Sidebar extends React.Component {
     render() {
         const searchResultsDroppable = (
             <Droppable
-                droppableId={JSON.stringify({type: "SEARCH", id: 0})}
-                type="COURSE"
+                droppableId={JSON.stringify({type: 'SEARCH', id: 0})}
+                type='COURSE'
                 isDropDisabled={true}
             >
                 {(provided)=> (
                     <div
                         ref={provided.innerRef}
                         {...provided.droppableProps}
-                        className="search-results"
+                        className='search-results'
                     > 
                         {/* TODO: insert courses into course placeholder and don't insert between course cards 
                             OR support re-ordering */}
@@ -159,7 +138,7 @@ class Sidebar extends React.Component {
                                     )}
                                     {!this.props.allSearchResultsDisplayed ? 
                                         <div 
-                                            className="load-more"
+                                            className='load-more'
                                             onClick={()=>this.props.dispatch(loadMoreResults())}
                                         >Load More Results</div>
                                     : null}
@@ -175,8 +154,8 @@ class Sidebar extends React.Component {
 
         const shortlistDroppable = (
             <Droppable
-                droppableId={JSON.stringify({type: "SHORTLIST", id: 0})}
-                type="COURSE"
+                droppableId={JSON.stringify({type: 'SHORTLIST', id: 0})}
+                type='COURSE'
                 isDropDisabled={false}
                 ignoreContainerClipping={true}
             >
@@ -184,7 +163,7 @@ class Sidebar extends React.Component {
                     <div
                         ref={provided.innerRef}
                         {...provided.droppableProps}
-                        className="shortlist"
+                        className='shortlist'
                     > 
                         {/* TODO: insert courses into course placeholder and don't insert between course cards 
                             OR support re-ordering */}
@@ -196,37 +175,37 @@ class Sidebar extends React.Component {
                                 removeFromTerm={()=>{this.props.dispatch(removeFromShortlist(course))}}
                             /> : null
                         ) : <div>Add some courses to your shortlist!</div>}
-                        <div className="course-card-placeholder">{provided.placeholder}</div>
+                        <div className='course-card-placeholder'>{provided.placeholder}</div>
                     </div>
                 )}
             </Droppable>
         );
 
         return (
-            <div className="Sidebar">
-                <div className="content" style={{width: `${this.state.width}px`}}>
+            <div className='Sidebar'>
+                <div className='content' id='sidebar-animation-width'>
                     <SidebarSection 
-                        title="Search Results" 
+                        title='Search Results' 
                         forceOpen={this.props.searchResults.length > 0}
                     >
                         {searchResultsDroppable}
                     </SidebarSection>
                     <SidebarSection 
-                        title="Shortlist"
+                        title='Shortlist'
                         forceOpen={this.props.shortlist.length > 0}
                     >
                         {shortlistDroppable}
                     </SidebarSection>
-                    <SidebarSection title="Tools" forceOpen={!this.props.searchResults.length && !this.props.shortlist.length}>
-                        <button className="tool">Prerequisite Tree</button>
-                        <button className="tool coming-soon">Auto-plan Courses (COMING SOON)</button>
-                        <button className="tool coming-soon">Import Transcript (COMING SOON)</button>
+                    <SidebarSection title='Tools' forceOpen={!this.props.searchResults.length && !this.props.shortlist.length}>
+                        <button className='tool'>Prerequisite Tree</button>
+                        <button className='tool coming-soon'>Auto-plan Courses (COMING SOON)</button>
+                        <button className='tool coming-soon'>Import Transcript (COMING SOON)</button>
                     </SidebarSection>
-                    <div className="padding-sidebar-section" />
+                    <div className='padding-sidebar-section' />
                 </div>
                 <div 
-                    className="drag-bar no-select" 
-                    draggable="true" 
+                    className='drag-bar no-select' 
+                    draggable='true' 
                     onDrag={this.resize}
                     onDragStart={this.initDrag}
                     onDragEnd={this.endDrag}
