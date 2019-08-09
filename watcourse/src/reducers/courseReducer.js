@@ -1,76 +1,35 @@
-import { GET_COURSES_SUCCESS } from '../actions/types';
+import { GET_COURSES_SUCCESS, 
+    GET_FLOW_COURSE_SUCCESS, GET_FLOW_COURSE_ERROR } from '../actions/types';
 
 const initialState = [];
-/* const initialState = [
-    {
-        id: 1,
-        code: 'CS343',
-        name: 'Concurrent Programming',
-        description: 'A really painful course about uC++ concurrency with long hard assignments. Enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy!',
-        prereqs: 'A tormented soul is not required but recommended.',  
-    },
-    {
-        id: 2,
-        code: 'CS346',
-        name: 'ConcurrenCY',
-        description: 'special boii',
-        prereqs: 'A tormented soul is not required but recommended.',  
-    },
-    {
-        id: 3,
-        code: 'CS343',
-        name: 'Concurrent Programming',
-        description: 'A really painful course about uC++ concurrency with long hard assignments. Enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy!',
-        prereqs: 'A tormented soul is not required but recommended.',  
-    },
-    {
-        id: 4,
-        code: 'CS343',
-        name: 'Concurrent Programming',
-        description: 'A really painful course about uC++ concurrency with long hard assignments. Enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy!',
-        prereqs: 'A tormented soul is not required but recommended.',  
-    },
-    {
-        id: 5,
-        code: 'CS343',
-        name: 'Concurrent Programming',
-        description: 'A really painful course about uC++ concurrency with long hard assignments. Enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy!',
-        prereqs: 'A tormented soul is not required but recommended.',  
-    },
-    {
-        id: 6,
-        code: 'CS343',
-        name: 'Concurrent Programming',
-        description: 'A really painful course about uC++ concurrency with long hard assignments. Enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy!',
-        prereqs: 'A tormented soul is not required but recommended.',  
-    },
-    {
-        id: 7,
-        code: 'CS343',
-        name: 'Concurrent Programming',
-        description: 'A really painful course about uC++ concurrency with long hard assignments. Enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy!',
-        prereqs: 'A tormented soul is not required but recommended.',  
-    },
-    {
-        id: 8,
-        code: 'CS343',
-        name: 'Concurrent Programming',
-        description: 'A really painful course about uC++ concurrency with long hard assignments. Enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy!',
-        prereqs: 'A tormented soul is not required but recommended.',  
-    },
-    {
-        id: 9,
-        code: 'CS343',
-        name: 'Concurrent Programming',
-        description: 'A really painful course about uC++ concurrency with long hard assignments. Enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy enjoy!',
-        prereqs: 'A tormented soul is not required but recommended.',  
-    },
-];*/
 
 export default function (state = initialState, action) {
+    const { watCID, flowCourse } = action;
+    let updatedCourse;
+
     switch (action.type) {
     case GET_COURSES_SUCCESS:
         return action.courses || state;
+    case GET_FLOW_COURSE_SUCCESS:
+        updatedCourse = state.find(course => course.id === watCID);
+        if ( !updatedCourse ) return state;
+
+        updatedCourse.flow = {
+            ratings : flowCourse.ratings,
+        }; 
+        return [
+            ...state.filter(course => course.id !== watCID), 
+            updatedCourse
+        ];
+    case GET_FLOW_COURSE_ERROR:
+        // Clear the flow info from the state.
+        updatedCourse = state.find(course => course.id === watCID);
+        if ( !updatedCourse ) return state;
+        updatedCourse.flow = null;
+        return [
+            ...state.filter(course => course.id !== watCID), 
+            updatedCourse
+        ];
     default:
         return state;
     }

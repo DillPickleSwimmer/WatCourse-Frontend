@@ -12,6 +12,7 @@ import { TERMLABELS } from '../constants/names.js';
 
 import { removeFromTerm } from '../actions/termCourseActions';
 import { removeTerm, editTerm } from '../actions/termActions';
+import { getFlowCourse } from '../actions/courseActions';
 
 import { ReactComponent as RemoveIcon } from '../images/icon_minus.svg';
 import { ReactComponent as EditIcon } from '../images/icon_pencil.svg';
@@ -27,7 +28,17 @@ class TermCard extends React.Component {
         this.state = {
             editMode: false,
             name: this.props.term.name,
-        }
+        };
+    }
+    
+    componentDidMount(){
+        this.props.courses.forEach(course => {
+            // TODO: get this cached from backend
+            const {subject, num, id, flow} = course;
+            if (flow === undefined) {
+                this.props.dispatch(getFlowCourse(subject+num, id));
+            }
+        });
     }
 
     toggleEditMode() {
@@ -75,7 +86,7 @@ class TermCard extends React.Component {
                                     />
                                     {` - ${TermNumNames[term.termNum]} ${term.termYear}`}
                                 </div>
-                            :
+                                :
                                 `${term.name} - ${TermNumNames[term.termNum]} ${term.termYear}`
                             }
                             &nbsp;<EditIcon className="small-icon" onClick={this.toggleEditMode} />
