@@ -5,6 +5,8 @@ import { CourseType } from '../types/types';
 import { ReactComponent as RemoveIcon } from '../images/icon_minus.svg';
 import  FlowIcon from '../images/flow-logo-75x35.png';
 import { Draggable } from 'react-beautiful-dnd';
+import {WatButton, WatButtonType} from './WatButton';
+import { browserHistory } from 'react-router';
 
 class CourseCard extends React.Component {
     constructor(props) {
@@ -13,12 +15,12 @@ class CourseCard extends React.Component {
         this.state = {
             expanded : false,
         };
-        this.toggleExapnded = this.toggleExapnded.bind(this);
+        this.toggleExpand = this.toggleExpand.bind(this);
         this.generateDescriptions = this.generateDescriptions.bind(this);
         this.openFlow = this.openFlow.bind(this);
     }
 
-    toggleExapnded(){
+    toggleExpand(){
         if (this.props.removeFromTerm === undefined) return;
         this.setState({
             expanded: !this.state.expanded,
@@ -32,9 +34,22 @@ class CourseCard extends React.Component {
         win.focus();
     }
 
-    generateDescriptions(course){
-        const {description , prereqs, antireqs, coreqs, notes} = course;
+    toPercentage(number) {
+        return `${Math.round(number * 100)}%`;
+    }
+
+    openPrereqVisualisation(subject, num){
+        browserHistory.push(`/prereq/tree/${subject}/${num}`);
+    }
+
+    generateDescriptions(course) {
+        const {subject, num, description , prereqs, antireqs, coreqs, notes} = course;
         let descriptions = [];
+        
+        descriptions.push(
+            <button
+                onClick={() => this.openPrereqVisualisation(subject, num)}>View PreReq Tree
+            </button>);
         
         if (description !== '')
             descriptions.push(<div key={'desc-1'} className='detail'><i>Description:</i> {description}</div>);
@@ -47,10 +62,11 @@ class CourseCard extends React.Component {
         if (notes !== '')
             descriptions.push(<div key={'desc-5'} className='detail'><i>Notes:</i> {notes}</div>);
         
-        descriptions.push(<div key={`flow_desc`} className='detail'><em>UW Flow Ratings</em></div>);
+        descriptions.push(<hr key={'flow-hr'}/>);
+        descriptions.push(<div key={'flow-desc'} className='detail'><strong>UW Flow Ratings</strong></div>);
         if (course.flow && course.flow.ratings) {
             descriptions.push(course.flow.ratings.map( (r, i) => 
-                <div key={`flow${i}`} className='detail'><i>{r.name}</i>{r.rating}</div>));
+                <div key={`flow${i}`} className='detail'><i>{r.name}:</i> {this.toPercentage(r.rating)}</div>));
         }
         descriptions.push(<img  key={'flow-img'} onClick={this.openFlow} className='flow-icon' src={FlowIcon} alt='ViewInFlow'/>);
 
@@ -76,7 +92,7 @@ class CourseCard extends React.Component {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
-                        onClick={this.toggleExapnded}
+                        onClick={this.toggleExpand}
                     >                          
                         <div className='detail-wrapper'>
                             <div className='summary'>{`${subject}${num}`}<br />{title}</div>

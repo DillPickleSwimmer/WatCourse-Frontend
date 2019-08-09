@@ -2,6 +2,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import { PropTypes } from 'prop-types';
 import { login, togglePasswordReset, clearAuthMessages } from '../actions/authActions';
+import { getCourses } from '../actions/courseActions';
 import  {LOGGED_IN, SIGNUP_DETAILS} from '../reducers/authReducer';
 import '../styles/Login.css';
 import {WatButton, WatButtonType} from './WatButton';
@@ -19,16 +20,22 @@ class Login extends React.Component {
 
     componentWillMount() {
         if(this.props.auth && this.props.page === LOGGED_IN) 
-            browserHistory.push('/');
+            this.openLandingPage();
+         
         if(this.props.auth && this.props.page === SIGNUP_DETAILS) 
             browserHistory.push('/signup');
     }
 
     componentWillUpdate(nextProps) {
         if(!this.props.auth && nextProps.auth && nextProps.page === LOGGED_IN) 
-            browserHistory.push('/');
+            this.openLandingPage();
         if(!this.props.auth && nextProps.auth && nextProps.page === SIGNUP_DETAILS) 
             browserHistory.push('/signup');
+    }
+
+    openLandingPage(){
+        browserHistory.push('/');
+        this.props.dispatch(getCourses());
     }
 
     handleSignup() {

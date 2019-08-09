@@ -21,7 +21,6 @@ export function* getFlowCourseSaga(action) {
         const flowCourse = yield call(getFlowCourseEndpoint, courseName);
         yield put({ type: GET_FLOW_COURSE_SUCCESS, watCID, flowCourse });
     } catch (error) {
-        console.log('ended - err')
         yield put({ type: GET_FLOW_COURSE_ERROR, error });
     }
 }
