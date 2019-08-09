@@ -66,6 +66,11 @@ class Login extends React.Component {
                         <input className='login-input' 
                             name='password'
                             onChange={this.handleChange}
+                            onKeyDown={(event) => {
+                                if ('Enter' === event.key) {
+                                    this.props.dispatch(login('EMAIL', this.state.email, this.state.password));
+                                }
+                            }}
                             type='password'
                             placeholder='Password'/>
                         <WatButton className='login-input'
