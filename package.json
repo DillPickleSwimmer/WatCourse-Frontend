@@ -1,6 +1,6 @@
 {
   "proxy": "https://watcourse-api.herokuapp.com",
-  "homepage": "https://watcourse.herokuapp.com",
+  "homepage": ".",
   "name": "watcourse",
   "version": "0.1.0",
   "private": true,
