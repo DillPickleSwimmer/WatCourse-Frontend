@@ -17,7 +17,7 @@ export const CourseType = PropTypes.shape({
 
 // Term Type
 
-export const TermNumNames = ["Fall", "Winter", "Spring", "Fall"];
+export const TermNumNames = ["Winter", "Spring", "Fall", null];
 
 export const TermType = PropTypes.shape({
     id: PropTypes.number.isRequired,
