@@ -1,5 +1,5 @@
 
-const ENDPOINT = '/shortlist/courses'
+const ENDPOINT = 'https://watcourse-api.herokuapp.com/shortlist/courses'
 
 export const getShortlistEndpoint = (accessToken, userId) => {
     return fetch(ENDPOINT, { headers: { 'Authorization': accessToken, 'UserID': userId } })

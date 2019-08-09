@@ -1,5 +1,5 @@
 export const putUser = (accessToken, programId, startYear, startTrimester) => {
-    const ENDPOINT = '/signup';
+    const ENDPOINT = 'https://watcourse-api.herokuapp.com/signup';
     return fetch(ENDPOINT, {
         method: 'POST',
         mode: 'cors',
@@ -17,7 +17,7 @@ export const putUser = (accessToken, programId, startYear, startTrimester) => {
 };
 
 export const getUserExists = (accesToken) => {
-    const ENDPOINT = 'user_exists';
+    const ENDPOINT = 'https://watcourse-api.herokuapp.com/user_exists';
     return fetch(ENDPOINT, { headers: { 'Authorization': accesToken } })
         .then(response => {
             return response.json();

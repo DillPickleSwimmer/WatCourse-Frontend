@@ -1,5 +1,5 @@
 export const reportBugEndpoint = (accessToken, userId, msg, screenshots) => {
-    const ENDPOINT = '/bug';    
+    const ENDPOINT = 'https://watcourse-api.herokuapp.com/bug';    
 
     var data = new FormData();
     data.append('bugs', msg);

@@ -1,5 +1,5 @@
 export const postTranscriptEndpoint = (accessToken, transcript) => {
-    const ENDPOINT = '/transcript';
+    const ENDPOINT = 'https://watcourse-api.herokuapp.com/transcript';
     return fetch(ENDPOINT, {
         method: 'POST',
         mode: 'cors',

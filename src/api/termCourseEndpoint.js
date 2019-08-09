@@ -1,5 +1,5 @@
 export const getTermCoursesEndpoint = (termId, accesToken, userId) => {
-    const ENDPOINT = `/term/${termId}/courses`;
+    const ENDPOINT = `https://watcourse-api.herokuapp.com/term/${termId}/courses`;
 
     return fetch(ENDPOINT, { headers: { 'Authorization': accesToken, 'UserID': userId } })
         .then(response => {
@@ -11,7 +11,7 @@ export const getTermCoursesEndpoint = (termId, accesToken, userId) => {
 };
 
 export const putTermCourseEndpoint = (accessToken, userId, termId, course) => {
-    const ENDPOINT = `/term/${termId}/courses`;
+    const ENDPOINT = `https://watcourse-api.herokuapp.com/term/${termId}/courses`;
     return fetch(ENDPOINT, {
         method: 'POST',
         mode: 'cors',
@@ -29,7 +29,7 @@ export const putTermCourseEndpoint = (accessToken, userId, termId, course) => {
 };
 
 export const deleteTermCourseEndpoint = (accessToken, userId, termId, course) => {
-    const ENDPOINT = `/term/${termId}/courses`;
+    const ENDPOINT = `https://watcourse-api.herokuapp.com/term/${termId}/courses`;
     return fetch(ENDPOINT, {
         method: 'DELETE',
         mode: 'cors',

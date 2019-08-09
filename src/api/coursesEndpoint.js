@@ -1,5 +1,5 @@
 export const getCoursesEndpoint = () => {
-    const ENDPOINT = '/courses';    // update this
+    const ENDPOINT = 'https://watcourse-api.herokuapp.com/courses';    // update this
   
     return fetch(ENDPOINT)
         .then(response => {

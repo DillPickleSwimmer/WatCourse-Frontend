@@ -1,5 +1,5 @@
 export const submitFeedbackEndpoint = (accessToken, userId, satisfaction, helpful, challenges, features) => {
-    const ENDPOINT = '/feedback';    
+    const ENDPOINT = 'https://watcourse-api.herokuapp.com/feedback';    
   
     return fetch(ENDPOINT, {
         method: 'POST',
