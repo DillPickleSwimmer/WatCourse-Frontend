@@ -11,13 +11,10 @@ class SidebarSection extends React.Component {
 
         this.toggleOpen = this.toggleOpen.bind(this);
 
-        this.open = this.open.bind(this);
         this.triggerOpen = this.triggerOpen.bind(this);
-        this.close = this.close.bind(this);
         this.triggerClose = this.triggerClose.bind(this);
 
         this.state = {
-            animateInterval: 0,
             flexgrow: 0,
         }
     }
@@ -45,8 +42,8 @@ class SidebarSection extends React.Component {
     // OPEN/CLOSE ANIMATION EVENTS
 
     triggerOpen() {
-        clearInterval(this.state.animateInterval);
-        this.setState({animateInterval:  setInterval(this.open, 5)});
+        document.getElementById(`sidebar-section-animation-${this.props.title}`).style.flexgrow = `${this.MAXFLEXGROW}`;
+        this.setState({flexgrow: this.MAXFLEXGROW});
     }
 
     open() {
@@ -59,8 +56,8 @@ class SidebarSection extends React.Component {
     }
 
     triggerClose() {
-        clearInterval(this.state.animateInterval);
-        this.setState({animateInterval:  setInterval(this.close, 5)});
+        document.getElementById(`sidebar-section-animation-${this.props.title}`).style.flexgrow = `0`;
+        this.setState({flexgrow: 0});
     }
 
     close() {
@@ -76,7 +73,7 @@ class SidebarSection extends React.Component {
 
     render() {
         return (
-            <div className="SidebarSection" style={{flexGrow: this.state.flexgrow}}>
+            <div className="SidebarSection" id={`sidebar-section-animation-${this.props.title}`} style={{flexGrow: this.state.flexgrow}}>
                 <div className="header no-select" onClick={this.toggleOpen}>
                     <div className="inner-header">
                         {this.state.open ? "<" : ">"}
