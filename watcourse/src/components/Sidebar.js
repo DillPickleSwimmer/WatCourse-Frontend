@@ -15,6 +15,7 @@ import { removeFromShortlist } from '../actions/shortlistActions';
 import { openSidebar, closeSidebar } from '../actions/sidebarActions';
 import { loadMoreResults } from '../actions/searchActions';
 import { browserHistory } from 'react-router';
+import { getFlowCourse } from '../actions/courseActions';
 
 // TODO: Set animation timeout / no animation mode for slow computers
 
@@ -58,6 +59,27 @@ class Sidebar extends React.Component {
             this.triggerOpen();
         } else {
             this.triggerClose();
+        }
+
+        if(this.props.searchResults.length) {		
+            this.props.searchResults.forEach((course) => {		
+                if (course){		
+                    const {subject, num, id, flow} = course;		
+                    if (flow === undefined) {		
+                        this.props.dispatch(getFlowCourse(subject+num, id));		
+                    }		
+                }		
+            });		
+        }		
+        if(this.props.shortlist.length){		
+            this.props.shortlist.forEach((course) => {		
+                if (course) {		
+                    const {subject, num, id, flow} = course;		
+                    if (flow === undefined) {		
+                        this.props.dispatch(getFlowCourse(subject+num, id));		
+                    }		
+                }		
+            });		
         }
     }
 

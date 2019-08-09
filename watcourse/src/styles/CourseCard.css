@@ -6,9 +6,33 @@
     padding: var(--theme-default-padding);
     font-size: 14px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin: var(--theme-default-margin);
     background-color: var(--theme-white);
+}
+
+.CourseCard hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.CourseCard .detail-wrapper {
+    width: 100%;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+}
+
+.CourseCard .detail {
+    overflow-wrap: break-word;
+    width: 100%;
+    white-space: normal;
+    flex-grow: 1; 
+    padding: 5px 0px
 }
 
 .default {

@@ -2,6 +2,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import { PropTypes } from 'prop-types';
 import { getPrograms } from '../actions/programsActions';
+import { getCourses } from '../actions/courseActions';
 import '../styles/Signup.css';
 import  {LOGGED_IN, SIGNUP_DETAILS} from '../reducers/authReducer';
 import SignUpDetails from './SignUpDetails';
@@ -9,7 +10,7 @@ import SignUpProvider from './SignUpProvider';
 
 class SignUp extends React.Component {
     componentWillMount() {
-        if (this.props.page === LOGGED_IN) browserHistory.push('/');
+        if (this.props.page === LOGGED_IN) this.openLandingPage();
     }
 
     componentDidMount() {
@@ -17,7 +18,12 @@ class SignUp extends React.Component {
     }
 
     componentWillUpdate(nextProps) {
-        if (nextProps.auth  && nextProps.page === LOGGED_IN) browserHistory.push('/');
+        if (nextProps.auth  && nextProps.page === LOGGED_IN) this.openLandingPage();
+    }
+
+    openLandingPage(){
+        browserHistory.push('/');
+        this.props.dispatch(getCourses());
     }
 
     render() {

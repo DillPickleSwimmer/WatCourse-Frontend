@@ -36,7 +36,7 @@
 }
 
 /* default icon style */
-.icon, .small-icon {
+.icon, .small-icon, .flow-icon  {
     fill: var(--theme-icon-color);
     background-color: transparent;
     padding: var(--theme-default-padding);
@@ -45,6 +45,11 @@
 .icon:hover, .small-icon:hover {
     cursor: pointer;
     fill: var(--theme-icon-hover);
+}
+
+.flow-icon {
+    width: 37.5px;
+    height: 17.5px;
 }
 
 .icon {
