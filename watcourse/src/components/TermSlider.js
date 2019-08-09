@@ -46,7 +46,7 @@ class TermSlider extends React.Component {
 
     termInPast(term) {
         const now = new Date();
-        const currentTerm = Math.floor(now.getMonth()/4) + 1;
+        const currentTerm = Math.floor(now.getMonth()/4);
         const currentYear = now.getYear() + 1900;
         if (term.termYear < currentYear ||
             (term.termYear === currentYear && term.termNum < currentTerm)) {
@@ -76,7 +76,6 @@ class TermSlider extends React.Component {
 
     render() {
         const { courses, terms } = this.props; 
-
         const termCards = this.props.terms.map((term, index) => 
             <div ref={this.courseRefs["course-"+term.id]} key={index} className="TermCard"> <TermCard
                 term={term} 
