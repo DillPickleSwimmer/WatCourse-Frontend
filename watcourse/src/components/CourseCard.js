@@ -43,6 +43,7 @@ class CourseCard extends React.Component {
     }
 
     generateDescriptions(course) {
+        if (course === null) return [];
         const {subject, num, description , prereqs, antireqs, coreqs, notes} = course;
         let descriptions = [];
         
@@ -75,7 +76,7 @@ class CourseCard extends React.Component {
     }
 
     render() {
-        const {id, subject, num, title, defaultCourse, arePrereqsMet, disabled } = this.props.course;
+        const {id, subject, num, title, defaultCourse, arePrereqsMet, disabled} = this.props.course || {};
         const removeFromTerm = this.props.removeFromTerm;
         const descriptions = this.generateDescriptions(this.props.course);
         return (
@@ -85,24 +86,33 @@ class CourseCard extends React.Component {
                 index={this.props.index} 
                 isDragDisabled={disabled || false}
             >
-                {(provided)=>(
-                    <div 
-                        className={`CourseCard ${defaultCourse ? 'default' : 'elective'} ${disabled ? 'disabled' : null} 
+                {(provided)=> {
+                    if( this.props.course) {
+                        return <div 
+                            className={`CourseCard ${defaultCourse ? 'default' : 'elective'} ${disabled ? 'disabled' : null} 
                     ${arePrereqsMet === false && removeFromTerm ? 'prereq-error' : '' }`}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                        onClick={this.toggleExpand}
-                    >                          
-                        <div className='detail-wrapper'>
-                            <div className='summary'>{`${subject}${num}`}<br />{title}</div>
-                            {removeFromTerm ?
-                                <div className='small-icon'><RemoveIcon onClick={removeFromTerm}/></div>
-                                : null}
-                        </div>
-                        {this.state.expanded && descriptions}
-                    </div>
-                )}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
+                            onClick={this.toggleExpand}
+                        >                          
+                            <div className='detail-wrapper'>
+                                <div className='summary'>{`${subject}${num}`}<br />{title}</div>
+                                {removeFromTerm ?
+                                    <div className='small-icon'><RemoveIcon onClick={removeFromTerm}/></div>
+                                    : null}
+                            </div>
+                            {this.state.expanded && descriptions}
+                        </div>;
+                    }else {
+                    // null course
+                        return <div 
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
+                        />    
+                    }
+                }}
             </Draggable>
         );
     }

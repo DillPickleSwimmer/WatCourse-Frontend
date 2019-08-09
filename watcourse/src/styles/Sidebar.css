@@ -6,6 +6,10 @@
     align-items: stretch;
 }
 
+.Sidebar #sidebar-animation-width {
+    transition: 0.5s;
+}
+
 .Sidebar .drag-bar {
     display: flex;
     align-items: center;

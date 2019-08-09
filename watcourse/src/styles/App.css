@@ -29,23 +29,3 @@
     min-width: 0;
     flex-grow: 1;
 }
-
-.footer {
-    height: 60px;
-    display: flex; 
-    flex-direction: row;
-    align-items: center;
-    padding: var(--theme-default-padding);
-    flex-grow: 0;
-    border-top: 1px solid var(--theme-light-grey);
-}
-
-.footer .innerFooter {
-    flex-grow: 1;
-    text-align: center;
-    font-size: 14px;
-}
-
-.footer .innerFooter a {
-    padding: var(--theme-default-padding)   ;
-}

@@ -73,7 +73,7 @@ a:hover {
 }
 
 /* input */
-select, input {
+select, input, textarea {
     border-radius: var(--theme-border-radius);
     padding: var(--theme-default-padding);
     border: 1px solid var(--theme-light-grey);
