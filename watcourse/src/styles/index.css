@@ -31,3 +31,7 @@ a {
     background: var(--theme-icon-color);
     border-radius: 10px;
 }
+
+.error-text {
+    color : var(--theme-error);
+}

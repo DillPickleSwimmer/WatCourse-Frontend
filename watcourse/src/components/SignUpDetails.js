@@ -1,4 +1,5 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 import { signupDetails } from '../actions/authActions';
 import { WatButton, WatButtonType } from './WatButton';
 import '../styles/Signup.css';
@@ -8,11 +9,13 @@ class SignUpDetails extends React.Component {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     handleSubmit(event) {
         event.preventDefault();
         const { program, startTrimester, startYear } = event.target.elements;
         this.props.dispatch(signupDetails(program.value, startYear.value,
             startTrimester.value));
+        browserHistory.push('/transcript');
     }
 
     render() {

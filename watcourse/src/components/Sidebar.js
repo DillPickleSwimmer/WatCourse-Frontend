@@ -14,6 +14,7 @@ import CourseCard from './CourseCard';
 import { removeFromShortlist } from '../actions/shortlistActions';
 import { openSidebar, closeSidebar } from '../actions/sidebarActions';
 import { loadMoreResults } from '../actions/searchActions';
+import { browserHistory } from 'react-router';
 
 // TODO: Set animation timeout / no animation mode for slow computers
 
@@ -152,7 +153,7 @@ class Sidebar extends React.Component {
                                 return (<div>Search for courses above!</div>);
                             }
                         })()}
-                        <div className="course-card-placeholder">{provided.placeholder}</div>
+                        <div className='course-card-placeholder'>{provided.placeholder}</div>
                     </div>
                 )}
             </Droppable>
@@ -203,9 +204,10 @@ class Sidebar extends React.Component {
                         {shortlistDroppable}
                     </SidebarSection>
                     <SidebarSection title='Tools' forceOpen={!this.props.searchResults.length && !this.props.shortlist.length}>
+                        <button className='tool' onClick={() => browserHistory.push('/')}> Course Planner </button>
                         <button className='tool'>Prerequisite Tree</button>
-                        <button className='tool coming-soon'>Auto-plan Courses (COMING SOON)</button>
-                        <button className='tool coming-soon'>Import Transcript (COMING SOON)</button>
+                        <button className='tool' onClick={() => browserHistory.push('/transcript')}>Import Transcript</button>
+                        <button className='tool coming-soon'>Auto-plan Courses (COMING SOON)</button>                        
                     </SidebarSection>
                     <div className='padding-sidebar-section' />
                 </div>
