@@ -39,9 +39,8 @@ export function* addTermSaga(action) {
         if ( action.lastTerm ) {
             nextTermType = action.prevTerm.termNum + 1;
             nextTermYear = action.prevTerm.termYear;
-            if ( nextTermType - 1 >= TERMNAMES.length ) {
+            if ( nextTermType >= TERMNAMES.length ) {
                 nextTermType = 0;
-                nextTermYear++;
             }
         } else {
             // use the current term

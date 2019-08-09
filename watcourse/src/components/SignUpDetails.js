@@ -38,13 +38,13 @@ class SignUpDetails extends React.Component {
                     <option value=''>
                             Which term did you start in?
                     </option>
-                    <option value='3'>
+                    <option value='2'>
                             Fall
                     </option>
-                    <option value='1'>
+                    <option value='0'>
                             Winter
                     </option>
-                    <option value='2'>
+                    <option value='1'>
                             Summer
                     </option>
                 </select>
