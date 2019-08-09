@@ -8,6 +8,7 @@ import '../styles/App.css';
 
 import Header from './Header';
 import SidebarContainer from '../containers/SidebarContainer';
+import Footer from './Footer';
 
 import { authenticate } from '../actions/authActions';
 import SIGNUP_DETAILS from '../reducers/authReducer';
@@ -100,12 +101,7 @@ class App extends React.Component {
                             <div className="main-screen">{this.props.children}</div>
                         </div>
                     </DragDropContext>
-                    <div className="footer">
-                        <div className="innerFooter">
-                            <a href="https://github.com/DillPickleSwimmer/WatCourse-Frontend">Frontend Github</a>
-                            <a href="https://github.com/SiddharthVaknalli/WatCourse-backend">Backend Github</a>
-                        </div>
-                    </div>
+                    <Footer />
                 </div>
             </div>
         );
