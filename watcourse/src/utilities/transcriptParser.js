@@ -17,11 +17,11 @@ function parseCourse(courseStr) {
 // Take trimmester to to int: "Fall 2015" => 3
 function parseTermNum(termStr){
     if (termStr.includes('Fall')) {
-        return 3;
-    } else if (termStr.includes('Winter')) {
-        return 1;
-    } else {
         return 2;
+    } else if (termStr.includes('Winter')) {
+        return 0;
+    } else {
+        return 1;
     }
 }
 

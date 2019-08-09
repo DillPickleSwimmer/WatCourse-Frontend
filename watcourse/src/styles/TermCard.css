@@ -5,6 +5,7 @@
     border-radius: var(--theme-border-radius);
     margin: var(--theme-default-margin);
     position: relative;
+    min-width: 350px;
 }
 
 .TermCard .contents {
@@ -48,6 +49,10 @@
 .Slider.vertical .TermCard .courses {
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+.Slider.vertical .TermCard {
+    flex-grow: 1;
 }
 
 .TermCard .course-placeholder {

@@ -15,6 +15,7 @@ class SignUp extends React.Component {
 
     componentDidMount() {
         this.props.dispatch(getPrograms());
+        this.props.dispatch(getCourses());
     }
 
     componentWillUpdate(nextProps) {
