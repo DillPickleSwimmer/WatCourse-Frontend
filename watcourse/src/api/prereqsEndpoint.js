@@ -1,5 +1,5 @@
 export const getCoursePrereqsEndpoint = (subject, number) => {
-    const ENDPOINT = `/prereq/tree/get?subject=${subject}&number=${number}`;
+    const ENDPOINT = `/prereq/tree/get?subject=${subject.toUpperCase()}&number=${number}`;
   
     return fetch(ENDPOINT)
         .then(response => {
