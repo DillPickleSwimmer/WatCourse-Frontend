@@ -1,0 +1,82 @@
+@import url("./shared/Theme.css");
+
+.Sidebar {
+    border-right: 1px solid var(--theme-light-grey);
+    display: flex;
+    align-items: stretch;
+}
+
+.Sidebar #sidebar-animation-width {
+    transition: 0.5s;
+}
+
+.Sidebar .drag-bar {
+    display: flex;
+    align-items: center;
+    color: var(--theme-light-blue);
+    font-size: 18px;
+}
+
+.Sidebar .drag-bar:hover, .Sidebar .drag-bar:active {
+    background-color: var(--theme-light-grey);
+    cursor: ew-resize !important;
+}
+
+.Sidebar .content {
+    display: flex;
+    flex-direction: column;
+}
+
+.Sidebar .load-more {
+    color: var(--theme-dark-blue);
+}
+
+.Sidebar .load-more:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.Sidebar .padding-sidebar-section {
+    flex-grow: 1;
+    border-top: 1px solid var(--theme-light-grey);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.Sidebar .shortlist {
+    display: flex;
+    flex-direction: column;
+    height: 100%;   
+}
+
+.Sidebar .shortlist .course-card-placeholder {
+    width: 100%;
+    flex-grow: 1;
+    min-height: 80px;
+}
+
+.Sidebar .shortlist .course-card-placeholder:hover {
+    border-radius: var(--theme-border-radius);
+    background-color: var(--theme-light-grey);
+}
+
+.Sidebar .tool {
+    width: 100%;
+    padding: var(--theme-default-padding);
+    margin: var(--theme-default-margin);
+    border: 1px solid var(--theme-light-purple);
+    box-sizing: border-box;
+    border-radius: var(--theme-border-radius);
+}
+
+.Sidebar .tool.coming-soon {
+    color: var(--theme-light-purple) !important;
+    background-color: var(--theme-light-grey);
+    border: 1px solid var(--theme-light-grey);
+}
+
+.Sidebar .tool:hover {
+    cursor: pointer; 
+    background-color: var(--theme-light-grey);
+    color: var(--theme-purple);
+}
