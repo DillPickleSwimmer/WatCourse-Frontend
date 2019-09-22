@@ -1,8 +1,9 @@
 import { put, call, takeLatest, takeEvery, select } from 'redux-saga/effects';
-import { 
+import {
     putTermCourseEndpoint,
     deleteTermCourseEndpoint,
-    getTermCoursesEndpoint
+    getTermCoursesEndpoint,
+    moveTermCourseEndpoint
 } from '../api/termCourseEndpoint';
 import { postShortlistEndpoint, deleteShortlistEndpoint } from '../api/shortlistEndpoint';
 import { validateMoveCourseRequest } from '../reducers/moveCourseReducerUtilities';
@@ -11,10 +12,10 @@ import {
     GET_SHORTLIST_REQUEST, TERM_TO_SHORTLIST_REQUEST, TERM_TO_SHORTLIST_SUCCESS, TERM_TO_SHORTLIST_ERROR,
     GET_TERM_COURSES_REQUEST, GET_TERM_COURSES_SUCCESS, GET_TERM_COURSES_ERROR,
     ADD_TERM_COURSE_REQUEST, ADD_TERM_COURSE_SUCCESS, ADD_TERM_COURSE_ERROR,
-    REMOVE_TERM_COURSE_REQUEST, REMOVE_TERM_COURSE_SUCCESS, REMOVE_TERM_COURSE_ERROR, 
-    MOVE_TERM_COURSE_REQUEST, MOVE_TERM_COURSE_SUCCESS, MOVE_TERM_COURSE_ERROR, 
+    REMOVE_TERM_COURSE_REQUEST, REMOVE_TERM_COURSE_SUCCESS, REMOVE_TERM_COURSE_ERROR,
+    MOVE_TERM_COURSE_REQUEST, MOVE_TERM_COURSE_SUCCESS, MOVE_TERM_COURSE_ERROR,
 } from '../actions/types';
-import { authRef } from '../base';  
+import { authRef } from '../base';
 
 export function* getTermCoursesSaga(term) {
     try {
@@ -27,8 +28,8 @@ export function* getTermCoursesSaga(term) {
         const custom_term = {
             id: term.id,
             name: term.name,
-            termNum: term.term_number, 
-            termYear: term.year,  
+            termNum: term.term_number,
+            termYear: term.year,
             courses: courses,
         };
         yield put({ type: GET_TERM_COURSES_SUCCESS, term: custom_term });
@@ -70,28 +71,22 @@ export function* removeTermCourseSaga(action) {
     }
 }
 
-// TODO: this should be 1 endpoint in the backend 
 export function* moveTermCourseSaga(action) {
+    const {fromTermId, toTermId, course} = action;
     try {
+        validateMoveCourseRequest(course);
         const user = authRef.currentUser;
         const token = yield user.getIdToken();
-        
-        validateMoveCourseRequest(action.course);
-        yield call(putTermCourseEndpoint, token, user.uid,  action.toTermId, action.course);
-        try {
-            yield call(deleteTermCourseEndpoint, token, user.uid, action.fromTermId, action.course);
-        } catch(error) {
-            // undo add
-            yield call(deleteTermCourseEndpoint, token, user.uid, action.toTermId, action.course);
-            throw error;
-        }
-        yield put({ type: MOVE_TERM_COURSE_SUCCESS, toTermId: action.toTermId, fromTermId: action.fromTermId, course: action.course });
+
+        yield call(moveTermCourseEndpoint, token, user.uid, fromTermId, toTermId, course);
+
+        yield put({ type: MOVE_TERM_COURSE_SUCCESS, toTermId: toTermId, fromTermId: fromTermId, course: course });
     } catch (error) {
-        yield put({ type: MOVE_TERM_COURSE_ERROR, toTermId: action.toTermId, fromTermId: action.fromTermId, course: action.course, error });
+        yield put({ type: MOVE_TERM_COURSE_ERROR, toTermId: toTermId, fromTermId: fromTermId, course: course, error });
     }
 }
 
-// TODO: this should be 1 endpoint in the backend 
+// TODO: this should be 1 endpoint in the backend
 export function* termToShortlistSaga(action) {
     try {
         validateMoveCourseRequest(action.course);
@@ -113,9 +108,9 @@ export function* termToShortlistSaga(action) {
 }
 
 export default function* termCourseSaga() {
-    yield takeLatest(GET_TERM_COURSES_REQUEST, getTermCoursesSaga);   
-    yield takeEvery(ADD_TERM_COURSE_REQUEST, addTermCourseSaga);   
-    yield takeEvery(REMOVE_TERM_COURSE_REQUEST, removeTermCourseSaga);   
-    yield takeEvery(MOVE_TERM_COURSE_REQUEST, moveTermCourseSaga);   
+    yield takeLatest(GET_TERM_COURSES_REQUEST, getTermCoursesSaga);
+    yield takeEvery(ADD_TERM_COURSE_REQUEST, addTermCourseSaga);
+    yield takeEvery(REMOVE_TERM_COURSE_REQUEST, removeTermCourseSaga);
+    yield takeEvery(MOVE_TERM_COURSE_REQUEST, moveTermCourseSaga);
     yield takeEvery(TERM_TO_SHORTLIST_REQUEST, termToShortlistSaga);
 }
